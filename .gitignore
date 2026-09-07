@@ -107,3 +107,6 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# Lock de paquetes: las versiones ya estan fijas en manifest.json
+/Packages/packages-lock.json
