@@ -1,0 +1,26 @@
+# Normalizacion de finales de linea
+* text=auto
+
+# Los assets de Unity son YAML: merge con la herramienta del editor
+*.unity           merge=unityyamlmerge eol=lf
+*.prefab          merge=unityyamlmerge eol=lf
+*.asset           merge=unityyamlmerge eol=lf
+*.mat             merge=unityyamlmerge eol=lf
+*.controller      merge=unityyamlmerge eol=lf
+*.anim            merge=unityyamlmerge eol=lf
+*.physicMaterial2D merge=unityyamlmerge eol=lf
+*.meta            merge=unityyamlmerge eol=lf
+
+# Binarios
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.psd    binary
+*.aseprite binary
+*.mp3    binary
+*.ogg    binary
+*.wav    binary
+*.ttf    binary
+*.otf    binary
+*.fbx    binary
+*.unitypackage binary
