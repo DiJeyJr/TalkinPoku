@@ -14,15 +14,24 @@ public enum SwipeDirection
 /// quien quiera reaccionar se suscribe.
 public class SwipeDetector : MonoBehaviour
 {
+    [Header("Referencias")]
+    [SerializeField] private Camera camara;
+
     [Header("Umbrales")]
     [SerializeField] private float swipeMinDistance = 150f;
     [SerializeField] private float swipeMaxDuration = 0.6f;
+    [SerializeField] private LayerMask capasQueBloquean = ~0;
 
     public event Action<SwipeDirection> Swiped;
 
     private int dedoActivo = -1;
     private Vector2 posicionInicial;
     private float tiempoInicial;
+
+    private void Awake()
+    {
+        if (camara == null) camara = Camera.main;
+    }
 
     private void OnEnable() => EnhancedTouchSupport.Enable();
 
@@ -36,6 +45,10 @@ public class SwipeDetector : MonoBehaviour
             // activeTouches se compacta cuando se levanta un dedo anterior y los indices se corren.
             if (touch.phase == TouchPhase.Began && dedoActivo == -1)
             {
+                // Si el dedo arranca sobre algo que se toca o se arrastra (comida, esponja, cama),
+                // el gesto es de ese objeto: arrastrar comida rapido no tiene que cambiar de habitacion.
+                if (Physics2D.OverlapPoint(camara.ScreenToWorldPoint(touch.screenPosition), capasQueBloquean) != null) continue;
+
                 dedoActivo = touch.touchId;
                 posicionInicial = touch.screenPosition;
                 tiempoInicial = Time.time;

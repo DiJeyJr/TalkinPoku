@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// Muestra una habitacion por vez. Las habitaciones son hijos de la escena que se prenden y
@@ -12,6 +13,13 @@ public class RoomNavigator : MonoBehaviour
     private int actual;
 
     public int Actual => actual;
+    public int Cantidad => habitaciones == null ? 0 : habitaciones.Length;
+
+    // El nombre sale del GameObject para no mantener un segundo array de textos que se
+    // desordena al reordenar las habitaciones.
+    public string NombreActual => Cantidad > 0 && habitaciones[actual] != null ? habitaciones[actual].name : "";
+
+    public event Action<int> HabitacionCambiada;
 
     private void OnEnable()
     {
@@ -59,5 +67,6 @@ public class RoomNavigator : MonoBehaviour
         }
 
         actual = indice;
+        HabitacionCambiada?.Invoke(actual);
     }
 }
