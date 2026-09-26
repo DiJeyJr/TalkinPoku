@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using UnityEngine;
 
 /// Guarda el estado de las necesidades de la mascota y avisa cuando cambian. No conoce la UI ni
@@ -27,12 +28,38 @@ public class NeedsSystem : MonoBehaviour
     // Felicidad no se guarda: se calcula siempre, asi nunca queda desincronizada del resto.
     public float Felicidad => (valores[0] + valores[1] + valores[2] + valores[3]) / 4f;
 
+    // Ir a un minijuego recarga la escena de la casa, y con ella este componente. Lo estatico
+    // sobrevive a ese cambio de escena; se pierde al cerrar la app, que es lo que va a cubrir el guardado.
+    private static NeedsState estadoAlSalir;
+
     private void Awake()
     {
-        for (int i = 0; i < valores.Length; i++)
+        if (estadoAlSalir == null)
         {
-            valores[i] = config.ValorInicial;
+            for (int i = 0; i < valores.Length; i++)
+            {
+                valores[i] = config.ValorInicial;
+            }
+            return;
         }
+
+        Array.Copy(estadoAlSalir.valores, valores, valores.Length);
+        // Con Dormir y no asignando Dormido directo, para que el overlay se entere si ya estaba escuchando.
+        Dormir(estadoAlSalir.dormido);
+
+        // La mascota siguio viviendo mientras se jugaba: se descuenta ese tiempo de una sola vez.
+        DateTime salida = DateTime.Parse(estadoAlSalir.momentoUtc, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
+        Avanzar((float)(DateTime.UtcNow - salida).TotalHours * multiplicadorTiempo);
+    }
+
+    private void OnDestroy()
+    {
+        estadoAlSalir = new NeedsState
+        {
+            valores = (float[])valores.Clone(),
+            dormido = Dormido,
+            momentoUtc = DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture)
+        };
     }
 
     private void Update()
