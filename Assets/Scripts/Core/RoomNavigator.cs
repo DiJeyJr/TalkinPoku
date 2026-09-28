@@ -55,6 +55,13 @@ public class RoomNavigator : MonoBehaviour
         Mostrar((actual - 1 + habitaciones.Length) % habitaciones.Length);
     }
 
+    // Para saltar directo desde los iconos del indicador, sin pasar por las del medio.
+    public void IrA(int indice)
+    {
+        if (habitaciones == null || indice < 0 || indice >= habitaciones.Length) return;
+        Mostrar(indice);
+    }
+
     private void Mostrar(int indice)
     {
         if (habitaciones == null || habitaciones.Length == 0) return;

@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Va en la mascota. Es el punto por donde las actividades (comida, esponja) le aplican efectos,
-/// asi ninguna de ellas necesita conocer al NeedsSystem.
+/// Va en la mascota. Es el punto por donde las actividades (la comida, por ahora) le aplican
+/// efectos, asi ninguna de ellas necesita conocer al NeedsSystem.
 [RequireComponent(typeof(Collider2D))]
 public class PetDropTarget : MonoBehaviour
 {

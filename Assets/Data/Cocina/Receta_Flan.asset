@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c85649d285413ec4db524216017fb212, type: 3}
+  m_Name: Receta_Flan
+  m_EditorClassIdentifier: Assembly-CSharp::RecipeDefinition
+  id: flan
+  nombre: Flan
+  sprite: {fileID: 21300000, guid: a8336b26da836a344a0a115255be3da6, type: 3}
+  ingredientes:
+  - {fileID: 11400000, guid: 465b9d533e97c6e4eb58c9f329991157, type: 2}
+  - {fileID: 11400000, guid: 42a4c66fb8a234049b62ee8c7871f6b5, type: 2}

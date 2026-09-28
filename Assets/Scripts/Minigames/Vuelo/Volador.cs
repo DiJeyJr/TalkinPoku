@@ -12,6 +12,21 @@ public class Volador : MonoBehaviour
     [Header("Vuelo")]
     [SerializeField] private float velocidadAleteo = 8f;
 
+    [Header("Inclinacion")]
+    // Solo el dibujo: el Rigidbody2D tiene la rotacion congelada para que los choques no lo hagan girar.
+    [SerializeField] private Transform dibujo;
+    // Grados por cada unidad por segundo de velocidad vertical, con tope para arriba y para abajo.
+    [SerializeField] private float gradosPorVelocidad = 4f;
+    [SerializeField] private float inclinacionMaxima = 30f;
+    [SerializeField] private float inclinacionMinima = -60f;
+
+    [Header("Suavizado")]
+    [SerializeField] private float suavizado = 10f;
+
+    [Header("Sonidos")]
+    [SerializeField] private AudioClip sonidoAleteo;
+    [SerializeField] private AudioClip sonidoChoque;
+
     public event Action Despego;
     public event Action PasoObstaculo;
     public event Action Choco;
@@ -33,6 +48,9 @@ public class Volador : MonoBehaviour
 
     private void Update()
     {
+        // Antes del return: despues del choque sigue cayendo, y se ve mejor si cae de nariz.
+        Inclinar();
+
         if (choco) return;
 
         // El tap se lee en Update porque en FixedUpdate se pierden los Began que caen entre dos
@@ -53,6 +71,15 @@ public class Volador : MonoBehaviour
         }
     }
 
+    private void Inclinar()
+    {
+        // Nariz para arriba al subir y para abajo al caer. Va con el suavizado de la clase 5 (Lerp con
+        // smoothing * deltaTime), asi el cambio de golpe del aleteo no hace saltar el dibujo.
+        float objetivo = Mathf.Clamp(body.linearVelocity.y * gradosPorVelocidad, inclinacionMinima, inclinacionMaxima);
+        float angulo = Mathf.LerpAngle(dibujo.localEulerAngles.z, objetivo, suavizado * Time.deltaTime);
+        dibujo.localRotation = Quaternion.Euler(0f, 0f, angulo);
+    }
+
     private void FixedUpdate()
     {
         if (!quiereAletear) return;
@@ -61,6 +88,7 @@ public class Volador : MonoBehaviour
         // Se asigna la velocidad en vez de sumar fuerza: con AddForce dos taps seguidos se acumulan
         // y sale disparada.
         body.linearVelocity = new Vector2(0f, velocidadAleteo);
+        SoundPlayer.Reproducir(sonidoAleteo);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -74,6 +102,7 @@ public class Volador : MonoBehaviour
         // Despues del primer choque sigue cayendo y rebota contra el suelo: eso no es otra derrota.
         if (choco) return;
         choco = true;
+        SoundPlayer.Reproducir(sonidoChoque);
         Choco?.Invoke();
     }
 }

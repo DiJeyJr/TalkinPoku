@@ -16,7 +16,21 @@ public class MinigameFlow : MonoBehaviour
     [SerializeField] private TMP_Text textoMonedas;
     [SerializeField] private Button botonVolver;
 
+    // La ultima partida terminada, hasta que la casa la cobre. Estatica porque al volver se carga
+    // otra escena y este componente deja de existir.
+    private static MinigameResult? resultadoPendiente;
+
     private IMinigame minijuego;
+
+    // La llama MinigameReward al arrancar la casa. Devuelve false si no hay partida para cobrar, y
+    // la borra para que no se cobre dos veces.
+    public static bool TomarResultado(out MinigameResult resultado)
+    {
+        resultado = resultadoPendiente.GetValueOrDefault();
+        bool habia = resultadoPendiente.HasValue;
+        resultadoPendiente = null;
+        return habia;
+    }
 
     private void Awake()
     {
@@ -34,7 +48,8 @@ public class MinigameFlow : MonoBehaviour
 
     private void MostrarResultado(MinigameResult resultado)
     {
-        // Todavia no hay Wallet: cuando exista, este es el unico lugar que acredita las monedas.
+        // El premio no se aplica aca sino en la casa (MinigameReward), que es donde viven las necesidades.
+        resultadoPendiente = resultado;
         textoPuntos.SetText("Puntos: {0}", resultado.Score);
         textoMonedas.SetText("Monedas: {0}", resultado.Coins);
         panelResultado.SetActive(true);

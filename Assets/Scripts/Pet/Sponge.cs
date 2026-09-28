@@ -1,15 +1,16 @@
 using UnityEngine;
 
-/// Esponja del bano: sube la higiene mientras se frota sobre la mascota. Cuenta la distancia
+/// Esponja del bano: frotarla sobre las manchas de Poku las va borrando. Cuenta la distancia
 /// recorrida encima y no el tiempo, para que dejarla quieta no limpie.
 [RequireComponent(typeof(Draggable))]
 public class Sponge : MonoBehaviour
 {
     [Header("Referencias")]
-    [SerializeField] private PetDropTarget mascota;
+    [SerializeField] private PetStains manchas;
 
     [Header("Umbrales")]
-    [SerializeField] private float higienePorUnidad = 4f;
+    // Radio de la esponja en unidades de mundo: una mancha cuenta apenas la esponja la roza.
+    [SerializeField] private float alcance = 0.6f;
 
     private Draggable draggable;
     private Vector2 ultimoPunto;
@@ -22,39 +23,31 @@ public class Sponge : MonoBehaviour
 
     private void OnEnable()
     {
+        draggable.Levantado += AlLevantar;
         draggable.Movido += AlMover;
-        draggable.Soltado += AlSoltar;
     }
 
     private void OnDisable()
     {
+        draggable.Levantado -= AlLevantar;
         draggable.Movido -= AlMover;
-        draggable.Soltado -= AlSoltar;
+    }
+
+    private void AlLevantar()
+    {
+        // Cada arrastre empieza de cero: si no, el primer tramo iria desde donde quedo la anterior.
+        hayUltimoPunto = false;
     }
 
     private void AlMover(Vector2 puntoMundo)
     {
-        if (mascota == null) return;
+        if (manchas == null) return;
 
-        if (mascota.Contiene(puntoMundo))
-        {
-            if (hayUltimoPunto)
-            {
-                float distancia = Vector2.Distance(ultimoPunto, puntoMundo);
-                mascota.Aplicar(NeedType.Higiene, distancia * higienePorUnidad);
-            }
-            ultimoPunto = puntoMundo;
-            hayUltimoPunto = true;
-        }
-        else
-        {
-            // Al salir de la mascota se corta, asi entrar de nuevo no suma el tramo de afuera.
-            hayUltimoPunto = false;
-        }
-    }
+        // El centro de la esponja y no el dedo: es lo que el jugador ve encima de las manchas.
+        Vector2 punto = transform.position;
+        if (hayUltimoPunto) manchas.Frotar(punto, alcance, Vector2.Distance(ultimoPunto, punto));
 
-    private void AlSoltar(Vector2 puntoMundo)
-    {
-        hayUltimoPunto = false;
+        ultimoPunto = punto;
+        hayUltimoPunto = true;
     }
 }

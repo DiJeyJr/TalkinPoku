@@ -20,6 +20,8 @@ public class Draggable : MonoBehaviour
     public event Action<Vector2> Movido;
     public event Action<Vector2> Soltado;
 
+    public bool Arrastrando => arrastrando;
+
     private Collider2D miCollider;
     private int dedoActivo = -1;
     private Vector2 posicionInicialPantalla;

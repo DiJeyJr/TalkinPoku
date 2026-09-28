@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: NeedsConfig
   m_EditorClassIdentifier: Assembly-CSharp::NeedsConfig
   valorInicial: 80
+  umbralBajo: 50
   umbralCritico: 20
   hambrePorHora: 8
   higienePorHora: 5
   diversionPorHora: 6
   energiaPorHora: 4
   energiaDurmiendoPorHora: 25
+  higieneSinManchas: 50
+  manchasMaximas: 5

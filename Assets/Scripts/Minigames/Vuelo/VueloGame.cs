@@ -15,6 +15,10 @@ public class VueloGame : MonoBehaviour, IMinigame
     [SerializeField] private int monedasPorPunto = 1;
     [SerializeField] private int maximoMonedas = 50;
 
+    [Header("Sonidos")]
+    // Cada obstaculo pasado es una moneda ganada.
+    [SerializeField] private AudioClip sonidoPunto;
+
     public event Action<MinigameResult> Finished;
 
     private int puntos;
@@ -40,6 +44,7 @@ public class VueloGame : MonoBehaviour, IMinigame
     {
         puntos++;
         textoPuntos.SetText("{0}", puntos);
+        SoundPlayer.Reproducir(sonidoPunto);
     }
 
     private void Perder()

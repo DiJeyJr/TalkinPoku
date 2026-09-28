@@ -8,6 +8,9 @@ public class Bed : MonoBehaviour
     [Header("Referencias")]
     [SerializeField] private NeedsSystem necesidades;
 
+    [Header("Sonidos")]
+    [SerializeField] private AudioClip sonidoDormir;
+
     private TouchTarget toque;
 
     private void Awake()
@@ -27,6 +30,9 @@ public class Bed : MonoBehaviour
 
     private void AlTocar()
     {
-        if (necesidades != null) necesidades.Dormir(!necesidades.Dormido);
+        if (necesidades == null) return;
+        necesidades.Dormir(!necesidades.Dormido);
+        // Solo al acostarlo: despertarlo no lleva sonido de cuna.
+        if (necesidades.Dormido) SoundPlayer.Reproducir(sonidoDormir);
     }
 }
