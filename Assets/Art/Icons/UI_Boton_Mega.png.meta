@@ -1,0 +1,1014 @@
+fileFormatVersion: 2
+guid: 8746dc0a857f0a049b7082561df072b2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6112020737122623995
+    second: UI_Boton_Mega_0
+  - first:
+      213: 7996277222828511450
+    second: UI_Boton_Mega_1
+  - first:
+      213: -2787561913884926604
+    second: UI_Boton_Mega_2
+  - first:
+      213: -2508010621343653355
+    second: UI_Boton_Mega_3
+  - first:
+      213: -3567785930445670312
+    second: UI_Boton_Mega_4
+  - first:
+      213: 9193272696255581129
+    second: UI_Boton_Mega_5
+  - first:
+      213: 9099764299368790137
+    second: UI_Boton_Mega_6
+  - first:
+      213: -4238530688629168483
+    second: UI_Boton_Mega_7
+  - first:
+      213: -5782124248886012205
+    second: UI_Boton_Mega_8
+  - first:
+      213: 9091877346148416082
+    second: UI_Boton_Mega_9
+  - first:
+      213: 4245853361313254147
+    second: UI_Boton_Mega_10
+  - first:
+      213: -48224301473017914
+    second: UI_Boton_Mega_11
+  - first:
+      213: 48681219404061315
+    second: UI_Boton_Mega_12
+  - first:
+      213: 9009519195645135730
+    second: UI_Boton_Mega_13
+  - first:
+      213: -5442386266620382438
+    second: UI_Boton_Mega_14
+  - first:
+      213: -8714529712361220373
+    second: UI_Boton_Mega_15
+  - first:
+      213: -5457581074604141695
+    second: UI_Boton_Mega_16
+  - first:
+      213: -5521934189608427387
+    second: UI_Boton_Mega_17
+  - first:
+      213: -8710509695541280499
+    second: UI_Boton_Mega_18
+  - first:
+      213: 2542683694453097327
+    second: UI_Boton_Mega_19
+  - first:
+      213: -6252018854153615720
+    second: UI_Boton_Mega_20
+  - first:
+      213: 2969733770473816178
+    second: UI_Boton_Mega_21
+  - first:
+      213: 2826610209967823367
+    second: UI_Boton_Mega_22
+  - first:
+      213: -5338969508279622802
+    second: UI_Boton_Mega_23
+  - first:
+      213: -7676595240973896162
+    second: UI_Boton_Mega_24
+  - first:
+      213: -6479030333739097708
+    second: UI_Boton_Mega_25
+  - first:
+      213: 4298148892079954616
+    second: UI_Boton_Mega_26
+  - first:
+      213: 3869286250861803641
+    second: UI_Boton_Mega_27
+  - first:
+      213: 1637731743908173267
+    second: UI_Boton_Mega_28
+  - first:
+      213: 5697492986082242589
+    second: UI_Boton_Mega_29
+  - first:
+      213: 5742632917736055318
+    second: UI_Boton_Mega_30
+  - first:
+      213: -6205692844603535469
+    second: UI_Boton_Mega_31
+  - first:
+      213: -4416180855352666194
+    second: UI_Boton_Mega_32
+  - first:
+      213: -5040848897071510378
+    second: UI_Boton_Mega_33
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: UI_Boton_Mega_0
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 839
+        width: 129
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf1e3004a7242d450800000000000000
+      internalID: 6112020737122623995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_1
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 853
+        width: 20
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad09d30a4cb78fe60800000000000000
+      internalID: 7996277222828511450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_2
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 847
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47d1b7d55379059d0800000000000000
+      internalID: -2787561913884926604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_3
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 855
+        width: 11
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 512a7edb0a1c13dd0800000000000000
+      internalID: -2508010621343653355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_4
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 863
+        width: 29
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8583625699dac7ec0800000000000000
+      internalID: -3567785930445670312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_5
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 837
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cb8c972fc0159f70800000000000000
+      internalID: 9193272696255581129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_6
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 862
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97878abea6bd84e70800000000000000
+      internalID: 9099764299368790137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_7
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 831
+        width: 57
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d96aaae9bc6bd25c0800000000000000
+      internalID: -4238530688629168483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_8
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 857
+        width: 11
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d61af171a4c1cfa0800000000000000
+      internalID: -5782124248886012205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_9
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 839
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25af8968646dc2e70800000000000000
+      internalID: 9091877346148416082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_10
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 868
+        width: 33
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30b8979f22d4cea30800000000000000
+      internalID: 4245853361313254147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_11
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 835
+        width: 37
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cfc829d04ca45ff0800000000000000
+      internalID: -48224301473017914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_12
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 838
+        width: 6
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38adfc5af43fca000800000000000000
+      internalID: 48681219404061315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_13
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 831
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27bcd7559fd380d70800000000000000
+      internalID: 9009519195645135730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_14
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 833
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a13b0a78682c874b0800000000000000
+      internalID: -5442386266620382438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_15
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 859
+        width: 53
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be65f1ee565cf0780800000000000000
+      internalID: -8714529712361220373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_16
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 839
+        width: 13
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 183535b9de6c244b0800000000000000
+      internalID: -5457581074604141695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_17
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 815
+        width: 19
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5802e4b6c162e53b0800000000000000
+      internalID: -5521934189608427387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_18
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 847
+        width: 49
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d018aa8059d0e1780800000000000000
+      internalID: -8710509695541280499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_19
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 847
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f630e00395d694320800000000000000
+      internalID: 2542683694453097327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_20
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 834
+        width: 23
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 896012d0afd5c39a0800000000000000
+      internalID: -6252018854153615720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_21
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 854
+        width: 18
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 270c292412d963920800000000000000
+      internalID: 2969733770473816178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_22
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 839
+        width: 21
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70adf9b82032a3720800000000000000
+      internalID: 2826610209967823367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_23
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 847
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e63e950f48b28e5b0800000000000000
+      internalID: -5338969508279622802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_24
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 835
+        width: 105
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e16fb49fc41477590800000000000000
+      internalID: -7676595240973896162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_25
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 863
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49120842d3cd516a0800000000000000
+      internalID: -6479030333739097708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_26
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 871
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ba1a2015a716ab30800000000000000
+      internalID: 4298148892079954616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_27
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 821
+        width: 209
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 978bbe4485772b530800000000000000
+      internalID: 3869286250861803641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_28
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 833
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d5170118546ab610800000000000000
+      internalID: 1637731743908173267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_29
+      rect:
+        serializedVersion: 2
+        x: 1126
+        y: 817
+        width: 111
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1036b92faf811f40800000000000000
+      internalID: 5697492986082242589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_30
+      rect:
+        serializedVersion: 2
+        x: 1236
+        y: 836
+        width: 89
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6126f11863ee1bf40800000000000000
+      internalID: 5742632917736055318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_31
+      rect:
+        serializedVersion: 2
+        x: 1078
+        y: 823
+        width: 17
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39f093cac33f0e9a0800000000000000
+      internalID: -6205692844603535469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_32
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 817
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea7d2d4f8e296b2c0800000000000000
+      internalID: -4416180855352666194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Boton_Mega_33
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 22
+        width: 1505
+        height: 774
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69c02abb2ae4b0ab0800000000000000
+      internalID: -5040848897071510378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      UI_Boton_Mega_0: 6112020737122623995
+      UI_Boton_Mega_1: 7996277222828511450
+      UI_Boton_Mega_10: 4245853361313254147
+      UI_Boton_Mega_11: -48224301473017914
+      UI_Boton_Mega_12: 48681219404061315
+      UI_Boton_Mega_13: 9009519195645135730
+      UI_Boton_Mega_14: -5442386266620382438
+      UI_Boton_Mega_15: -8714529712361220373
+      UI_Boton_Mega_16: -5457581074604141695
+      UI_Boton_Mega_17: -5521934189608427387
+      UI_Boton_Mega_18: -8710509695541280499
+      UI_Boton_Mega_19: 2542683694453097327
+      UI_Boton_Mega_2: -2787561913884926604
+      UI_Boton_Mega_20: -6252018854153615720
+      UI_Boton_Mega_21: 2969733770473816178
+      UI_Boton_Mega_22: 2826610209967823367
+      UI_Boton_Mega_23: -5338969508279622802
+      UI_Boton_Mega_24: -7676595240973896162
+      UI_Boton_Mega_25: -6479030333739097708
+      UI_Boton_Mega_26: 4298148892079954616
+      UI_Boton_Mega_27: 3869286250861803641
+      UI_Boton_Mega_28: 1637731743908173267
+      UI_Boton_Mega_29: 5697492986082242589
+      UI_Boton_Mega_3: -2508010621343653355
+      UI_Boton_Mega_30: 5742632917736055318
+      UI_Boton_Mega_31: -6205692844603535469
+      UI_Boton_Mega_32: -4416180855352666194
+      UI_Boton_Mega_33: -5040848897071510378
+      UI_Boton_Mega_4: -3567785930445670312
+      UI_Boton_Mega_5: 9193272696255581129
+      UI_Boton_Mega_6: 9099764299368790137
+      UI_Boton_Mega_7: -4238530688629168483
+      UI_Boton_Mega_8: -5782124248886012205
+      UI_Boton_Mega_9: 9091877346148416082
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
