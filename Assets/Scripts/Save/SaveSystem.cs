@@ -38,6 +38,7 @@ public static class SaveSystem
         RecipeBook.Restaurar(datos.recetas);
         Progression.Restaurar(datos.nivel, datos.xp);
         MegaEvolution.Restaurar(datos.energiaMega, datos.megaHasta);
+        Inventory.Restaurar(datos.inventario);
     }
 
     public static void Guardar()
@@ -54,6 +55,7 @@ public static class SaveSystem
         datos.xp = Progression.XpActual;
         datos.energiaMega = MegaEvolution.EnergiaActual;
         datos.megaHasta = MegaEvolution.MegaHasta;
+        datos.inventario = Inventory.Foto();
         datos.version = SaveData.VersionActual;
 
         try

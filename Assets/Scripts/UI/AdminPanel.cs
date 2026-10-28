@@ -9,6 +9,8 @@ public class AdminPanel : MonoBehaviour
     [SerializeField] private NeedsSystem necesidades;
     [SerializeField] private Progression progreso;
     [SerializeField] private MegaEvolution mega;
+    [SerializeField] private Wallet billetera;
+    [SerializeField] private Inventory inventario;
     [SerializeField] private ScreenStack pantallas;
     [SerializeField] private GameObject contenido;
     [SerializeField] private TMP_Text textoVelocidad;
@@ -65,6 +67,18 @@ public class AdminPanel : MonoBehaviour
     public void TerminarMega()
     {
         mega.Terminar();
+    }
+
+    // Para probar la tienda sin jugar minijuegos.
+    public void SumarMonedas(int cantidad)
+    {
+        billetera.Sumar(CurrencyType.Monedas, cantidad);
+        billetera.Sumar(CurrencyType.Gemas, cantidad / 50);
+    }
+
+    public void VaciarInventario()
+    {
+        inventario.Vaciar();
     }
 
     private void MostrarVelocidad()

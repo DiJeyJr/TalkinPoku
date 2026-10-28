@@ -15,5 +15,13 @@ MonoBehaviour:
   id: manzana
   nombre: Manzana
   icono: {fileID: 21300000, guid: 7b05dcabd19932b418b738a2c2946af6, type: 3}
+  categoria: 0
+  precio: 0
+  moneda: 0
   necesidad: 0
   cantidad: 20
+  spriteMundo: {fileID: 0}
+  escalaMundo: 1
+  ranura: 0
+  posicionInicial: {x: 0, y: 0}
+  capa: 0
