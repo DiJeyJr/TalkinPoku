@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
     [Header("Referencias")]
     [SerializeField] private PetDropTarget mascota;
     [SerializeField] private PetMoodController cara;
+    [SerializeField] private Progression progreso;
 
     [Header("Tiro")]
     [SerializeField] private float velocidadMaxima = 18f;
@@ -108,5 +109,6 @@ public class Ball : MonoBehaviour
 
         mascota.Aplicar(NeedType.Diversion, diversionPorGolpe);
         cara.Alegrar(segundosContento);
+        if (progreso != null) progreso.Ganar(XpSource.Pelota);
     }
 }

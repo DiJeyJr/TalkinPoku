@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using UnityEngine;
 
-/// Lee y escribe la partida en un JSON. Las necesidades, la billetera y las recetas viven cada una en
+/// Lee y escribe la partida en un JSON. Las necesidades, la billetera, las recetas y el nivel viven cada uno en
 /// su sistema: aca solo se juntan para escribirlas y se reparten al abrir el juego.
 public static class SaveSystem
 {
@@ -36,6 +36,8 @@ public static class SaveSystem
         NeedsSystem.Restaurar(datos.necesidades);
         Wallet.Restaurar(datos.saldo);
         RecipeBook.Restaurar(datos.recetas);
+        Progression.Restaurar(datos.nivel, datos.xp);
+        MegaEvolution.Restaurar(datos.energiaMega, datos.megaHasta);
     }
 
     public static void Guardar()
@@ -48,6 +50,10 @@ public static class SaveSystem
         if (saldo != null) datos.saldo = saldo;
 
         datos.recetas = RecipeBook.Foto();
+        datos.nivel = Progression.NivelActual;
+        datos.xp = Progression.XpActual;
+        datos.energiaMega = MegaEvolution.EnergiaActual;
+        datos.megaHasta = MegaEvolution.MegaHasta;
         datos.version = SaveData.VersionActual;
 
         try

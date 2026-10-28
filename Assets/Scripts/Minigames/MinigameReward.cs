@@ -10,6 +10,7 @@ public class MinigameReward : MonoBehaviour
     [SerializeField] private PetMoodController cara;
     [SerializeField] private Wallet billetera;
     [SerializeField] private MonedasVoladoras monedasVoladoras;
+    [SerializeField] private Progression progreso;
 
     [Header("Premio")]
     [SerializeField] private float diversionPorPartida = 25f;
@@ -22,11 +23,18 @@ public class MinigameReward : MonoBehaviour
         // Una partida abandonada no divierte ni paga.
         if (!resultado.Completed) return;
 
+        // Se mira al cobrar y no al empezar la partida: si la Mega se termino mientras jugaba, ya no paga
+        // de mas. Redondea para arriba para que una partida de pocas monedas tambien note el bonus.
+        int monedas = resultado.Coins;
+        if (MegaEvolution.Activa && progreso != null)
+            monedas = Mathf.CeilToInt(monedas * progreso.Config.MultiplicadorMonedasMega);
+
         // Primero el vuelo y despues el saldo: asi el contador sabe que esas monedas vienen volando.
-        if (monedasVoladoras != null) monedasVoladoras.Lanzar(resultado.Coins);
-        billetera.Sumar(CurrencyType.Monedas, resultado.Coins);
+        if (monedasVoladoras != null) monedasVoladoras.Lanzar(monedas);
+        billetera.Sumar(CurrencyType.Monedas, monedas);
         necesidades.Sumar(NeedType.Diversion, diversionPorPartida);
         cara.Alegrar(segundosContento);
+        if (progreso != null) progreso.Ganar(XpSource.Minijuego);
 
         // Las monedas no pueden depender del proximo autoguardado: si la app se cierra antes, se pierden.
         SaveSystem.Guardar();

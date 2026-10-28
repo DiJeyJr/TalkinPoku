@@ -7,6 +7,8 @@ public class AdminPanel : MonoBehaviour
 {
     [Header("Referencias")]
     [SerializeField] private NeedsSystem necesidades;
+    [SerializeField] private Progression progreso;
+    [SerializeField] private MegaEvolution mega;
     [SerializeField] private ScreenStack pantallas;
     [SerializeField] private GameObject contenido;
     [SerializeField] private TMP_Text textoVelocidad;
@@ -35,6 +37,34 @@ public class AdminPanel : MonoBehaviour
         velocidadElegida = multiplicador;
         necesidades.MultiplicadorTiempo = multiplicador;
         MostrarVelocidad();
+    }
+
+    // Las llaman los botones de nivel desde su OnClick.
+    public void SumarXp(int cantidad)
+    {
+        progreso.Sumar(cantidad);
+    }
+
+    public void SubirNivel()
+    {
+        progreso.SubirNivel();
+    }
+
+    public void ReiniciarNivel()
+    {
+        // Si no, quedaria Mega-Pokuchan en el nivel 1.
+        mega.Terminar();
+        progreso.Reiniciar();
+    }
+
+    public void LlenarMega()
+    {
+        mega.LlenarEnergia();
+    }
+
+    public void TerminarMega()
+    {
+        mega.Terminar();
     }
 
     private void MostrarVelocidad()
