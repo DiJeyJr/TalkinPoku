@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392485701e92e0246bdfc31784c40184, type: 3}
+  m_Name: Item_Zanahoria
+  m_EditorClassIdentifier: Assembly-CSharp::ItemDefinition
+  id: zanahoria
+  nombre: Zanahoria
+  icono: {fileID: 21300000, guid: 3aa2fe156e8df174aa7f484a7462000d, type: 3}
+  categoria: 0
+  precio: 5
+  moneda: 0
+  necesidad: 0
+  cantidad: 12
+  spriteMundo: {fileID: 0}
+  escalaMundo: 1
+  ranura: 0
+  posicionInicial: {x: 0, y: 0}
+  capa: 0

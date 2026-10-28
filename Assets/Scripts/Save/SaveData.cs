@@ -22,4 +22,5 @@ public class SaveData
     // megaHasta en ticks UTC: JsonUtility no guarda DateTime. 0 = la Mega no estaba activa.
     public int energiaMega;
     public long megaHasta;
+    public InventoryState inventario;
 }

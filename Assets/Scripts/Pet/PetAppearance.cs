@@ -18,6 +18,16 @@ public class PetAppearance : ScriptableObject
     [Header("Minijuegos")]
     [SerializeField] private Sprite avion;
 
+    [Header("Accesorios")]
+    // Donde va cada ranura, como fraccion del sprite (0,0 abajo a la izquierda, 1,1 arriba a la
+    // derecha), medido sobre la cara normal. Las otras caras tienen la cabeza en el mismo lugar.
+    [SerializeField] private Vector2 anclaCabeza = new Vector2(0.45f, 0.7f);
+    [SerializeField] private Vector2 anclaCara = new Vector2(0.45f, 0.5f);
+    [SerializeField] private Vector2 anclaCuello = new Vector2(0.45f, 0.4f);
+    [SerializeField] private Vector2 anclaEspalda = new Vector2(0.45f, 0.35f);
+    // Las evoluciones tienen la cabeza mas chica en proporcion al cuerpo.
+    [SerializeField] private float escalaAccesorios = 1f;
+
     [Header("Provisorio")]
     // Mientras no esten los dibujos de una evolucion se usan los de Poku mas grandes y tenidos, asi el
     // cambio se nota. Con el arte final, escala 1 y tinte blanco.
@@ -36,5 +46,17 @@ public class PetAppearance : ScriptableObject
     public Sprite Acariciado => acariciado;
     public Sprite Avion => avion;
     public float Escala => escala;
+    public float EscalaAccesorios => escalaAccesorios;
+
+    public Vector2 Ancla(AccessorySlot ranura)
+    {
+        switch (ranura)
+        {
+            case AccessorySlot.Cabeza: return anclaCabeza;
+            case AccessorySlot.Cara: return anclaCara;
+            case AccessorySlot.Cuello: return anclaCuello;
+            default: return anclaEspalda;
+        }
+    }
     public Color Tinte => tinte;
 }

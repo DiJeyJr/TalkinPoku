@@ -44,6 +44,17 @@ public class Wallet : MonoBehaviour
         SaldoCambiado?.Invoke(tipo, saldo[(int)tipo]);
     }
 
+    // Devuelve false sin tocar nada si no alcanza: el que compra decide que mostrar.
+    public bool Gastar(CurrencyType tipo, int cantidad)
+    {
+        if (cantidad < 0) return false;
+        Empezar();
+        if (saldo[(int)tipo] < cantidad) return false;
+        saldo[(int)tipo] -= cantidad;
+        SaldoCambiado?.Invoke(tipo, saldo[(int)tipo]);
+        return true;
+    }
+
     // Se carga el saldo inicial al primer uso y no en Awake: los Awake de cada objeto corren en
     // cualquier orden, y los contadores leen el saldo en su OnEnable, que puede llegar antes.
     private void Empezar()

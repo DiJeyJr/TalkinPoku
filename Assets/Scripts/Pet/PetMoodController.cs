@@ -77,11 +77,17 @@ public class PetMoodController : MonoBehaviour
         Actualizar();
     }
 
+    public PetAppearance Apariencia => apariencia;
+
+    // PetAccessories la escucha para acomodar la ropa a la etapa nueva.
+    public event System.Action AparienciaCambiada;
+
     public void CambiarApariencia(PetAppearance nueva)
     {
         if (nueva == null || nueva == apariencia) return;
         apariencia = nueva;
         Actualizar();
+        AparienciaCambiada?.Invoke();
     }
 
     private void AlCambiar(NeedType tipo, float valor)
