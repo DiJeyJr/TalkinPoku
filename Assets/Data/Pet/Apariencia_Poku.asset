@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f17cf691cb4cf43a745e11cfac281d, type: 3}
+  m_Name: Apariencia_Poku
+  m_EditorClassIdentifier: Assembly-CSharp::PetAppearance
+  normal: {fileID: 21300000, guid: bc8528216f9d20b4e8205333c4429f1a, type: 3}
+  contento: {fileID: 21300000, guid: f6b027e5e96088a41b684ba8c053bf52, type: 3}
+  conHambre: {fileID: 21300000, guid: ff4132bc488f4114c81578421872c47c, type: 3}
+  sucio: {fileID: 21300000, guid: 16d6297d3847aa743a3c75f8d5abf001, type: 3}
+  aburrido: {fileID: 21300000, guid: 5f3df209a6b83b14196cda54bcf002b4, type: 3}
+  cansado: {fileID: 21300000, guid: 5f3df209a6b83b14196cda54bcf002b4, type: 3}
+  dormido: {fileID: 21300000, guid: df406581c9ef6544683cd179fbb11ed4, type: 3}
+  acariciado: {fileID: 21300000, guid: b07a746f429d32444b8661812ebf32ca, type: 3}
+  avion: {fileID: 21300000, guid: 3e166635d6e3a26499926f26a2d61911, type: 3}
+  escala: 1
+  tinte: {r: 1, g: 1, b: 1, a: 1}

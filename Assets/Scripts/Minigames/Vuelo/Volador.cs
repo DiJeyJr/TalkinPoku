@@ -23,6 +23,10 @@ public class Volador : MonoBehaviour
     [Header("Suavizado")]
     [SerializeField] private float suavizado = 10f;
 
+    [Header("Apariencia")]
+    // En el minijuego no hay Progression en la escena: el nivel sale del estatico y la etapa del config.
+    [SerializeField] private ProgressionConfig progresion;
+
     [Header("Sonidos")]
     [SerializeField] private AudioClip sonidoAleteo;
     [SerializeField] private AudioClip sonidoChoque;
@@ -40,6 +44,17 @@ public class Volador : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         // Quieta en el aire hasta el primer tap, para que el jugador llegue a leer la indicacion.
         body.simulated = false;
+        PonerAvionDeLaEtapa();
+    }
+
+    private void PonerAvionDeLaEtapa()
+    {
+        // Sin config o sin dibujo para esa etapa queda el sprite que tiene la escena (el de Poku).
+        if (progresion == null) return;
+        PetAppearance apariencia = progresion.Etapas[progresion.EtapaDe(Progression.NivelActual)].apariencia;
+        if (MegaEvolution.Activa && progresion.AparienciaMega != null) apariencia = progresion.AparienciaMega;
+        if (apariencia == null || apariencia.Avion == null) return;
+        dibujo.GetComponent<SpriteRenderer>().sprite = apariencia.Avion;
     }
 
     private void OnEnable() => EnhancedTouchSupport.Enable();

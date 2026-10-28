@@ -8,6 +8,7 @@ public class PetStains : MonoBehaviour
     [SerializeField] private NeedsSystem necesidades;
     // En el orden en que aparecen: la primera es la que se ve apenas empieza a ensuciarse.
     [SerializeField] private Stain[] manchas;
+    [SerializeField] private Progression progreso;
 
     [Header("Sonidos")]
     [SerializeField] private AudioClip sonidoLimpiar;
@@ -50,6 +51,7 @@ public class PetStains : MonoBehaviour
         // menos y Sincronizar no apaga ninguna otra.
         necesidades.LimpiarMancha();
         SoundPlayer.Reproducir(sonidoLimpiar);
+        if (progreso != null) progreso.Ganar(XpSource.Limpiar);
     }
 
     private void Sincronizar()

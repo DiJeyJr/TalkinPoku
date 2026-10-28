@@ -293,6 +293,7 @@ MonoBehaviour:
   inclinacionMaxima: 30
   inclinacionMinima: -60
   suavizado: 10
+  progresion: {fileID: 11400000, guid: e54ba8ddf02159b4ea343f14b0d80db1, type: 2}
   sonidoAleteo: {fileID: 8300000, guid: 8ecfa2210a6b0c349bca891a4435c5ec, type: 3}
   sonidoChoque: {fileID: 8300000, guid: 527b5b976d8619f488876013574f914d, type: 3}
 --- !u!58 &211455096

@@ -7,6 +7,7 @@ public class PetInteraction : MonoBehaviour
 {
     [Header("Referencias")]
     [SerializeField] private NeedsSystem necesidades;
+    [SerializeField] private Progression progreso;
 
     [Header("Diversion")]
     [SerializeField] private float porToque = 3f;
@@ -22,11 +23,13 @@ public class PetInteraction : MonoBehaviour
     private void OnEnable()
     {
         toque.Tocado += AlTocar;
+        toque.HoldEmpezado += AlEmpezarCaricia;
     }
 
     private void OnDisable()
     {
         toque.Tocado -= AlTocar;
+        toque.HoldEmpezado -= AlEmpezarCaricia;
     }
 
     private void Update()
@@ -41,5 +44,11 @@ public class PetInteraction : MonoBehaviour
     {
         // Dormida no juega: tocarla no la entretiene hasta que se despierte.
         if (!necesidades.Dormido) necesidades.Sumar(NeedType.Diversion, porToque);
+    }
+
+    private void AlEmpezarCaricia()
+    {
+        // La experiencia va una vez por caricia y no por segundo: dejar el dedo apoyado no sube de nivel.
+        if (!necesidades.Dormido && progreso != null) progreso.Ganar(XpSource.Acariciar);
     }
 }

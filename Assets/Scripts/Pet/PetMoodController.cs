@@ -1,8 +1,9 @@
 using UnityEngine;
 
-/// Elige la cara de Poku. Contento es una reaccion de unos segundos (al volver de un minijuego o
-/// cuando la pelota le pega). El resto del tiempo manda la necesidad que esta peor si ya se nota
-/// (debajo del umbral bajo de NeedsConfig), y si ninguna se nota, la cara normal.
+/// Elige la cara de Poku. Dormido y acariciado duran lo que dura eso. Contento es una reaccion de
+/// unos segundos (al volver de un minijuego o cuando la pelota le pega). El resto del tiempo manda
+/// la necesidad que esta peor si ya se nota (debajo del umbral bajo de NeedsConfig), y si ninguna
+/// se nota, la cara normal. Las caras salen de la apariencia de la etapa actual (Poku, Pokucha...).
 [RequireComponent(typeof(SpriteRenderer))]
 public class PetMoodController : MonoBehaviour
 {
@@ -14,18 +15,17 @@ public class PetMoodController : MonoBehaviour
 
     [Header("Referencias")]
     [SerializeField] private NeedsSystem necesidades;
+    // Opcional: el mismo TouchTarget que usa PetInteraction, para poner la cara de caricia.
+    [SerializeField] private TouchTarget toque;
 
     [Header("Expresiones")]
-    [SerializeField] private Sprite normal;
-    [SerializeField] private Sprite contento;
-    [SerializeField] private Sprite conHambre;
-    [SerializeField] private Sprite sucio;
-    [SerializeField] private Sprite aburrido;
-    [SerializeField] private Sprite cansado;
+    // La de Poku. PetEvolution la cambia al arrancar si la mascota ya evoluciono.
+    [SerializeField] private PetAppearance apariencia;
 
     private SpriteRenderer spriteRenderer;
     private bool reaccionando;
     private float contentoHasta;
+    private bool acariciando;
 
     private void Awake()
     {
@@ -35,11 +35,13 @@ public class PetMoodController : MonoBehaviour
     private void OnEnable()
     {
         necesidades.NeedChanged += AlCambiar;
+        necesidades.DormidoCambiado += AlDormir;
     }
 
     private void OnDisable()
     {
         necesidades.NeedChanged -= AlCambiar;
+        necesidades.DormidoCambiado -= AlDormir;
     }
 
     private void Start()
@@ -55,6 +57,15 @@ public class PetMoodController : MonoBehaviour
             reaccionando = false;
             Actualizar();
         }
+
+        // Se mira Sosteniendo y no los eventos de hold: si se abre una pantalla con el dedo apoyado,
+        // el TouchTarget se apaga sin avisar HoldTerminado y la cara quedaria trabada.
+        bool ahora = toque != null && toque.Sosteniendo;
+        if (ahora != acariciando)
+        {
+            acariciando = ahora;
+            Actualizar();
+        }
     }
 
     // La llaman quienes lo divierten (el premio del minijuego, la pelota). Si ya estaba contento,
@@ -66,7 +77,19 @@ public class PetMoodController : MonoBehaviour
         Actualizar();
     }
 
+    public void CambiarApariencia(PetAppearance nueva)
+    {
+        if (nueva == null || nueva == apariencia) return;
+        apariencia = nueva;
+        Actualizar();
+    }
+
     private void AlCambiar(NeedType tipo, float valor)
+    {
+        Actualizar();
+    }
+
+    private void AlDormir(bool estaDormido)
     {
         Actualizar();
     }
@@ -79,8 +102,13 @@ public class PetMoodController : MonoBehaviour
 
     private Sprite Elegir()
     {
-        // La reaccion tapa a las demas caras: es corta y es la respuesta a algo que hizo el jugador.
-        if (reaccionando) return contento;
+        // Dormido tapa todo: ni la pelota ni las caricias lo despiertan (PetInteraction tampoco cuenta
+        // las caricias mientras duerme). Sin sprite asignado sigue con las demas caras.
+        if (necesidades.Dormido && apariencia.Dormido != null) return apariencia.Dormido;
+
+        // Acariciarlo y la reaccion tapan a las necesidades: son la respuesta a algo que hizo el jugador.
+        if (acariciando && apariencia.Acariciado != null) return apariencia.Acariciado;
+        if (reaccionando) return apariencia.Contento;
 
         NeedType peor = necesidadesBase[0];
         foreach (NeedType tipo in necesidadesBase)
@@ -94,13 +122,13 @@ public class PetMoodController : MonoBehaviour
         {
             switch (peor)
             {
-                case NeedType.Hambre: return conHambre;
-                case NeedType.Higiene: return sucio;
-                case NeedType.Diversion: return aburrido;
-                default: return cansado;
+                case NeedType.Hambre: return apariencia.ConHambre;
+                case NeedType.Higiene: return apariencia.Sucio;
+                case NeedType.Diversion: return apariencia.Aburrido;
+                default: return apariencia.Cansado;
             }
         }
 
-        return normal;
+        return apariencia.Normal;
     }
 }

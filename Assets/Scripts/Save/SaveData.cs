@@ -16,4 +16,10 @@ public class SaveData
     public int[] saldo;
     // Por id y no por referencia al asset: renombrar o mover una receta no rompe la partida.
     public List<string> recetas = new List<string>();
+    // Una partida de antes de la progresion los trae en 0: Progression.Restaurar la deja en el nivel 1.
+    public int nivel;
+    public int xp;
+    // megaHasta en ticks UTC: JsonUtility no guarda DateTime. 0 = la Mega no estaba activa.
+    public int energiaMega;
+    public long megaHasta;
 }
