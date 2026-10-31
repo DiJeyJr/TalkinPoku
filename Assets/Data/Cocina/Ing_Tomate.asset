@@ -15,3 +15,4 @@ MonoBehaviour:
   id: tomate
   nombre: Tomate
   sprite: {fileID: 21300000, guid: 3127e06abdcc517469ee962e2bd5a1b1, type: 3}
+  precio: 10

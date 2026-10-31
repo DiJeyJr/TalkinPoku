@@ -40,6 +40,11 @@ public class Olla : MonoBehaviour
         return miCollider.OverlapPoint(puntoMundo);
     }
 
+    public bool Tiene(IngredientDefinition ingrediente)
+    {
+        return contenido.Contains(ingrediente);
+    }
+
     // false si ya estaba o si no hay lugar. Repetido no suma: las recetas son de ingredientes distintos.
     public bool Agregar(IngredientDefinition ingrediente)
     {

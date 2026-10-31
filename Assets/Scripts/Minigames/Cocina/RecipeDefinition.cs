@@ -11,11 +11,17 @@ public class RecipeDefinition : ScriptableObject
     [SerializeField] private string nombre;
     [SerializeField] private Sprite sprite;
     [SerializeField] private IngredientDefinition[] ingredientes;
+    // Lo que el plato suma por si mismo, aparte de lo que valen sus ingredientes.
+    [SerializeField] private int energiaExtra = 10;
 
     public string Id => id;
     public string Nombre => nombre;
     public Sprite Sprite => sprite;
     public IReadOnlyList<IngredientDefinition> Ingredientes => ingredientes;
+
+    // La energia que le da a Poku: un plato con ingredientes mas caros llena mas, y el extra deja
+    // ajustar cada receta sin tocar los precios de la tienda.
+    public int Energia => ingredientes.Sum(i => i.Precio) + energiaExtra;
 
     // La olla arma la suya con la misma funcion, asi comparar dos combinaciones es comparar dos strings.
     public string Clave => ClaveDe(ingredientes.Select(i => i.Id));

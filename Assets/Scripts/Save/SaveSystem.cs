@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -32,13 +33,30 @@ public static class SaveSystem
         // Primera vez que se abre: cada sistema arranca con sus valores iniciales.
         if (leidos == null) return;
 
-        datos = leidos;
+        datos = Migrar(leidos);
         NeedsSystem.Restaurar(datos.necesidades);
         Wallet.Restaurar(datos.saldo);
         RecipeBook.Restaurar(datos.recetas);
         Progression.Restaurar(datos.nivel, datos.xp);
         MegaEvolution.Restaurar(datos.energiaMega, datos.megaHasta);
         Inventory.Restaurar(datos.inventario);
+        Despensa.Ingredientes.Restaurar(datos.ingredientes);
+        Despensa.Platos.Restaurar(datos.platos);
+    }
+
+    // Un paso por version, en cascada, sin borrar nunca lo que no se entiende: una partida vieja se
+    // convierte en vez de perderse.
+    private static SaveData Migrar(SaveData viejos)
+    {
+        if (viejos.version < 2)
+        {
+            // La 1 no tenia despensa. Nivel e inventario de accesorios ya se arreglan solos al restaurar.
+            if (viejos.ingredientes == null) viejos.ingredientes = new List<ItemCantidad>();
+            if (viejos.platos == null) viejos.platos = new List<ItemCantidad>();
+        }
+
+        viejos.version = SaveData.VersionActual;
+        return viejos;
     }
 
     public static void Guardar()
@@ -56,6 +74,8 @@ public static class SaveSystem
         datos.energiaMega = MegaEvolution.EnergiaActual;
         datos.megaHasta = MegaEvolution.MegaHasta;
         datos.inventario = Inventory.Foto();
+        datos.ingredientes = Despensa.Ingredientes.Foto();
+        datos.platos = Despensa.Platos.Foto();
         datos.version = SaveData.VersionActual;
 
         try

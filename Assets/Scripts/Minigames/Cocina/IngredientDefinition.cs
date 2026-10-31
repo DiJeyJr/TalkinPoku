@@ -8,8 +8,11 @@ public class IngredientDefinition : ScriptableObject
     [SerializeField] private string id;
     [SerializeField] private string nombre;
     [SerializeField] private Sprite sprite;
+    // Lo que cuesta en la tienda, en monedas. Tambien es lo que aporta a la energia de los platos.
+    [SerializeField] private int precio = 10;
 
     public string Id => id;
     public string Nombre => nombre;
     public Sprite Sprite => sprite;
+    public int Precio => precio;
 }

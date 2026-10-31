@@ -15,3 +15,4 @@ MonoBehaviour:
   id: harina
   nombre: Harina
   sprite: {fileID: 21300000, guid: 8cdcc5544a450f142ad25544067ff64d, type: 3}
+  precio: 5

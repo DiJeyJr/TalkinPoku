@@ -15,3 +15,4 @@ MonoBehaviour:
   id: queso
   nombre: Queso
   sprite: {fileID: 21300000, guid: e93c1935f85f22a47afb82a008df653a, type: 3}
+  precio: 12

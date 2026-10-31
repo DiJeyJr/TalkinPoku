@@ -15,3 +15,4 @@ MonoBehaviour:
   id: huevo
   nombre: Huevo
   sprite: {fileID: 21300000, guid: 1de6ee6f341ac434db1ca1cc5627661d, type: 3}
+  precio: 8

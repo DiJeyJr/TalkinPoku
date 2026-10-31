@@ -7,7 +7,9 @@ using System.Collections.Generic;
 public class SaveData
 {
     // Se sube cuando cambia el formato, para saber al leer una partida vieja que hay que convertirla.
-    public const int VersionActual = 1;
+    // 1: necesidades, saldo y recetas. 2: se suman la progresion, los accesorios y muebles, y los
+    // ingredientes y platos.
+    public const int VersionActual = 2;
 
     public int version;
     // Trae el momento en que se saco la foto: al abrir se descuenta el tiempo que paso desde ahi.
@@ -23,4 +25,13 @@ public class SaveData
     public int energiaMega;
     public long megaHasta;
     public InventoryState inventario;
+    public List<ItemCantidad> ingredientes = new List<ItemCantidad>();
+    public List<ItemCantidad> platos = new List<ItemCantidad>();
+}
+
+[Serializable]
+public class ItemCantidad
+{
+    public string id;
+    public int cantidad;
 }

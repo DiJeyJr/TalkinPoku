@@ -18,3 +18,4 @@ MonoBehaviour:
   ingredientes:
   - {fileID: 11400000, guid: 465b9d533e97c6e4eb58c9f329991157, type: 2}
   - {fileID: 11400000, guid: 42a4c66fb8a234049b62ee8c7871f6b5, type: 2}
+  energiaExtra: 10

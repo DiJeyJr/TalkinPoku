@@ -19,3 +19,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 23e8ec3536b5eb54fba6fa46ce932853, type: 2}
   - {fileID: 11400000, guid: e0a621b02c0086349a7f52853e2f76a9, type: 2}
   - {fileID: 11400000, guid: 0ac49c0c0ece1504e8ec1ecf26002ff9, type: 2}
+  energiaExtra: 15

@@ -20,6 +20,23 @@ public class AdminTrigger : MonoBehaviour
     {
         // La Image del boton es transparente pero con Raycast Target prendido: no se ve y recibe toques.
         GetComponent<Button>().onClick.AddListener(Tocar);
+
+#if ADMIN
+        // Build de prueba (se compila con el simbolo ADMIN): el boton se ve y abre con un toque, para
+        // probar en el celular sin acordarse del truco. La build de entrega no lo tiene.
+        toquesNecesarios = 1;
+        GetComponent<Image>().color = new Color(0.93f, 0.54f, 0.18f, 0.85f);
+        TMPro.TextMeshProUGUI etiqueta = new GameObject("Etiqueta", typeof(RectTransform)).AddComponent<TMPro.TextMeshProUGUI>();
+        etiqueta.rectTransform.SetParent(transform, false);
+        etiqueta.rectTransform.anchorMin = Vector2.zero;
+        etiqueta.rectTransform.anchorMax = Vector2.one;
+        etiqueta.rectTransform.sizeDelta = Vector2.zero;
+        etiqueta.text = "Admin";
+        etiqueta.fontSize = 34;
+        etiqueta.fontStyle = TMPro.FontStyles.Bold;
+        etiqueta.alignment = TMPro.TextAlignmentOptions.Center;
+        etiqueta.raycastTarget = false;
+#endif
     }
 
     private void Tocar()

@@ -64,7 +64,10 @@ public class CocinaGame : MonoBehaviour, IMinigame
         terminado = false;
         plato.enabled = false;
         textoMonedas.SetText("{0}", monedas);
-        textoMensaje.SetText("Arrastrá ingredientes a la olla");
+        // Los ingredientes se compran en la tienda: sin ninguno no hay nada para cocinar.
+        textoMensaje.SetText(Despensa.Ingredientes.Total > 0
+            ? "Arrastrá ingredientes a la olla"
+            : "No tenés ingredientes: compralos en la Tienda");
         libro.Mostrar(recetas);
     }
 
@@ -94,14 +97,22 @@ public class CocinaGame : MonoBehaviour, IMinigame
         }
 
         string clave = RecipeDefinition.ClaveDe(olla.Contenido.Select(i => i.Id));
-        olla.Vaciar();
 
         if (!porClave.TryGetValue(clave, out RecipeDefinition receta))
         {
+            // Una combinacion que no existe no gasta nada: los ingredientes vuelven al estante.
+            // Equivocarse no cuesta, asi el jugador se anima a probar.
+            olla.Vaciar();
             textoMensaje.SetText("¡Puaj! Eso no es una receta");
             SoundPlayer.Reproducir(sonidoPuaj);
             return;
         }
+
+        // Cocinar si gasta lo que habia en la olla. El plato va al inventario y aparece en la mesada
+        // de la casa para darselo a Poku.
+        foreach (IngredientDefinition ingrediente in olla.Contenido) Despensa.Ingredientes.Gastar(ingrediente.Id);
+        olla.Vaciar();
+        Despensa.Platos.Sumar(receta.Id);
 
         bool nueva = RecipeBook.Registrar(receta.Id);
         cocinadas++;
