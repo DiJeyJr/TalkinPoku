@@ -40,7 +40,7 @@ public class Inventory : MonoBehaviour
     // Ropa y muebles se compran una sola vez.
     public bool PuedeComprar(ItemDefinition item)
     {
-        if (item.Precio <= 0) return false;
+        if (item.Precio <= 0 || item.Bloqueado) return false;
         if (!item.SeAcumula && Tiene(item)) return false;
         return billetera.Obtener(item.Moneda) >= item.Precio;
     }

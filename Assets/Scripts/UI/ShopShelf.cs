@@ -27,9 +27,23 @@ public class ShopShelf : MonoBehaviour
     private void Awake()
     {
         plantilla.gameObject.SetActive(false);
+        // Por nivel, asi lo que ya puede comprar queda primero y los candados al final. El orden del
+        // catalogo desempata.
+        List<ItemDefinition> ordenados = new List<ItemDefinition>();
         foreach (ItemDefinition item in inventario.Catalogo.Items)
         {
-            if (item == null || item.Categoria != categoria || item.Precio <= 0) continue;
+            if (item != null && item.Categoria == categoria && item.Precio > 0) ordenados.Add(item);
+        }
+        for (int i = 1; i < ordenados.Count; i++)
+        {
+            ItemDefinition actual = ordenados[i];
+            int j = i - 1;
+            for (; j >= 0 && ordenados[j].NivelRequerido > actual.NivelRequerido; j--) ordenados[j + 1] = ordenados[j];
+            ordenados[j + 1] = actual;
+        }
+
+        foreach (ItemDefinition item in ordenados)
+        {
             ShopSlot slot = Instantiate(plantilla, contenedor);
             slot.gameObject.SetActive(true);
             slot.name = item.Id;
@@ -64,6 +78,12 @@ public class ShopShelf : MonoBehaviour
 
     private void Pedir(ItemDefinition item)
     {
+        if (item.Bloqueado)
+        {
+            confirmacion.Avisar(item.Nombre + " se desbloquea en el nivel " + item.NivelRequerido + ".\n<size=75%>¡Cuidá a Poku para subir de nivel!</size>");
+            return;
+        }
+
         string moneda = item.Moneda == CurrencyType.Gemas ? "gemas" : "monedas";
         int falta = item.Precio - billetera.Obtener(item.Moneda);
         if (falta > 0)

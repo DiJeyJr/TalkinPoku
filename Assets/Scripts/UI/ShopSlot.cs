@@ -20,8 +20,11 @@ public class ShopSlot : MonoBehaviour
     // El de "Comprado" ya trae el cartel dibujado: con eso alcanza para ropa y muebles que ya tiene.
     [SerializeField] private Sprite marcoNormal;
     [SerializeField] private Sprite marcoComprado;
+    // Va en lugar de la moneda mientras no tiene el nivel, con el nivel en lugar del precio.
+    [SerializeField] private Sprite candado;
 
     private ItemDefinition item;
+    private Sprite moneda;
     private Action<ItemDefinition> alTocar;
 
     private void Awake()
@@ -29,15 +32,14 @@ public class ShopSlot : MonoBehaviour
         boton.onClick.AddListener(() => alTocar?.Invoke(item));
     }
 
-    public void Mostrar(ItemDefinition nuevo, Sprite moneda, Action<ItemDefinition> tocado)
+    public void Mostrar(ItemDefinition nuevo, Sprite iconoDeMoneda, Action<ItemDefinition> tocado)
     {
         item = nuevo;
         alTocar = tocado;
+        moneda = iconoDeMoneda;
         icono.sprite = item.Icono;
         icono.preserveAspect = true;
         nombre.SetText(item.Nombre);
-        precio.SetText("{0}", item.Precio);
-        iconoMoneda.sprite = moneda;
     }
 
     public void Refrescar(int cantidad, bool comprable)
@@ -51,6 +53,11 @@ public class ShopSlot : MonoBehaviour
         boton.interactable = !yaLoTiene;
         marco.sprite = yaLoTiene ? marcoComprado : marcoNormal;
         icono.color = comprable || yaLoTiene ? Color.white : new Color(1f, 1f, 1f, 0.55f);
+        // Se toca igual: el cartel le dice en que nivel se desbloquea.
+        bool bloqueado = item.Bloqueado && !yaLoTiene;
+        if (bloqueado) precio.SetText("Nivel {0}", item.NivelRequerido);
+        else precio.SetText("{0}", item.Precio);
+        iconoMoneda.sprite = bloqueado && candado != null ? candado : moneda;
         precio.gameObject.SetActive(!yaLoTiene);
         iconoMoneda.gameObject.SetActive(!yaLoTiene);
     }
