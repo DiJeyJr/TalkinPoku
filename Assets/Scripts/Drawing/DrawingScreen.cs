@@ -8,7 +8,6 @@ public class DrawingScreen : MonoBehaviour
     [Header("Referencias")]
     [SerializeField] private ScreenStack pantallas;
     [SerializeField] private DrawingCanvas hoja;
-    [SerializeField] private Button lapiz;
     [SerializeField] private Button pincel;
     [SerializeField] private Button borrador;
     [SerializeField] private Button limpiar;
@@ -29,6 +28,9 @@ public class DrawingScreen : MonoBehaviour
         new Color(0.62f, 0.38f, 0.85f), new Color(1f, 0.55f, 0.75f), new Color(0.55f, 0.35f, 0.2f),
     };
     [SerializeField] private float escalaElegido = 1.2f;
+    // Los botones de grosor son invisibles encima del dibujo: agrandarlos no se ve. Se oscurecen los
+    // que no estan elegidos.
+    [SerializeField] private Color grosorApagado = new Color(0f, 0f, 0f, 0.45f);
 
     [Header("Sonidos")]
     [SerializeField] private AudioClip sonidoGuardar;
@@ -38,7 +40,6 @@ public class DrawingScreen : MonoBehaviour
 
     private void Awake()
     {
-        lapiz.onClick.AddListener(() => ElegirHerramienta(DrawingTool.Lapiz));
         pincel.onClick.AddListener(() => ElegirHerramienta(DrawingTool.Pincel));
         borrador.onClick.AddListener(() => ElegirHerramienta(DrawingTool.Borrador));
         limpiar.onClick.AddListener(() =>
@@ -81,7 +82,6 @@ public class DrawingScreen : MonoBehaviour
     private void ElegirHerramienta(DrawingTool herramienta)
     {
         hoja.Herramienta = herramienta;
-        Resaltar(lapiz, herramienta == DrawingTool.Lapiz);
         Resaltar(pincel, herramienta == DrawingTool.Pincel);
         Resaltar(borrador, herramienta == DrawingTool.Borrador);
     }
@@ -89,7 +89,7 @@ public class DrawingScreen : MonoBehaviour
     private void ElegirGrosor(int cual)
     {
         hoja.Grosor = radios[Mathf.Clamp(cual, 0, radios.Length - 1)];
-        for (int i = 0; i < grosores.Length; i++) Resaltar(grosores[i], i == cual);
+        for (int i = 0; i < grosores.Length; i++) grosores[i].image.color = i == cual ? Color.clear : grosorApagado;
     }
 
     private void ElegirColor(int cual)

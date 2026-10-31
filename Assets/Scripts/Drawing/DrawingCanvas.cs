@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public enum DrawingTool { Lapiz, Pincel, Borrador }
+public enum DrawingTool { Pincel, Borrador }
 
 /// La hoja del atril: pinta sobre una textura siguiendo el dedo. Entre dos eventos de arrastre el
 /// dedo puede saltar varios pixeles, asi que se estampan circulos a lo largo de la linea: si no,
@@ -12,8 +12,6 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
 {
     [Header("Pincel")]
     [SerializeField] private Color fondo = Color.white;
-    // El lapiz es fino siempre; el grosor elegido es para el pincel y el borrador.
-    [SerializeField] private int radioLapiz = 2;
 
     public DrawingTool Herramienta { get; set; } = DrawingTool.Pincel;
     public Color ColorActual { get; set; } = Color.black;
@@ -88,7 +86,6 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
 
     private int Radio()
     {
-        if (Herramienta == DrawingTool.Lapiz) return radioLapiz;
         if (Herramienta == DrawingTool.Borrador) return Mathf.RoundToInt(Grosor * 1.5f);
         return Grosor;
     }
