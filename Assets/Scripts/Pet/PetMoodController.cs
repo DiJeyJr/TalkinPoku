@@ -17,12 +17,28 @@ public class PetMoodController : MonoBehaviour
     [SerializeField] private NeedsSystem necesidades;
     // Opcional: el mismo TouchTarget que usa PetInteraction, para poner la cara de caricia.
     [SerializeField] private TouchTarget toque;
+    // Opcional: sin el, las emociones cambian la cara pero el cuerpo no se mueve.
+    [SerializeField] private PetJuice juice;
 
     [Header("Expresiones")]
     // La de Poku. PetEvolution la cambia al arrancar si la mascota ya evoluciono.
     [SerializeField] private PetAppearance apariencia;
 
+    [Header("Sonidos")]
+    [SerializeField] private AudioClip sonidoFeliz;
+    [SerializeField] private AudioClip sonidoTriste;
+    [SerializeField] private AudioClip sonidoEnojado;
+    [SerializeField] private float volumenEmocion = 0.8f;
+    // Si una necesidad oscila justo en el umbral, la emocion cambiaria seguido y sonaria en loop.
+    [SerializeField] private float esperaEntreSonidos = 3f;
+
+    // No hay cara de enojado: Poku se enoja cuando esta sucio.
+    private enum Emocion { Ninguna, Feliz, Triste, Enojado }
+
     private SpriteRenderer spriteRenderer;
+    private Emocion emocion;
+    private bool arrancado;
+    private float silencioHasta;
     private bool reaccionando;
     private float contentoHasta;
     private bool acariciando;
@@ -47,6 +63,8 @@ public class PetMoodController : MonoBehaviour
     private void Start()
     {
         Actualizar();
+        // Recien ahora vale una emocion nueva: la de arranque no suena ni se mueve.
+        arrancado = true;
     }
 
     private void Update()
@@ -102,19 +120,56 @@ public class PetMoodController : MonoBehaviour
 
     private void Actualizar()
     {
-        Sprite cara = Elegir();
+        Sprite cara = Elegir(out Emocion nueva);
         if (spriteRenderer.sprite != cara) spriteRenderer.sprite = cara;
+
+        // Solo al cambiar: Actualizar corre con cada cambio de necesidad y sonaria todo el tiempo.
+        if (nueva == emocion) return;
+        emocion = nueva;
+        if (arrancado) Expresar(nueva);
     }
 
-    private Sprite Elegir()
+    private void Expresar(Emocion nueva)
     {
+        if (nueva == Emocion.Ninguna) return;
+
+        // Si acaricia, PetInteraction ya la aplasta: rebotar encima seria doble.
+        if (juice != null)
+        {
+            if (nueva == Emocion.Feliz && !acariciando) juice.Rebotar();
+            else if (nueva == Emocion.Enojado) juice.Sacudir();
+        }
+
+        if (Time.time < silencioHasta) return;
+        silencioHasta = Time.time + esperaEntreSonidos;
+
+        switch (nueva)
+        {
+            case Emocion.Feliz: SoundPlayer.Reproducir(sonidoFeliz, volumenEmocion); break;
+            case Emocion.Triste: SoundPlayer.Reproducir(sonidoTriste, volumenEmocion); break;
+            default: SoundPlayer.Reproducir(sonidoEnojado, volumenEmocion); break;
+        }
+    }
+
+    private Sprite Elegir(out Emocion nueva)
+    {
+        nueva = Emocion.Ninguna;
+
         // Dormido tapa todo: ni la pelota ni las caricias lo despiertan (PetInteraction tampoco cuenta
         // las caricias mientras duerme). Sin sprite asignado sigue con las demas caras.
         if (necesidades.Dormido && apariencia.Dormido != null) return apariencia.Dormido;
 
         // Acariciarlo y la reaccion tapan a las necesidades: son la respuesta a algo que hizo el jugador.
-        if (acariciando && apariencia.Acariciado != null) return apariencia.Acariciado;
-        if (reaccionando) return apariencia.Contento;
+        if (acariciando && apariencia.Acariciado != null)
+        {
+            nueva = Emocion.Feliz;
+            return apariencia.Acariciado;
+        }
+        if (reaccionando)
+        {
+            nueva = Emocion.Feliz;
+            return apariencia.Contento;
+        }
 
         NeedType peor = necesidadesBase[0];
         foreach (NeedType tipo in necesidadesBase)
@@ -128,10 +183,18 @@ public class PetMoodController : MonoBehaviour
         {
             switch (peor)
             {
-                case NeedType.Hambre: return apariencia.ConHambre;
-                case NeedType.Higiene: return apariencia.Sucio;
-                case NeedType.Diversion: return apariencia.Aburrido;
-                default: return apariencia.Cansado;
+                case NeedType.Hambre:
+                    nueva = Emocion.Triste;
+                    return apariencia.ConHambre;
+                case NeedType.Higiene:
+                    nueva = Emocion.Enojado;
+                    return apariencia.Sucio;
+                case NeedType.Diversion:
+                    nueva = Emocion.Triste;
+                    return apariencia.Aburrido;
+                default:
+                    nueva = Emocion.Triste;
+                    return apariencia.Cansado;
             }
         }
 

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b625c402343b4b4ca761efd204885ba, type: 3}
+  m_Name: Pack_MonedasGrande
+  m_EditorClassIdentifier: Assembly-CSharp::PackDefinition
+  id: monedas_grande
+  nombre: Cofre de monedas
+  icono: {fileID: 21300000, guid: 3374822a1c74f6f46a9fa8ff58e6fcdc, type: 3}
+  moneda: 0
+  cantidad: 1000
+  precioVitrina: US$ 2,99
+  productId: monedas_1000

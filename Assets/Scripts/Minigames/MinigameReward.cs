@@ -16,18 +16,34 @@ public class MinigameReward : MonoBehaviour
     [SerializeField] private float diversionPorPartida = 25f;
     [SerializeField] private float segundosContento = 3f;
 
+    // Cuanto va a cobrar esta partida. Lo usa tambien la pantalla de resultado, que no puede tener
+    // la logica de pago propia: si se balancea el bonus, cambia en un solo lugar.
+    // Se mira al cobrar y no al empezar la partida: si la Mega se termino mientras jugaba, ya no paga
+    // de mas. Redondea para arriba para que una partida de pocas monedas tambien note el bonus.
+    public static int MonedasCobradas(MinigameResult resultado, ProgressionConfig config)
+    {
+        // Una partida abandonada no divierte ni paga.
+        if (!resultado.Completed) return 0;
+
+        int monedas = resultado.Coins;
+        if (MegaEvolution.Activa && config != null)
+            monedas = Mathf.CeilToInt(monedas * config.MultiplicadorMonedasMega);
+        return monedas;
+    }
+
+    public static int XpCobrada(MinigameResult resultado, ProgressionConfig config)
+    {
+        if (!resultado.Completed || config == null) return 0;
+        return config.BuscarPremio(XpSource.Minijuego, out ProgressionConfig.Premio premio) ? premio.xp : 0;
+    }
+
     private void Start()
     {
         if (!MinigameFlow.TomarResultado(out MinigameResult resultado)) return;
 
-        // Una partida abandonada no divierte ni paga.
         if (!resultado.Completed) return;
 
-        // Se mira al cobrar y no al empezar la partida: si la Mega se termino mientras jugaba, ya no paga
-        // de mas. Redondea para arriba para que una partida de pocas monedas tambien note el bonus.
-        int monedas = resultado.Coins;
-        if (MegaEvolution.Activa && progreso != null)
-            monedas = Mathf.CeilToInt(monedas * progreso.Config.MultiplicadorMonedasMega);
+        int monedas = MonedasCobradas(resultado, progreso != null ? progreso.Config : null);
 
         // Primero el vuelo y despues el saldo: asi el contador sabe que esas monedas vienen volando.
         if (monedasVoladoras != null) monedasVoladoras.Lanzar(monedas);

@@ -136,7 +136,9 @@ public class CocinaGame : MonoBehaviour, IMinigame
         if (terminado) return;
         terminado = true;
 
-        // Entrar y salir sin cocinar nada cuenta como abandonar: no paga ni divierte.
-        Finished?.Invoke(new MinigameResult(cocinadas, monedas, cocinadas > 0));
+        // Entrar y salir sin cocinar nada cuenta como abandonar: no paga ni divierte, y tampoco es
+        // victoria. Con una receta cocinada ya se gana: equivocarse no tiene que castigar.
+        bool cocino = cocinadas > 0;
+        Finished?.Invoke(new MinigameResult(cocinadas, monedas, cocino, cocino));
     }
 }

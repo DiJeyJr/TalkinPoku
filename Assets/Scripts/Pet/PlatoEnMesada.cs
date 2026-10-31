@@ -10,6 +10,7 @@ public class PlatoEnMesada : MonoBehaviour
     [SerializeField] private PetDropTarget mascota;
     [SerializeField] private PetMoodController cara;
     [SerializeField] private Progression progreso;
+    [SerializeField] private PetJuice juice;
     [SerializeField] private TMP_Text cantidad;
 
     [Header("Feedback")]
@@ -62,6 +63,8 @@ public class PlatoEnMesada : MonoBehaviour
         SoundPlayer.Reproducir(sonidoComer);
         if (cara != null) cara.Alegrar(segundosContento);
         if (progreso != null) progreso.Ganar(XpSource.Comer);
+        if (juice != null) juice.Rebotar();
+        Vibracion.Vibrar();
         // El plato ya no esta en el inventario: que no vuelva si la app se cierra antes del autoguardado.
         SaveSystem.Guardar();
     }

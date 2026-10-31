@@ -10,6 +10,7 @@ public class FoodItem : MonoBehaviour
     [SerializeField] private PetDropTarget mascota;
     [SerializeField] private PetMoodController cara;
     [SerializeField] private Progression progreso;
+    [SerializeField] private PetJuice juice;
 
     [Header("Feedback")]
     [SerializeField] private float segundosContento = 1.5f;
@@ -44,5 +45,7 @@ public class FoodItem : MonoBehaviour
         SoundPlayer.Reproducir(sonidoComer);
         if (cara != null) cara.Alegrar(segundosContento);
         if (progreso != null) progreso.Ganar(XpSource.Comer);
+        if (juice != null) juice.Rebotar();
+        Vibracion.Vibrar();
     }
 }

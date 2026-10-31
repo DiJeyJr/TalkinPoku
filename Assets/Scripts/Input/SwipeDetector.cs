@@ -35,7 +35,13 @@ public class SwipeDetector : MonoBehaviour
 
     private void OnEnable() => EnhancedTouchSupport.Enable();
 
-    private void OnDisable() => EnhancedTouchSupport.Disable();
+    private void OnDisable()
+    {
+        EnhancedTouchSupport.Disable();
+        // El ScreenStack lo apaga al abrir la tienda con el dedo todavia apoyado. Ese touch termina
+        // mientras esta apagado y nunca llega el Ended: si no se limpia, no acepta mas gestos.
+        dedoActivo = -1;
+    }
 
     private void Update()
     {

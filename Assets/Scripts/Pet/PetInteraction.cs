@@ -8,10 +8,15 @@ public class PetInteraction : MonoBehaviour
     [Header("Referencias")]
     [SerializeField] private NeedsSystem necesidades;
     [SerializeField] private Progression progreso;
+    [SerializeField] private PetJuice juice;
 
     [Header("Diversion")]
     [SerializeField] private float porToque = 3f;
     [SerializeField] private float porSegundoAcariciando = 5f;
+
+    [Header("Feedback")]
+    // La caricia arranca de un dedo apoyado, no de un golpe: el aplastado va mas suave que en el tap.
+    [SerializeField] private float intensidadCaricia = 0.6f;
 
     private TouchTarget toque;
 
@@ -43,12 +48,19 @@ public class PetInteraction : MonoBehaviour
     private void AlTocar()
     {
         // Dormida no juega: tocarla no la entretiene hasta que se despierte.
-        if (!necesidades.Dormido) necesidades.Sumar(NeedType.Diversion, porToque);
+        if (necesidades.Dormido) return;
+
+        necesidades.Sumar(NeedType.Diversion, porToque);
+        if (juice != null) juice.Aplastar();
     }
 
     private void AlEmpezarCaricia()
     {
         // La experiencia va una vez por caricia y no por segundo: dejar el dedo apoyado no sube de nivel.
-        if (!necesidades.Dormido && progreso != null) progreso.Ganar(XpSource.Acariciar);
+        if (necesidades.Dormido) return;
+
+        if (progreso != null) progreso.Ganar(XpSource.Acariciar);
+        if (juice != null) juice.Aplastar(intensidadCaricia);
+        Vibracion.Vibrar();
     }
 }

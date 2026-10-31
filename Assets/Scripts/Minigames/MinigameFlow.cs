@@ -1,7 +1,5 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 /// Arranca el minijuego de la escena, muestra el resultado y vuelve a la casa. Es el mismo para
 /// todos los minijuegos: busca el IMinigame que tiene al lado y no sabe cual es.
@@ -11,10 +9,7 @@ public class MinigameFlow : MonoBehaviour
     [SerializeField] private string escenaCasa = "SampleScene";
 
     [Header("Resultado")]
-    [SerializeField] private GameObject panelResultado;
-    [SerializeField] private TMP_Text textoPuntos;
-    [SerializeField] private TMP_Text textoMonedas;
-    [SerializeField] private Button botonVolver;
+    [SerializeField] private PantallaResultado pantalla;
 
     // La ultima partida terminada, hasta que la casa la cobre. Estatica porque al volver se carga
     // otra escena y este componente deja de existir.
@@ -37,8 +32,9 @@ public class MinigameFlow : MonoBehaviour
         // GetComponent acepta interfaces; un [SerializeField] de tipo IMinigame no se veria en el Inspector.
         minijuego = GetComponent<IMinigame>();
         minijuego.Finished += MostrarResultado;
-        botonVolver.onClick.AddListener(VolverACasa);
-        panelResultado.SetActive(false);
+        pantalla.PidioReintentar += Reintentar;
+        pantalla.PidioVolver += VolverACasa;
+        pantalla.Ocultar();
     }
 
     private void Start()
@@ -49,10 +45,25 @@ public class MinigameFlow : MonoBehaviour
     private void MostrarResultado(MinigameResult resultado)
     {
         // El premio no se aplica aca sino en la casa (MinigameReward), que es donde viven las necesidades.
-        resultadoPendiente = resultado;
-        textoPuntos.SetText("Puntos: {0}", resultado.Score);
-        textoMonedas.SetText("Monedas: {0}", resultado.Coins);
-        panelResultado.SetActive(true);
+        // Si ya habia una partida sin cobrar (se reintento sin pasar por la casa) se suman las monedas,
+        // para que reintentar no tire a la basura lo ganado antes.
+        if (resultadoPendiente.HasValue)
+        {
+            MinigameResult previo = resultadoPendiente.Value;
+            resultadoPendiente = new MinigameResult(resultado.Score, previo.Coins + resultado.Coins,
+                previo.Completed || resultado.Completed, resultado.Won);
+        }
+        else
+        {
+            resultadoPendiente = resultado;
+        }
+
+        pantalla.Mostrar(resultado);
+    }
+
+    private void Reintentar()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void VolverACasa()
