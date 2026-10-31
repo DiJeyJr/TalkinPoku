@@ -26,16 +26,16 @@ MonoBehaviour:
   desplazamiento: {x: 0, y: 0.3}
   ajustes:
   - apariencia: {fileID: 11400000, guid: 71496775a1de001429e6bb1fec30744f, type: 2}
-    desplazamiento: {x: 0, y: 0}
-    escala: 1
+    desplazamiento: {x: 0, y: 0.45}
+    escala: 0.85
   - apariencia: {fileID: 11400000, guid: fb61c9767f36b144689158e3e68e577a, type: 2}
-    desplazamiento: {x: 0, y: 0}
-    escala: 1.2
+    desplazamiento: {x: 0, y: 0.5}
+    escala: 1.05
   - apariencia: {fileID: 11400000, guid: 7537be56cd072104da5551e8de887806, type: 2}
-    desplazamiento: {x: 0, y: 0}
-    escala: 1.35
+    desplazamiento: {x: 0, y: 0.55}
+    escala: 1.2
   - apariencia: {fileID: 11400000, guid: 231aeeb8e5633b44283cf8e662e48d33, type: 2}
-    desplazamiento: {x: 0, y: 0}
+    desplazamiento: {x: 0, y: 0.4}
     escala: 1.6
   posicionInicial: {x: 0, y: 0}
   capa: -2

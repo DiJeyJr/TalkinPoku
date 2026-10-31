@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// Lo que el jugador compro: comida para darle, ropa para ponerle a Poku y muebles para la sala.
@@ -80,11 +81,8 @@ public class Inventory : MonoBehaviour
 
     public bool Colocado(ItemDefinition item) => estado.colocados.Contains(item.Id);
 
-    public Vector2 PosicionDe(ItemDefinition item)
-    {
-        int i = estado.colocados.IndexOf(item.Id);
-        return i < 0 ? item.PosicionInicial : estado.posiciones[i];
-    }
+    // En el orden en que se pusieron: RoomDecor reparte los cuadros por ese orden.
+    public IReadOnlyList<string> Colocados => estado.colocados;
 
     public void AlternarColocado(ItemDefinition item)
     {
@@ -92,22 +90,32 @@ public class Inventory : MonoBehaviour
         int i = estado.colocados.IndexOf(item.Id);
         if (i >= 0)
         {
-            estado.colocados.RemoveAt(i);
-            estado.posiciones.RemoveAt(i);
+            Sacar(i);
         }
         else
         {
+            // Un mueble por lugar: el nuevo guarda al que estaba. Con los dos cuadros colgados, sale el
+            // mas viejo.
+            int lugares = item.Lugar == FurnitureSpot.Cuadro ? 2 : 1;
+            List<int> ocupados = new List<int>();
+            for (int j = 0; j < estado.colocados.Count; j++)
+            {
+                ItemDefinition otro = catalogo.Buscar(estado.colocados[j]);
+                if (otro != null && otro.Lugar == item.Lugar) ocupados.Add(j);
+            }
+            for (int j = ocupados.Count - lugares; j >= 0; j--) Sacar(ocupados[j]);
+
             estado.colocados.Add(item.Id);
+            // Las posiciones ya no se usan (los muebles van a su lugar fijo), pero el guardado las espera.
             estado.posiciones.Add(item.PosicionInicial);
         }
         Cambiado?.Invoke();
     }
 
-    // La llama el mueble al soltarlo. No avisa: el mueble ya esta donde corresponde.
-    public void Mover(ItemDefinition item, Vector2 posicion)
+    private void Sacar(int i)
     {
-        int i = estado.colocados.IndexOf(item.Id);
-        if (i >= 0) estado.posiciones[i] = posicion;
+        estado.colocados.RemoveAt(i);
+        if (i < estado.posiciones.Count) estado.posiciones.RemoveAt(i);
     }
 
     // Para el panel de admin.

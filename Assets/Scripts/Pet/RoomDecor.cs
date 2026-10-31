@@ -1,92 +1,85 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// Va en la sala. Dibuja los muebles que el jugador coloco y, mientras esta abierta la bandeja de
-/// decoracion, deja arrastrarlos para acomodarlos. Con la bandeja cerrada quedan quietos: si no,
-/// tocar un mueble al deslizar para cambiar de habitacion lo moveria.
+/// Va en la sala. Dibuja los muebles que el jugador coloco, cada uno en su lugar fijo: no se arrastran,
+/// asi la sala siempre queda armada y nada tapa a Poku ni a los botones.
 public class RoomDecor : MonoBehaviour
 {
     [Header("Referencias")]
     [SerializeField] private Inventory inventario;
-    [SerializeField] private InventoryTray bandeja;
     // El fondo de la sala: los muebles van en su capa de dibujo, encima de el.
     [SerializeField] private SpriteRenderer fondo;
 
-    [Header("Limites")]
-    // Hasta donde se puede llevar un mueble, para que no se pierda fuera de la pantalla.
-    [SerializeField] private Rect zona = new Rect(-4.5f, -9f, 9f, 13f);
+    [Header("Lugares")]
+    // Los dos lugares de cuadro en la pared: el primero que se cuelga va al primero.
+    [SerializeField] private Vector2[] lugaresCuadro = { new Vector2(-3.45f, 4.15f), new Vector2(3.45f, 4.15f) };
+    // Sin la mesita abajo, la lampara de mesa va al piso en el mismo lugar.
+    [SerializeField] private Vector2 lamparaSinMesita = new Vector2(3.2f, -0.5f);
 
-    private readonly Dictionary<string, Draggable> muebles = new Dictionary<string, Draggable>();
-    private bool editando;
+    private readonly List<GameObject> muebles = new List<GameObject>();
 
     private void OnEnable()
     {
         inventario.Cambiado += Refrescar;
-        bandeja.AbiertaCambiada += AlAbrirBandeja;
         Refrescar();
     }
 
     private void OnDisable()
     {
         inventario.Cambiado -= Refrescar;
-        bandeja.AbiertaCambiada -= AlAbrirBandeja;
-    }
-
-    private void AlAbrirBandeja(bool abierta)
-    {
-        editando = abierta;
-        foreach (Draggable mueble in muebles.Values) mueble.enabled = editando;
     }
 
     private void Refrescar()
     {
-        // Saca los que ya no estan colocados.
-        List<string> sacar = new List<string>();
-        foreach (KeyValuePair<string, Draggable> par in muebles)
+        // Son pocos muebles: rearmarlos todos es mas simple que seguir cual cambio, y un cuadro que se
+        // saca puede correr al otro de lugar.
+        foreach (GameObject mueble in muebles) Destroy(mueble);
+        muebles.Clear();
+
+        bool hayMesita = false;
+        foreach (ItemDefinition item in ColocadosEnOrden())
         {
-            ItemDefinition item = inventario.Catalogo.Buscar(par.Key);
-            if (item == null || !inventario.Colocado(item)) sacar.Add(par.Key);
-        }
-        foreach (string id in sacar)
-        {
-            Destroy(muebles[id].gameObject);
-            muebles.Remove(id);
+            if (item.Lugar == FurnitureSpot.Mesita) hayMesita = true;
         }
 
-        foreach (ItemDefinition item in inventario.Catalogo.Items)
+        int cuadros = 0;
+        foreach (ItemDefinition item in ColocadosEnOrden())
         {
-            if (item == null || item.Categoria != ItemCategory.Decoracion) continue;
-            if (!inventario.Colocado(item) || muebles.ContainsKey(item.Id)) continue;
-            muebles.Add(item.Id, Crear(item));
+            Vector2 posicion = item.PosicionInicial;
+            if (item.Lugar == FurnitureSpot.Cuadro)
+            {
+                if (cuadros >= lugaresCuadro.Length) continue;
+                posicion = lugaresCuadro[cuadros++];
+            }
+            else if (item.Lugar == FurnitureSpot.LamparaMesa && !hayMesita)
+            {
+                posicion = lamparaSinMesita;
+            }
+            muebles.Add(Crear(item, posicion));
         }
     }
 
-    private Draggable Crear(ItemDefinition item)
+    private IEnumerable<ItemDefinition> ColocadosEnOrden()
+    {
+        foreach (string id in inventario.Colocados)
+        {
+            ItemDefinition item = inventario.Catalogo.Buscar(id);
+            if (item != null && item.Categoria == ItemCategory.Decoracion) yield return item;
+        }
+    }
+
+    private GameObject Crear(ItemDefinition item, Vector2 posicion)
     {
         GameObject objeto = new GameObject(item.Id);
         objeto.transform.SetParent(transform, false);
-        objeto.transform.position = inventario.PosicionDe(item);
+        objeto.transform.position = posicion;
         objeto.transform.localScale = Vector3.one * item.EscalaMundo;
 
         SpriteRenderer dibujo = objeto.AddComponent<SpriteRenderer>();
         dibujo.sprite = item.SpriteMundo;
+        dibujo.flipX = item.Espejado;
         dibujo.sortingLayerID = fondo.sortingLayerID;
         dibujo.sortingOrder = fondo.sortingOrder + 1 + item.Capa;
-
-        objeto.AddComponent<BoxCollider2D>();
-        Draggable arrastre = objeto.AddComponent<Draggable>();
-        arrastre.VolverAlOrigen = false;
-        arrastre.enabled = editando;
-        arrastre.Soltado += punto => AlSoltar(item, objeto.transform);
-        return arrastre;
-    }
-
-    private void AlSoltar(ItemDefinition item, Transform mueble)
-    {
-        Vector2 p = mueble.position;
-        p.x = Mathf.Clamp(p.x, zona.xMin, zona.xMax);
-        p.y = Mathf.Clamp(p.y, zona.yMin, zona.yMax);
-        mueble.position = p;
-        inventario.Mover(item, p);
+        return objeto;
     }
 }

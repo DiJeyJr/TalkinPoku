@@ -72,7 +72,7 @@ public class ShopShelf : MonoBehaviour
             return;
         }
 
-        confirmacion.Preguntar("¿Comprar " + item.Nombre + " por " + item.Precio + " " + moneda + "?", () =>
+        confirmacion.PreguntarCompra(item, item.Moneda == CurrencyType.Gemas ? iconoGemas : iconoMonedas, () =>
         {
             if (inventario.Comprar(item)) SoundPlayer.Reproducir(sonidoCompra);
         });

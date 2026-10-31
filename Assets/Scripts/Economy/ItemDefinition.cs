@@ -42,8 +42,13 @@ public class ItemDefinition : ScriptableObject
     // una gorra aunque las dos sean de la cabeza. Se achica con la escala de accesorios de la etapa.
     [SerializeField] private Vector2 desplazamiento;
     [SerializeField] private AjusteEtapa[] ajustes;
-    // Donde aparece un mueble la primera vez que se coloca, en unidades de mundo.
+    [Header("Muebles")]
+    // Los muebles no se arrastran: cada uno tiene su lugar en la sala.
+    [SerializeField] private FurnitureSpot lugar;
+    // Donde va en la sala, en unidades de mundo. Los cuadros usan los lugares de RoomDecor.
     [SerializeField] private Vector2 posicionInicial;
+    // El sillon y la mesita miran hacia Poku, que esta en el medio.
+    [SerializeField] private bool espejado;
     // Orden de dibujo entre muebles: la alfombra abajo de todo, la planta adelante.
     [SerializeField] private int capa;
 
@@ -72,7 +77,9 @@ public class ItemDefinition : ScriptableObject
         return new AjusteEtapa { apariencia = apariencia, escala = 1f };
     }
 
+    public FurnitureSpot Lugar => lugar;
     public Vector2 PosicionInicial => posicionInicial;
+    public bool Espejado => espejado;
     public int Capa => capa;
 
     // La comida se gasta al comerla: se puede tener varias. Ropa y muebles se compran una vez.

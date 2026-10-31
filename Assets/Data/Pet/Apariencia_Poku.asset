@@ -23,7 +23,7 @@ MonoBehaviour:
   avion: {fileID: 21300000, guid: 3e166635d6e3a26499926f26a2d61911, type: 3}
   anclaCabeza: {x: 0.457, y: 0.63}
   anclaCara: {x: 0.44657096, y: 0.5015949}
-  anclaCuello: {x: 0.457, y: 0.4}
+  anclaCuello: {x: 0.437, y: 0.36}
   anclaEspalda: {x: 0.457, y: 0.28}
   escalaAccesorios: 1
   escala: 1

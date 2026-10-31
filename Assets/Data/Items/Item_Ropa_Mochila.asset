@@ -26,8 +26,8 @@ MonoBehaviour:
   desplazamiento: {x: 0, y: 0}
   ajustes:
   - apariencia: {fileID: 11400000, guid: 71496775a1de001429e6bb1fec30744f, type: 2}
-    desplazamiento: {x: 0, y: -0.42}
-    escala: 1.1
+    desplazamiento: {x: 0, y: -0.05}
+    escala: 0.95
   - apariencia: {fileID: 11400000, guid: fb61c9767f36b144689158e3e68e577a, type: 2}
     desplazamiento: {x: 0, y: -0.24}
     escala: 1

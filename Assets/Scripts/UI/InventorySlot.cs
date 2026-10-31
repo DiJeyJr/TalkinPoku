@@ -10,9 +10,12 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
 {
     [Header("Referencias")]
     [SerializeField] private Image icono;
+    [SerializeField] private TMP_Text nombre;
     [SerializeField] private TMP_Text cantidad;
-    // Se prende cuando esta puesto o colocado.
-    [SerializeField] private GameObject marca;
+    // Puesto o colocado se ve con el marco de "Equipado", que ya trae el cartel dibujado.
+    [SerializeField] private Image marco;
+    [SerializeField] private Sprite marcoNormal;
+    [SerializeField] private Sprite marcoEquipado;
 
     public ItemDefinition Item { get; private set; }
 
@@ -38,7 +41,8 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         icono.preserveAspect = true;
         if (item.SeAcumula) cantidad.SetText("x{0}", cuantos);
         else cantidad.SetText("");
-        marca.SetActive(activo);
+        nombre.SetText(item.Nombre);
+        marco.sprite = activo ? marcoEquipado : marcoNormal;
     }
 
     public void OnPointerClick(PointerEventData evento)
