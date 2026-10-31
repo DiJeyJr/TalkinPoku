@@ -21,7 +21,11 @@ MonoBehaviour:
   necesidad: 0
   cantidad: 20
   spriteMundo: {fileID: 21300000, guid: 4ac29f5ed49726a4d86dc0206586eb67, type: 3}
-  escalaMundo: 0.55
+  escalaMundo: 0.5712
   ranura: 0
-  posicionInicial: {x: 3.6, y: -1.4}
-  capa: 2
+  desplazamiento: {x: 0, y: 0}
+  ajustes: []
+  lugar: 6
+  posicionInicial: {x: -3.951, y: 0.19}
+  espejado: 0
+  capa: 1

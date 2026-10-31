@@ -110,3 +110,6 @@ InitTestScene*.unity*
 
 # Lock de paquetes: las versiones ya estan fijas en manifest.json
 /Packages/packages-lock.json
+
+# Fotos de revision, no son parte del juego
+/Capturas/

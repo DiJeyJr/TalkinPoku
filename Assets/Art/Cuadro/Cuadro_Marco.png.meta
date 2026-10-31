@@ -1,0 +1,1170 @@
+fileFormatVersion: 2
+guid: d161b8bdd184b4e45a00ded4cd99c536
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4503366898918117125
+    second: Cuadro_Marco_0
+  - first:
+      213: 2523823928915932912
+    second: Cuadro_Marco_1
+  - first:
+      213: -6583381936275531268
+    second: Cuadro_Marco_2
+  - first:
+      213: 7238431302440652254
+    second: Cuadro_Marco_3
+  - first:
+      213: 8643782819038268978
+    second: Cuadro_Marco_4
+  - first:
+      213: 3251259676103350048
+    second: Cuadro_Marco_5
+  - first:
+      213: -3559329847349942923
+    second: Cuadro_Marco_6
+  - first:
+      213: 5193508948508926183
+    second: Cuadro_Marco_7
+  - first:
+      213: -3946542701736535137
+    second: Cuadro_Marco_8
+  - first:
+      213: 5105232609766505815
+    second: Cuadro_Marco_9
+  - first:
+      213: 2317435003731831765
+    second: Cuadro_Marco_10
+  - first:
+      213: 8933682355973848489
+    second: Cuadro_Marco_11
+  - first:
+      213: -4129047573755499966
+    second: Cuadro_Marco_12
+  - first:
+      213: -3913137753388881116
+    second: Cuadro_Marco_13
+  - first:
+      213: 5968092066458290789
+    second: Cuadro_Marco_14
+  - first:
+      213: -8740512165091768810
+    second: Cuadro_Marco_15
+  - first:
+      213: -2051514230961104223
+    second: Cuadro_Marco_16
+  - first:
+      213: -6496621436118619780
+    second: Cuadro_Marco_17
+  - first:
+      213: -4652014262261411379
+    second: Cuadro_Marco_18
+  - first:
+      213: 6352755175198550983
+    second: Cuadro_Marco_19
+  - first:
+      213: -1633326766209749667
+    second: Cuadro_Marco_20
+  - first:
+      213: 7558330698730446167
+    second: Cuadro_Marco_21
+  - first:
+      213: 2877917626247895178
+    second: Cuadro_Marco_22
+  - first:
+      213: -3350088078255196969
+    second: Cuadro_Marco_23
+  - first:
+      213: -6087566181640620408
+    second: Cuadro_Marco_24
+  - first:
+      213: 8869479184540101560
+    second: Cuadro_Marco_25
+  - first:
+      213: -7456246838435056743
+    second: Cuadro_Marco_26
+  - first:
+      213: 2574661291979251711
+    second: Cuadro_Marco_27
+  - first:
+      213: 4290431780828549025
+    second: Cuadro_Marco_28
+  - first:
+      213: -4742899335681181850
+    second: Cuadro_Marco_29
+  - first:
+      213: 5468499292252384279
+    second: Cuadro_Marco_30
+  - first:
+      213: 6464876304768717559
+    second: Cuadro_Marco_31
+  - first:
+      213: 3777646278022822685
+    second: Cuadro_Marco_32
+  - first:
+      213: 8447527827908362829
+    second: Cuadro_Marco_33
+  - first:
+      213: 7651874209900799614
+    second: Cuadro_Marco_34
+  - first:
+      213: -6307060680241657279
+    second: Cuadro_Marco_35
+  - first:
+      213: -6836113065644148492
+    second: Cuadro_Marco_36
+  - first:
+      213: 4278571171822678940
+    second: Cuadro_Marco_37
+  - first:
+      213: 5467005066491568642
+    second: Cuadro_Marco_38
+  - first:
+      213: -8912477664672863688
+    second: Cuadro_Marco_39
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Cuadro_Marco_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1929
+        height: 1534
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50f444fa55c2f7e30800000000000000
+      internalID: 4503366898918117125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_1
+      rect:
+        serializedVersion: 2
+        x: 1926
+        y: 1391
+        width: 107
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f63aa6dd7c660320800000000000000
+      internalID: 2523823928915932912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_2
+      rect:
+        serializedVersion: 2
+        x: 1926
+        y: 1255
+        width: 91
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf9d29b520123a4a0800000000000000
+      internalID: -6583381936275531268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_3
+      rect:
+        serializedVersion: 2
+        x: 1976
+        y: 1301
+        width: 65
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edd0b013be2147460800000000000000
+      internalID: 7238431302440652254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1192
+        width: 5
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23e866c5da2e4f770800000000000000
+      internalID: 8643782819038268978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_5
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 1203
+        width: 33
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02711b2137bce1d20800000000000000
+      internalID: 3251259676103350048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_6
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 1174
+        width: 11
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 575e24aac58ba9ec0800000000000000
+      internalID: -3559329847349942923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_7
+      rect:
+        serializedVersion: 2
+        x: 2006
+        y: 1185
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e0efad4fdc031840800000000000000
+      internalID: 5193508948508926183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_8
+      rect:
+        serializedVersion: 2
+        x: 1940
+        y: 935
+        width: 89
+        height: 251
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9b551c82501b39c0800000000000000
+      internalID: -3946542701736535137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_9
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 611
+        width: 14
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75d7fd8820e69d640800000000000000
+      internalID: 5105232609766505815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_10
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 522
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dbed7b8bde292020800000000000000
+      internalID: 2317435003731831765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_11
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 806
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9adfef325c0dafb70800000000000000
+      internalID: 8933682355973848489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_12
+      rect:
+        serializedVersion: 2
+        x: 1934
+        y: 491
+        width: 99
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24a6d99bb1da2b6c0800000000000000
+      internalID: -4129047573755499966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_13
+      rect:
+        serializedVersion: 2
+        x: 1958
+        y: 401
+        width: 61
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42be51c22fdb1b9c0800000000000000
+      internalID: -3913137753388881116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_14
+      rect:
+        serializedVersion: 2
+        x: 1946
+        y: 449
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56ac2183d1ce2d250800000000000000
+      internalID: 5968092066458290789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_15
+      rect:
+        serializedVersion: 2
+        x: 1958
+        y: 343
+        width: 69
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61689bcbe7673b680800000000000000
+      internalID: -8740512165091768810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_16
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 327
+        width: 37
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aa97e32dae8783e0800000000000000
+      internalID: -2051514230961104223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 291
+        width: 5
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7926f3793d57d5a0800000000000000
+      internalID: -6496621436118619780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_18
+      rect:
+        serializedVersion: 2
+        x: 1992
+        y: 163
+        width: 56
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc19bd70da9b07fb0800000000000000
+      internalID: -4652014262261411379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_19
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 123
+        width: 35
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cbebba6c25892850800000000000000
+      internalID: 6352755175198550983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_20
+      rect:
+        serializedVersion: 2
+        x: 2004
+        y: 101
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5d2ee9b5f14559e0800000000000000
+      internalID: -1633326766209749667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_21
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 56
+        width: 11
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75d12c889b594e860800000000000000
+      internalID: 7558330698730446167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_22
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 31
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a88575d45da60f720800000000000000
+      internalID: 2877917626247895178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_23
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 31
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d4f35174a81281d0800000000000000
+      internalID: -3350088078255196969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_24
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 31
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88631a4afce948ba0800000000000000
+      internalID: -6087566181640620408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_25
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 33
+        width: 7
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bbeb396358b61b70800000000000000
+      internalID: 8869479184540101560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_26
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 21
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 993f27d5107168890800000000000000
+      internalID: -7456246838435056743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_27
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 21
+        width: 25
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fff1f5dcdc80bb320800000000000000
+      internalID: 2574661291979251711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_28
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 25
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1af055519fcaa8b30800000000000000
+      internalID: 4290431780828549025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_29
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 22
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6677943ee26dd2eb0800000000000000
+      internalID: -4742899335681181850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_30
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 29
+        width: 39
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71cad29022304eb40800000000000000
+      internalID: 5468499292252384279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_31
+      rect:
+        serializedVersion: 2
+        x: 992
+        y: 22
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f2549e2fbad7b950800000000000000
+      internalID: 6464876304768717559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_32
+      rect:
+        serializedVersion: 2
+        x: 1048
+        y: 23
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1b70a86645ec6430800000000000000
+      internalID: 3777646278022822685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_33
+      rect:
+        serializedVersion: 2
+        x: 1192
+        y: 24
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4284b47dc5ab3570800000000000000
+      internalID: 8447527827908362829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_34
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 31
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e762c137d0be03a60800000000000000
+      internalID: 7651874209900799614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_35
+      rect:
+        serializedVersion: 2
+        x: 1286
+        y: 25
+        width: 41
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14acc514ab1d878a0800000000000000
+      internalID: -6307060680241657279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_36
+      rect:
+        serializedVersion: 2
+        x: 1366
+        y: 33
+        width: 25
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f8bfd5d26f3121a0800000000000000
+      internalID: -6836113065644148492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_37
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 30
+        width: 57
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c93b7badfc9806b30800000000000000
+      internalID: 4278571171822678940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_38
+      rect:
+        serializedVersion: 2
+        x: 646
+        y: 15
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 202ad7d7424bedb40800000000000000
+      internalID: 5467005066491568642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuadro_Marco_39
+      rect:
+        serializedVersion: 2
+        x: 730
+        y: 19
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83a2298c8c4805480800000000000000
+      internalID: -8912477664672863688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Cuadro_Marco_0: 4503366898918117125
+      Cuadro_Marco_1: 2523823928915932912
+      Cuadro_Marco_10: 2317435003731831765
+      Cuadro_Marco_11: 8933682355973848489
+      Cuadro_Marco_12: -4129047573755499966
+      Cuadro_Marco_13: -3913137753388881116
+      Cuadro_Marco_14: 5968092066458290789
+      Cuadro_Marco_15: -8740512165091768810
+      Cuadro_Marco_16: -2051514230961104223
+      Cuadro_Marco_17: -6496621436118619780
+      Cuadro_Marco_18: -4652014262261411379
+      Cuadro_Marco_19: 6352755175198550983
+      Cuadro_Marco_2: -6583381936275531268
+      Cuadro_Marco_20: -1633326766209749667
+      Cuadro_Marco_21: 7558330698730446167
+      Cuadro_Marco_22: 2877917626247895178
+      Cuadro_Marco_23: -3350088078255196969
+      Cuadro_Marco_24: -6087566181640620408
+      Cuadro_Marco_25: 8869479184540101560
+      Cuadro_Marco_26: -7456246838435056743
+      Cuadro_Marco_27: 2574661291979251711
+      Cuadro_Marco_28: 4290431780828549025
+      Cuadro_Marco_29: -4742899335681181850
+      Cuadro_Marco_3: 7238431302440652254
+      Cuadro_Marco_30: 5468499292252384279
+      Cuadro_Marco_31: 6464876304768717559
+      Cuadro_Marco_32: 3777646278022822685
+      Cuadro_Marco_33: 8447527827908362829
+      Cuadro_Marco_34: 7651874209900799614
+      Cuadro_Marco_35: -6307060680241657279
+      Cuadro_Marco_36: -6836113065644148492
+      Cuadro_Marco_37: 4278571171822678940
+      Cuadro_Marco_38: 5467005066491568642
+      Cuadro_Marco_39: -8912477664672863688
+      Cuadro_Marco_4: 8643782819038268978
+      Cuadro_Marco_5: 3251259676103350048
+      Cuadro_Marco_6: -3559329847349942923
+      Cuadro_Marco_7: 5193508948508926183
+      Cuadro_Marco_8: -3946542701736535137
+      Cuadro_Marco_9: 5105232609766505815
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

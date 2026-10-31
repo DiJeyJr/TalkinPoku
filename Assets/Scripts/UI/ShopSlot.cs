@@ -14,6 +14,12 @@ public class ShopSlot : MonoBehaviour
     [SerializeField] private Image iconoMoneda;
     [SerializeField] private TMP_Text estado;
     [SerializeField] private Button boton;
+    [SerializeField] private Image marco;
+
+    [Header("Marcos")]
+    // El de "Comprado" ya trae el cartel dibujado: con eso alcanza para ropa y muebles que ya tiene.
+    [SerializeField] private Sprite marcoNormal;
+    [SerializeField] private Sprite marcoComprado;
 
     private ItemDefinition item;
     private Action<ItemDefinition> alTocar;
@@ -38,11 +44,12 @@ public class ShopSlot : MonoBehaviour
     {
         // La comida muestra cuantas tiene; ropa y muebles, que ya estan comprados.
         if (item.SeAcumula) estado.SetText(cantidad > 0 ? "Tenés " + cantidad : "");
-        else estado.SetText(cantidad > 0 ? "¡Ya es tuyo!" : "");
+        else estado.SetText("");
 
         // Lo que no le alcanza se ve apagado pero se puede tocar: el cartel le dice cuanto le falta.
         bool yaLoTiene = !item.SeAcumula && cantidad > 0;
         boton.interactable = !yaLoTiene;
+        marco.sprite = yaLoTiene ? marcoComprado : marcoNormal;
         icono.color = comprable || yaLoTiene ? Color.white : new Color(1f, 1f, 1f, 0.55f);
         precio.gameObject.SetActive(!yaLoTiene);
         iconoMoneda.gameObject.SetActive(!yaLoTiene);
