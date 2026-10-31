@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392485701e92e0246bdfc31784c40184, type: 3}
+  m_Name: Item_Ropa_Hebilla
+  m_EditorClassIdentifier: Assembly-CSharp::ItemDefinition
+  id: hebilla
+  nombre: Hebilla de estrella
+  icono: {fileID: 21300000, guid: 1077b8bd484afcf4ab3e123c34091e8e, type: 3}
+  categoria: 1
+  precio: 25
+  moneda: 0
+  nivelRequerido: 20
+  necesidad: 0
+  cantidad: 20
+  spriteMundo: {fileID: 21300000, guid: 1077b8bd484afcf4ab3e123c34091e8e, type: 3}
+  escalaMundo: 0.31990233
+  ranura: 0
+  desplazamiento: {x: 0.55, y: 0.15}
+  ajustes: []
+  lugar: 0
+  posicionInicial: {x: 0, y: 0}
+  espejado: 0
+  capa: 1

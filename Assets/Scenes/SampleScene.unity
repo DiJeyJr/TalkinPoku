@@ -4571,6 +4571,7 @@ MonoBehaviour:
   marco: {fileID: 239357921}
   marcoNormal: {fileID: 21300000, guid: e10bfc37a8c9d1449b5a63b4755c4a93, type: 3}
   marcoComprado: {fileID: 21300000, guid: e6a9b165974a6bd438229eccd9e35b3c, type: 3}
+  candado: {fileID: 21300000, guid: 470977510c66f2d4c8e9d9f75d4c8b3d, type: 3}
 --- !u!1 &250868800
 GameObject:
   m_ObjectHideFlags: 0
@@ -20404,6 +20405,7 @@ MonoBehaviour:
   marco: {fileID: 1294807756}
   marcoNormal: {fileID: 21300000, guid: e10bfc37a8c9d1449b5a63b4755c4a93, type: 3}
   marcoComprado: {fileID: 21300000, guid: e6a9b165974a6bd438229eccd9e35b3c, type: 3}
+  candado: {fileID: 21300000, guid: 470977510c66f2d4c8e9d9f75d4c8b3d, type: 3}
 --- !u!114 &1294807754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27537,6 +27539,7 @@ MonoBehaviour:
   marco: {fileID: 1826919940}
   marcoNormal: {fileID: 21300000, guid: e10bfc37a8c9d1449b5a63b4755c4a93, type: 3}
   marcoComprado: {fileID: 21300000, guid: e6a9b165974a6bd438229eccd9e35b3c, type: 3}
+  candado: {fileID: 21300000, guid: 470977510c66f2d4c8e9d9f75d4c8b3d, type: 3}
 --- !u!114 &1826919938
 MonoBehaviour:
   m_ObjectHideFlags: 0

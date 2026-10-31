@@ -18,6 +18,7 @@ MonoBehaviour:
   categoria: 1
   precio: 8
   moneda: 1
+  nivelRequerido: 50
   necesidad: 0
   cantidad: 20
   spriteMundo: {fileID: 21300000, guid: 59fb743292c56e440992f4323505e6bd, type: 3}
@@ -37,5 +38,7 @@ MonoBehaviour:
   - apariencia: {fileID: 11400000, guid: 231aeeb8e5633b44283cf8e662e48d33, type: 2}
     desplazamiento: {x: 0, y: 0.4}
     escala: 1.6
+  lugar: 0
   posicionInicial: {x: 0, y: 0}
+  espejado: 0
   capa: -2

@@ -28,6 +28,9 @@ public class ItemDefinition : ScriptableObject
     // 0 = no se vende (la manzana de la cocina es gratis).
     [SerializeField] private int precio;
     [SerializeField] private CurrencyType moneda = CurrencyType.Monedas;
+    // Hasta este nivel aparece en la tienda con candado. La ropa se desbloquea por etapa: asi
+    // evolucionar trae cosas nuevas para ponerle.
+    [SerializeField] private int nivelRequerido = 1;
 
     [Header("Comida")]
     [SerializeField] private NeedType necesidad = NeedType.Hambre;
@@ -58,6 +61,8 @@ public class ItemDefinition : ScriptableObject
     public ItemCategory Categoria => categoria;
     public int Precio => precio;
     public CurrencyType Moneda => moneda;
+    public int NivelRequerido => nivelRequerido;
+    public bool Bloqueado => Progression.NivelActual < nivelRequerido;
     public NeedType Necesidad => necesidad;
     public float Cantidad => cantidad;
     public Sprite SpriteMundo => spriteMundo;
