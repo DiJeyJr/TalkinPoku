@@ -22,6 +22,11 @@ public class NeedsConfig : ScriptableObject
     // Durmiendo, hambre, higiene y diversion bajan a esta fraccion de lo normal.
     [SerializeField] private float factorDormido = 0.5f;
 
+    [Header("Mega Evolucion")]
+    // Con Mega-Pokuchan todo lo que lo cuida rinde mas: la comida llena mas hambre, jugar mas
+    // diversion y dormido recupera energia mas rapido. Es parte del premio de activarla.
+    [SerializeField] private float multiplicadorMega = 2f;
+
     [Header("App cerrada")]
     // Lo maximo que se descuenta al volver. Sin tope, despues de unos dias Poku estaria en cero.
     [SerializeField] private float horasMaximasAusente = 6f;
@@ -40,6 +45,7 @@ public class NeedsConfig : ScriptableObject
     public float EnergiaDurmiendoPorHora => energiaDurmiendoPorHora;
     public float FactorDormido => factorDormido;
     public float HorasMaximasAusente => horasMaximasAusente;
+    public float MultiplicadorMega => multiplicadorMega;
 
     public float DecaimientoPorHora(NeedType tipo)
     {

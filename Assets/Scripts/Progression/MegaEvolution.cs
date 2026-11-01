@@ -12,24 +12,30 @@ public class MegaEvolution : MonoBehaviour
     // Cuanto falta para poder activarla, o cuanto le queda si esta activa (de 0 a 1).
     public event Action<float> EnergiaCambiada;
     public event Action<bool> MegaCambiada;
+    // Solo la primera vez que se activa en la partida: el cartel que explica que gana con la Mega.
+    public event Action PrimeraVez;
 
     // Estatico como el nivel: sobrevive a ir a un minijuego y lo llena el guardado.
     private static int energia;
     // Hasta cuando dura, en hora real (ticks UTC) y no en Time.time: la media hora sigue corriendo
     // con la app cerrada, como las necesidades. 0 = no esta activa.
     private static long megaHasta;
+    // Si ya vio el cartel de la primera Mega. Se guarda: no tiene que volver a salir al reabrir la app.
+    private static bool presentada;
 
     private bool estabaActiva;
 
     public static int EnergiaActual => energia;
     public static long MegaHasta => megaHasta;
+    public static bool Presentada => presentada;
     // Se calcula con la hora y no con un flag: los minijuegos lo leen sin tener este componente.
     public static bool Activa => megaHasta > DateTime.UtcNow.Ticks;
 
-    public static void Restaurar(int energiaGuardada, long megaHastaGuardada)
+    public static void Restaurar(int energiaGuardada, long megaHastaGuardada, bool presentadaGuardada)
     {
         energia = Mathf.Max(0, energiaGuardada);
         megaHasta = megaHastaGuardada;
+        presentada = presentadaGuardada;
     }
 
     private ProgressionConfig Config => progreso.Config;
@@ -81,6 +87,11 @@ public class MegaEvolution : MonoBehaviour
         estabaActiva = true;
         MegaCambiada?.Invoke(true);
         EnergiaCambiada?.Invoke(Fraccion);
+        if (!presentada)
+        {
+            presentada = true;
+            PrimeraVez?.Invoke();
+        }
 
         // Si la app se cierra antes del proximo autoguardado, volveria a estar la barra llena.
         SaveSystem.Guardar();
