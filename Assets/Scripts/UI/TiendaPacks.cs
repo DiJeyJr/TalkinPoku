@@ -23,6 +23,11 @@ public class TiendaPacks : MonoBehaviour
     [SerializeField] private Sprite iconoMonedas;
     [SerializeField] private Sprite iconoGemas;
 
+    [Header("Textos")]
+    // Mientras el backend sea el simulado, el que aprueba tiene que saber que no se le cobra nada.
+    // Con la tienda real se deja vacio.
+    [SerializeField] private string leyendaPrueba = "Compra de prueba: no se cobra dinero real.";
+
     [Header("Sonidos")]
     [SerializeField] private AudioClip sonidoCompra;
 
@@ -50,6 +55,8 @@ public class TiendaPacks : MonoBehaviour
 
     private static string NombreMoneda(CurrencyType moneda) => moneda == CurrencyType.Gemas ? "gemas" : "monedas";
 
+    private string Leyenda() => string.IsNullOrEmpty(leyendaPrueba) ? "" : "\n<size=75%>" + leyendaPrueba + "</size>";
+
     private void Pedir(PackDefinition pack)
     {
         if (comprando) return;
@@ -59,7 +66,7 @@ public class TiendaPacks : MonoBehaviour
             return;
         }
 
-        string queSeCompra = pack.Nombre + ": " + pack.Cantidad + " " + NombreMoneda(pack.Moneda) + " por " + pack.PrecioVitrina;
+        string queSeCompra = pack.Nombre + ": " + pack.Cantidad + " " + NombreMoneda(pack.Moneda) + " por " + pack.PrecioVitrina + Leyenda();
         puerta.Pedir(queSeCompra, () => Cobrar(pack));
     }
 
@@ -82,7 +89,7 @@ public class TiendaPacks : MonoBehaviour
                 // Se guarda en el momento: si la app se cierra ahora, lo pagado no se puede perder.
                 SaveSystem.Guardar();
                 SoundPlayer.Reproducir(sonidoCompra);
-                confirmacion.Avisar("¡Listo! Sumaste " + pack.Cantidad + " " + NombreMoneda(pack.Moneda) + ".");
+                confirmacion.Avisar("¡Listo! Sumaste " + pack.Cantidad + " " + NombreMoneda(pack.Moneda) + "." + Leyenda());
                 break;
             case ResultadoCompra.Fallo:
                 confirmacion.Avisar("No se pudo hacer la compra y no se cobró nada.\n<size=75%>Probá de nuevo más tarde.</size>");
