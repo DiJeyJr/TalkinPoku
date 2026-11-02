@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dee50c92d3531a1478bcbcc0e4487118, type: 3}
+  m_Name: Escenario_Parque
+  m_EditorClassIdentifier: Assembly-CSharp::Escenario
+  id: parque
+  nombre: Parque
+  fondoSucio: {fileID: 21300000, guid: ed6e06316049ecf4db4358dbd4dd6866, type: 3}
+  fondoLimpio: {fileID: 21300000, guid: 018bb89967399154bb25812b841e6524, type: 3}
+  basuras:
+  - sprite: {fileID: 21300000, guid: b3a8fe3866f79434bb131237e801229a, type: 2}
+    posicion: {x: -0.6, y: 3.8}
+    tipo: 0
+  - sprite: {fileID: 21300000, guid: b022aca8b5f6f9d4abd68609734ff72d, type: 2}
+    posicion: {x: 1.8, y: 1.4}
+    tipo: 0
+  - sprite: {fileID: 21300000, guid: b78e251dd61ee694a99f1e15e7ea5dc5, type: 2}
+    posicion: {x: -2.5, y: 0}
+    tipo: 0
+  - sprite: {fileID: 21300000, guid: b022aca8b5f6f9d4abd68609734ff72d, type: 2}
+    posicion: {x: 0.4, y: -1.4}
+    tipo: 1
+  - sprite: {fileID: 21300000, guid: b3a8fe3866f79434bb131237e801229a, type: 2}
+    posicion: {x: -2, y: -2.9}
+    tipo: 0
+  - sprite: {fileID: 21300000, guid: b78e251dd61ee694a99f1e15e7ea5dc5, type: 2}
+    posicion: {x: 1.3, y: -4.8}
+    tipo: 1
+  - sprite: {fileID: 21300000, guid: b3a8fe3866f79434bb131237e801229a, type: 2}
+    posicion: {x: 2.8, y: -0.9}
+    tipo: 0
+  monedas: 40

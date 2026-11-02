@@ -14,6 +14,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cocina.unity
     guid: 811ba82d1f509ee4bb43310195aaed0a
+  - enabled: 1
+    path: Assets/Scenes/Atrapar.unity
+    guid: 399160f9f062665499b79581c5fc4985
+  - enabled: 1
+    path: Assets/Scenes/Camino.unity
+    guid: 93b813ed5834a424f842838c2cba17b0
+  - enabled: 1
+    path: Assets/Scenes/Limpieza.unity
+    guid: 8e6bce2d21937604fb7479bf776c393e
+  - enabled: 1
+    path: Assets/Scenes/Unir.unity
+    guid: 30f02a88ba9931c43a4814b4b09d44e8
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: a19b547c61622bf46b8b473f0bf20764, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dee50c92d3531a1478bcbcc0e4487118, type: 3}
+  m_Name: Escenario_Bosque
+  m_EditorClassIdentifier: Assembly-CSharp::Escenario
+  id: bosque
+  nombre: Bosque
+  fondoSucio: {fileID: 21300000, guid: f19b3ea165ff28040bc319323f99c8b0, type: 3}
+  fondoLimpio: {fileID: 21300000, guid: 96df653eb41e53244a6e9c5308b0caad, type: 3}
+  basuras:
+  - sprite: {fileID: 21300000, guid: b3a8fe3866f79434bb131237e801229a, type: 2}
+    posicion: {x: -0.6, y: 3.8}
+    tipo: 0
+  - sprite: {fileID: 21300000, guid: b022aca8b5f6f9d4abd68609734ff72d, type: 2}
+    posicion: {x: -0.5, y: 0}
+    tipo: 0
+  - sprite: {fileID: 21300000, guid: b78e251dd61ee694a99f1e15e7ea5dc5, type: 2}
+    posicion: {x: -1.4, y: -3.8}
+    tipo: 1
+  - sprite: {fileID: 21300000, guid: b022aca8b5f6f9d4abd68609734ff72d, type: 2}
+    posicion: {x: 1.9, y: 2.5}
+    tipo: 1
+  - sprite: {fileID: 21300000, guid: b78e251dd61ee694a99f1e15e7ea5dc5, type: 2}
+    posicion: {x: -3.2, y: -1.4}
+    tipo: 2
+  - sprite: {fileID: 21300000, guid: f9ce6e8adcb6c994d8281bb0ea35e432, type: 2}
+    posicion: {x: 3.2, y: -1}
+    tipo: 2
+  - sprite: {fileID: 21300000, guid: b78e251dd61ee694a99f1e15e7ea5dc5, type: 2}
+    posicion: {x: -2.7, y: 6.6}
+    tipo: 2
+  monedas: 50

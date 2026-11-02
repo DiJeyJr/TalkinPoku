@@ -42,6 +42,7 @@ public static class SaveSystem
         Inventory.Restaurar(datos.inventario);
         Despensa.Ingredientes.Restaurar(datos.ingredientes);
         Despensa.Platos.Restaurar(datos.platos);
+        EscenariosLimpios.Restaurar(datos.escenariosLimpios);
     }
 
     // Un paso por version, en cascada, sin borrar nunca lo que no se entiende: una partida vieja se
@@ -53,6 +54,12 @@ public static class SaveSystem
             // La 1 no tenia despensa. Nivel e inventario de accesorios ya se arreglan solos al restaurar.
             if (viejos.ingredientes == null) viejos.ingredientes = new List<ItemCantidad>();
             if (viejos.platos == null) viejos.platos = new List<ItemCantidad>();
+        }
+
+        if (viejos.version < 3)
+        {
+            // La 2 no tenia el minijuego de limpieza: arranca sin escenarios limpios.
+            if (viejos.escenariosLimpios == null) viejos.escenariosLimpios = new List<string>();
         }
 
         viejos.version = SaveData.VersionActual;
@@ -76,6 +83,7 @@ public static class SaveSystem
         datos.inventario = Inventory.Foto();
         datos.ingredientes = Despensa.Ingredientes.Foto();
         datos.platos = Despensa.Platos.Foto();
+        datos.escenariosLimpios = EscenariosLimpios.Foto();
         datos.version = SaveData.VersionActual;
 
         try

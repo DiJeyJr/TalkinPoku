@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// Arranca el minijuego de la escena, muestra el resultado y vuelve a la casa. Es el mismo para
 /// todos los minijuegos: busca el IMinigame que tiene al lado y no sabe cual es.
@@ -10,6 +11,8 @@ public class MinigameFlow : MonoBehaviour
 
     [Header("Resultado")]
     [SerializeField] private PantallaResultado pantalla;
+    // Para abandonar a mitad de partida: si no, la unica salida es perder o terminar.
+    [SerializeField] private Button botonSalir;
 
     // La ultima partida terminada, hasta que la casa la cobre. Estatica porque al volver se carga
     // otra escena y este componente deja de existir.
@@ -35,6 +38,8 @@ public class MinigameFlow : MonoBehaviour
         pantalla.PidioReintentar += Reintentar;
         pantalla.PidioVolver += VolverACasa;
         pantalla.Ocultar();
+        // Es navegacion de la interfaz, no una accion del juego: por eso alcanza con el onClick.
+        if (botonSalir != null) botonSalir.onClick.AddListener(VolverACasa);
     }
 
     private void Start()
