@@ -63,7 +63,8 @@ public class MinigameFlow : MonoBehaviour
             resultadoPendiente = resultado;
         }
 
-        pantalla.Mostrar(resultado);
+        // Se muestra lo acumulado y no la ultima partida: es lo que se va a cobrar en la casa.
+        pantalla.Mostrar(resultadoPendiente.Value);
     }
 
     private void Reintentar()

@@ -172,7 +172,7 @@ public class LimpiezaGame : MonoBehaviour, IMinigame
         yield return new WaitForSeconds(segundosAntesDelResultado);
 
         // Si se acabo el tiempo se paga la parte limpiada: el feedback celebra lo hecho, no castiga.
-        int monedas = Mathf.RoundToInt(actual.Monedas * juntadas / (float)basuras.Count);
+        int monedas = Mathf.RoundToInt(actual.Monedas * juntadas / (float)Mathf.Max(1, basuras.Count));
         Finished?.Invoke(new MinigameResult(juntadas, monedas, true, limpioTodo));
     }
 }

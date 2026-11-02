@@ -48,7 +48,7 @@ public class NeedBar : MonoBehaviour
     private void Pintar(float valor)
     {
         ultimo = valor;
-        relleno.fillAmount = valor / 100f;
+        relleno.fillAmount = valor / NeedsSystem.Maximo;
         relleno.color = valor < necesidades.UmbralCritico ? colorCritico : colorNormal;
     }
 }

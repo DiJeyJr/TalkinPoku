@@ -35,6 +35,7 @@ public class Basura : MonoBehaviour
     private Draggable draggable;
     private Collider2D cesto;
     private TipoBasura tipo;
+    private Coroutine temblor;
 
     private void Awake()
     {
@@ -96,7 +97,9 @@ public class Basura : MonoBehaviour
         else if (tipo == TipoBasura.EnArbol) StartCoroutine(Caer());
         else if (tipo == TipoBasura.Pegada)
         {
-            StartCoroutine(Temblar());
+            // Un toque mientras tiembla no arranca otro: el nuevo tomaria como origen la posicion
+            // corrida y la basura quedaria fuera de lugar.
+            if (temblor == null) temblor = StartCoroutine(Temblar());
             PidioAyuda?.Invoke(this);
         }
     }
@@ -111,6 +114,7 @@ public class Basura : MonoBehaviour
             yield return null;
         }
         transform.position = origen;
+        temblor = null;
     }
 
     private void AlSostener()

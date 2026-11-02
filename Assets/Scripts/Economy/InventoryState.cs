@@ -10,7 +10,7 @@ public class InventoryState
     public List<string> ids = new List<string>();
     public List<int> cantidades = new List<int>();
     // Lo que tiene puesto Poku, uno por ranura en el orden de AccessorySlot. "" = nada.
-    public string[] puestos = new string[4];
+    public string[] puestos = new string[Enum.GetValues(typeof(AccessorySlot)).Length];
     // Los muebles que estan en la sala.
     public List<string> colocados = new List<string>();
 }

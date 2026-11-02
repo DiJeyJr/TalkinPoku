@@ -91,7 +91,7 @@ public class CaminoGame : MonoBehaviour, IMinigame
 
         // Cuanto mas avanzado el nivel, menos tiempo por paso, hasta llegar al minimo.
         float segundosPorPaso = Mathf.Lerp(segundosPorPasoMaximo, segundosPorPasoMinimo,
-            (float)nivel / nivelesHastaMinimo);
+            (float)nivel / Mathf.Max(1, nivelesHastaMinimo));
         WaitForSeconds esperaPaso = new WaitForSeconds(segundosPorPaso);
 
         // Una espera antes del primer paso, para que se vea donde quedaron las casas.
