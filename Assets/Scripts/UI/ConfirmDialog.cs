@@ -3,8 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// Cartel de "¿Seguro?" con Aceptar y Cancelar. El GDD pide confirmar antes de gastar: el publico es
-/// infantil y un toque sin querer no puede llevarse las monedas.
+// Cartel de "¿Seguro?" con Aceptar y Cancelar. El GDD pide confirmar antes de gastar: el publico es
+// infantil y un toque sin querer no puede llevarse las monedas.
 public class ConfirmDialog : MonoBehaviour
 {
     [Header("Referencias")]

@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
 
-/// Una mancha sobre Poku. Se va borrando mientras la esponja pasa por encima: cuenta la distancia
-/// frotada y no el tiempo, asi dejar la esponja quieta no limpia.
+// Una mancha sobre Poku. Se va borrando mientras la esponja pasa por encima: cuenta la distancia
+// frotada y no el tiempo, asi dejar la esponja quieta no limpia.
 [RequireComponent(typeof(SpriteRenderer))]
 public class Stain : MonoBehaviour
 {

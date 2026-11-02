@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Comida de la cocina: se arrastra hasta la mascota y al soltarla encima sube la necesidad que
-/// diga el ItemDefinition. Si se suelta en otro lado, Draggable la devuelve a su lugar.
+// Comida de la cocina: se arrastra hasta la mascota y al soltarla encima sube la necesidad que
+// diga el ItemDefinition. Si se suelta en otro lado, Draggable la devuelve a su lugar.
 [RequireComponent(typeof(Draggable))]
 public class FoodItem : MonoBehaviour
 {

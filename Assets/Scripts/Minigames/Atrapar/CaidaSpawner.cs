@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
 
-/// Tira ingredientes y objetos malos desde arriba. Los crea todos al arrancar y los recicla, igual
-/// que ObstaculoSpawner en el vuelo, para no generar basura con un Instantiate por caida.
+// Tira ingredientes y objetos malos desde arriba. Los crea todos al arrancar y los recicla, igual
+// que ObstaculoSpawner en el vuelo, para no generar basura con un Instantiate por caida.
 public class CaidaSpawner : MonoBehaviour
 {
     [Header("Referencias")]

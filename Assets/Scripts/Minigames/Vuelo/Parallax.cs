@@ -1,8 +1,8 @@
 using UnityEngine;
 
-/// Corre hacia la izquierda una tira de dibujo que se repite (SpriteRenderer en Draw Mode Tiled).
-/// Cada capa usa un factor distinto: lo lejano se mueve lento y lo cercano rapido, y esa diferencia
-/// es la que da sensacion de profundidad.
+// Corre hacia la izquierda una tira de dibujo que se repite (SpriteRenderer en Draw Mode Tiled).
+// Cada capa usa un factor distinto: lo lejano se mueve lento y lo cercano rapido, y esa diferencia
+// es la que da sensacion de profundidad.
 [RequireComponent(typeof(SpriteRenderer))]
 public class Parallax : MonoBehaviour
 {

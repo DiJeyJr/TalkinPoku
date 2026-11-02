@@ -4,9 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// Panel que aparece al terminar cualquier minijuego: si se gano o se perdio, el puntaje y lo que
-/// se cobra. No paga ni cambia de escena: lee los numeros de MinigameReward y avisa con eventos
-/// que boton se apreto, y MinigameFlow decide a donde ir.
+// Panel que aparece al terminar cualquier minijuego: si se gano o se perdio, el puntaje y lo que
+// se cobra. No paga ni cambia de escena: lee los numeros de MinigameReward y avisa con eventos
+// que boton se apreto, y MinigameFlow decide a donde ir.
 public class PantallaResultado : MonoBehaviour
 {
     [Header("Referencias")]

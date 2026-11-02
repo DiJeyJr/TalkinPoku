@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Un ingrediente bueno o un objeto malo que cae. Es siempre el mismo objeto reciclado: el spawner
-/// le cambia el dibujo y si es bueno cada vez que lo vuelve a tirar.
+// Un ingrediente bueno o un objeto malo que cae. Es siempre el mismo objeto reciclado: el spawner
+// le cambia el dibujo y si es bueno cada vez que lo vuelve a tirar.
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class ObjetoQueCae : MonoBehaviour

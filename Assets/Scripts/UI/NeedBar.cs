@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/// Barra de una necesidad. La Image de relleno tiene que estar en Image Type = Filled.
+// Barra de una necesidad. La Image de relleno tiene que estar en Image Type = Filled.
 public class NeedBar : MonoBehaviour
 {
     [Header("Referencias")]

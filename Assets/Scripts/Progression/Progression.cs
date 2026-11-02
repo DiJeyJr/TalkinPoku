@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-/// Nivel y experiencia de la mascota. Las actividades le avisan con Ganar y este decide cuanto vale
-/// cada una (ProgressionConfig). Avisa por evento cuando cambia la experiencia, cuando sube de nivel
-/// y cuando eso la hace evolucionar.
+// Nivel y experiencia de la mascota. Las actividades le avisan con Ganar y este decide cuanto vale
+// cada una (ProgressionConfig). Avisa por evento cuando cambia la experiencia, cuando sube de nivel
+// y cuando eso la hace evolucionar.
 public class Progression : MonoBehaviour
 {
     [Header("Referencias")]

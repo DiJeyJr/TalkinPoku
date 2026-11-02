@@ -1,8 +1,8 @@
 using UnityEngine;
 
-/// Decide cuando guardar. Lo crea SaveSystem al abrir el juego y sobrevive a los cambios de escena.
-/// En Android el sistema puede cerrar la app sin llamar a nada, por eso no alcanza con guardar al
-/// salir: tambien se guarda cada tantos segundos.
+// Decide cuando guardar. Lo crea SaveSystem al abrir el juego y sobrevive a los cambios de escena.
+// En Android el sistema puede cerrar la app sin llamar a nada, por eso no alcanza con guardar al
+// salir: tambien se guarda cada tantos segundos.
 public class AutoSave : MonoBehaviour
 {
     [Header("Umbrales")]

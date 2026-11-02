@@ -4,8 +4,8 @@ using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
-/// Detecta tap y pulsacion prolongada sobre este objeto, con el mismo criterio que el detector
-/// de la clase 2. Avisa por evento; que significa cada gesto lo decide otro script.
+// Detecta tap y pulsacion prolongada sobre este objeto, con el mismo criterio que el detector
+// de la clase 2. Avisa por evento; que significa cada gesto lo decide otro script.
 [RequireComponent(typeof(Collider2D))]
 public class TouchTarget : MonoBehaviour
 {

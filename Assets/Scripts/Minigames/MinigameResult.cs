@@ -1,5 +1,3 @@
-/// Como termino una partida. Es un struct de solo lectura porque es un dato que se pasa, no algo
-/// que alguien tenga que modificar despues.
 public readonly struct MinigameResult
 {
     public int Score { get; }

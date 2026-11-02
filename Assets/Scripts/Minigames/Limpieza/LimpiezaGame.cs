@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-/// Reglas del minijuego de limpieza: arma el escenario, cuenta la basura juntada y aclara el fondo
-/// a medida que se limpia. Se gana al juntar todo; si hay tiempo limite y se acaba, se cobra la parte.
+// Reglas del minijuego de limpieza: arma el escenario, cuenta la basura juntada y aclara el fondo
+// a medida que se limpia. Se gana al juntar todo; si hay tiempo limite y se acaba, se cobra la parte.
 public class LimpiezaGame : Minijuego
 {
     [Header("Escenarios")]

@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-/// Una receta: que ingredientes lleva y que plato sale. Es un dato, no codigo: para sumar una
-/// receta se crea otro asset y se agrega a la lista de CocinaGame.
+// Una receta: que ingredientes lleva y que plato sale. Es un dato, no codigo: para sumar una
+// receta se crea otro asset y se agrega a la lista de CocinaGame.
 [CreateAssetMenu(menuName = "TalkinPoku/Receta", fileName = "Receta_Nueva")]
 public class RecipeDefinition : ScriptableObject
 {

@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Jugar con la mascota tocandola: un tap le da un poco de diversion y mantener el dedo apoyado
-/// (una caricia) le da diversion mientras dure.
+// Jugar con la mascota tocandola: un tap le da un poco de diversion y mantener el dedo apoyado
+// (una caricia) le da diversion mientras dure.
 [RequireComponent(typeof(TouchTarget))]
 public class PetInteraction : MonoBehaviour
 {

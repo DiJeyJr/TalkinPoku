@@ -5,8 +5,8 @@ using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
-/// La canasta de abajo. Se mueve inclinando el celular o arrastrando el dedo, y avisa que atrapo,
-/// pero no lleva puntos ni vidas: eso es de AtraparGame.
+// La canasta de abajo. Se mueve inclinando el celular o arrastrando el dedo, y avisa que atrapo,
+// pero no lleva puntos ni vidas: eso es de AtraparGame.
 [RequireComponent(typeof(Rigidbody2D))]
 public class Canasta : MonoBehaviour
 {

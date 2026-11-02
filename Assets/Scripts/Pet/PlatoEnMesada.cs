@@ -1,8 +1,8 @@
 using TMPro;
 using UnityEngine;
 
-/// Un lugar de la mesada de la cocina. Muestra un plato del inventario y cuantos hay; arrastrado
-/// hasta Poku, se lo come y le da la energia de la receta. Que plato muestra lo decide la Mesada.
+// Un lugar de la mesada de la cocina. Muestra un plato del inventario y cuantos hay; arrastrado
+// hasta Poku, se lo come y le da la energia de la receta. Que plato muestra lo decide la Mesada.
 [RequireComponent(typeof(Draggable))]
 public class PlatoEnMesada : MonoBehaviour
 {

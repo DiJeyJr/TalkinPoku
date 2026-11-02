@@ -10,8 +10,8 @@ public enum SwipeDirection
     Derecha
 }
 
-/// Detecta swipes horizontales y los avisa por evento. No sabe que hay del otro lado:
-/// quien quiera reaccionar se suscribe.
+// Detecta swipes horizontales y los avisa por evento. No sabe que hay del otro lado:
+// quien quiera reaccionar se suscribe.
 public class SwipeDetector : MonoBehaviour
 {
     [Header("Referencias")]

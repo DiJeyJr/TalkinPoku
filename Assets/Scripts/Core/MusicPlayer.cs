@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Musica de fondo. Una sola instancia que sobrevive a los cambios de escena y mezcla dos
-/// AudioSource para pasar de un tema a otro con fundido cruzado, sin corte ni silencio en el medio.
+// Musica de fondo. Una sola instancia que sobrevive a los cambios de escena y mezcla dos
+// AudioSource para pasar de un tema a otro con fundido cruzado, sin corte ni silencio en el medio.
 public class MusicPlayer : MonoBehaviour
 {
     private static MusicPlayer instancia;

@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-/// Reglas del minijuego de vuelo: un punto por obstaculo que se pasa, y se termina al chocar.
+// Reglas del minijuego de vuelo: un punto por obstaculo que se pasa, y se termina al chocar.
 public class VueloGame : Minijuego
 {
     [Header("Referencias")]

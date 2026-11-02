@@ -1,8 +1,8 @@
 using UnityEngine;
 
-/// La pestana de la tienda que vende monedas y gemas por dinero real. Es la unica parte del juego
-/// que cobra plata de verdad, por eso nunca compra de un toque: primero pasa un adulto por la puerta,
-/// despues cobra el backend y recien con la respuesta se acredita y se guarda.
+// La pestana de la tienda que vende monedas y gemas por dinero real. Es la unica parte del juego
+// que cobra plata de verdad, por eso nunca compra de un toque: primero pasa un adulto por la puerta,
+// despues cobra el backend y recien con la respuesta se acredita y se guarda.
 public class TiendaPacks : MonoBehaviour
 {
     [Header("Referencias")]

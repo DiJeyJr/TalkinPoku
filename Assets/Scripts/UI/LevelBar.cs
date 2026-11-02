@@ -2,8 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// El nivel en el HUD: el numero adentro de la estrella, que se va llenando con la experiencia que
-/// falta para el proximo. La Image de relleno tiene que estar en Image Type = Filled.
+// El nivel en el HUD: el numero adentro de la estrella, que se va llenando con la experiencia que
+// falta para el proximo. La Image de relleno tiene que estar en Image Type = Filled.
 public class LevelBar : MonoBehaviour
 {
     [Header("Referencias")]

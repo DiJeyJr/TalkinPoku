@@ -2,9 +2,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// El boton de la Mega Evolucion, que es tambien su barra: se va llenando con la Energia Mega, con
-/// la barra llena late y se puede tocar, y mientras dura Mega-Pokuchan se vacia con el tiempo que
-/// le queda. Antes del nivel 50 no se muestra. La Image de relleno tiene que estar en Filled.
+// El boton de la Mega Evolucion, que es tambien su barra: se va llenando con la Energia Mega, con
+// la barra llena late y se puede tocar, y mientras dura Mega-Pokuchan se vacia con el tiempo que
+// le queda. Antes del nivel 50 no se muestra. La Image de relleno tiene que estar en Filled.
 public class MegaButton : MonoBehaviour
 {
     [Header("Referencias")]

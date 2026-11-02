@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-/// Reglas de la cocina: con dos o tres ingredientes en la olla, mezclar (sacudiendo el celular o con
-/// el boton Mezclar) busca la receta. Una nueva paga mas que una repetida y una que no existe no
-/// cobra nada: es un juego de descubrir, y equivocarse tiene que ser gratis.
+// Reglas de la cocina: con dos o tres ingredientes en la olla, mezclar (sacudiendo el celular o con
+// el boton Mezclar) busca la receta. Una nueva paga mas que una repetida y una que no existe no
+// cobra nada: es un juego de descubrir, y equivocarse tiene que ser gratis.
 public class CocinaGame : Minijuego
 {
     [Header("Referencias")]

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-/// El cuadro colgado en la casa: muestra el ultimo dibujo guardado y un tap abre el atril.
+// El cuadro colgado en la casa: muestra el ultimo dibujo guardado y un tap abre el atril.
 [RequireComponent(typeof(TouchTarget))]
 public class HouseFrame : MonoBehaviour
 {

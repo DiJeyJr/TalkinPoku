@@ -1,8 +1,7 @@
-/// Como termino una compra con dinero real. Cancelado no es un error: el adulto cerro la ventana de
-/// pago, y no hay que mostrarle un cartel de falla.
 public enum ResultadoCompra
 {
     Exito,
     Fallo,
+    // El adulto cerro la ventana de pago: no es un error y no se muestra cartel de falla.
     Cancelado
 }

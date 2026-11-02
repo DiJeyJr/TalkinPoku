@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// Una fila del libro de recetas: el plato, el nombre y los ingredientes.
+// Una fila del libro de recetas: el plato, el nombre y los ingredientes.
 public class FilaReceta : MonoBehaviour
 {
     [Header("Referencias")]

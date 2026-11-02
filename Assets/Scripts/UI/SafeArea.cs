@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Ajusta este RectTransform a la zona segura de la pantalla (sin notch ni bordes redondeados).
-/// Todo el HUD va adentro; el fondo del juego sigue usando la pantalla entera.
+// Ajusta este RectTransform a la zona segura de la pantalla (sin notch ni bordes redondeados).
+// Todo el HUD va adentro; el fondo del juego sigue usando la pantalla entera.
 [RequireComponent(typeof(RectTransform))]
 public class SafeArea : MonoBehaviour
 {

@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/// La pantalla del atril: herramientas, colores y grosores alrededor de la hoja. Al abrirse carga
-/// lo que ya estaba dibujado; Guardar lo cuelga en el cuadro de la casa y cierra.
+// La pantalla del atril: herramientas, colores y grosores alrededor de la hoja. Al abrirse carga
+// lo que ya estaba dibujado; Guardar lo cuelga en el cuadro de la casa y cierra.
 public class DrawingScreen : MonoBehaviour
 {
     [Header("Referencias")]

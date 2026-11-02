@@ -4,9 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// La puerta para adultos antes de pagar con dinero real: una multiplicacion escrita con palabras y
-/// varias respuestas para elegir. Un chico que todavia no lee o no sabe las tablas no la pasa; un
-/// adulto la resuelve en dos segundos. Es lo habitual en apps para chicos (App Store la exige en Kids).
+// La puerta para adultos antes de pagar con dinero real: una multiplicacion escrita con palabras y
+// varias respuestas para elegir. Un chico que todavia no lee o no sabe las tablas no la pasa; un
+// adulto la resuelve en dos segundos. Es lo habitual en apps para chicos (App Store la exige en Kids).
 public class PuertaAdultos : MonoBehaviour
 {
     [Header("Referencias")]

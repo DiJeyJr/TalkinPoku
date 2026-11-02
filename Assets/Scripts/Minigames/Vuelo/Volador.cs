@@ -4,8 +4,8 @@ using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
-/// La mascota en el minijuego de vuelo: cada tap la hace aletear. Avisa cuando despega, cuando
-/// pasa un obstaculo y cuando choca, pero no lleva el puntaje: eso es de VueloGame.
+// La mascota en el minijuego de vuelo: cada tap la hace aletear. Avisa cuando despega, cuando
+// pasa un obstaculo y cuando choca, pero no lleva el puntaje: eso es de VueloGame.
 [RequireComponent(typeof(Rigidbody2D))]
 public class Volador : MonoBehaviour
 {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-/// Lee y escribe la partida en un JSON. Las necesidades, la billetera, las recetas y el nivel viven cada uno en
-/// su sistema: aca solo se juntan para escribirlas y se reparten al abrir el juego.
+// Lee y escribe la partida en un JSON. Las necesidades, la billetera, las recetas y el nivel viven cada uno en
+// su sistema: aca solo se juntan para escribirlas y se reparten al abrir el juego.
 public static class SaveSystem
 {
     private static string Ruta => Path.Combine(Application.persistentDataPath, "partida.json");

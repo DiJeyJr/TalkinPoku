@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// Lo que el jugador compro: comida para darle, ropa para ponerle a Poku y muebles para la sala.
-/// Comprar descuenta de la billetera; usar, poner y colocar avisan con Cambiado para que la UI, Poku
-/// y la sala se actualicen.
+// Lo que el jugador compro: comida para darle, ropa para ponerle a Poku y muebles para la sala.
+// Comprar descuenta de la billetera; usar, poner y colocar avisan con Cambiado para que la UI, Poku
+// y la sala se actualicen.
 public class Inventory : MonoBehaviour
 {
     [Header("Referencias")]

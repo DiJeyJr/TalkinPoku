@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-/// Muestra una habitacion por vez. Las habitaciones son hijos de la escena que se prenden y
-/// apagan, no escenas separadas: cargar una escena por cuarto da pantallas negras en mobile y
-/// ademas la mascota es la misma en todas.
+// Muestra una habitacion por vez. Las habitaciones son hijos de la escena que se prenden y
+// apagan, no escenas separadas: cargar una escena por cuarto da pantallas negras en mobile y
+// ademas la mascota es la misma en todas.
 public class RoomNavigator : MonoBehaviour
 {
     [Header("Referencias")]

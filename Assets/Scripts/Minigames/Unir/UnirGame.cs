@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-/// Reglas de Unir a los personajes: arma cada nivel, cobra una vida por cada trazo fallido y paga
-/// monedas por los que llegan.
+// Reglas de Unir a los personajes: arma cada nivel, cobra una vida por cada trazo fallido y paga
+// monedas por los que llegan.
 public class UnirGame : Minijuego
 {
     [Header("Referencias")]

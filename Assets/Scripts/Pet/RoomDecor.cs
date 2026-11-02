@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-/// Va en la sala. Dibuja los muebles que el jugador coloco, cada uno en su lugar fijo: no se arrastran,
-/// asi la sala siempre queda armada y nada tapa a Poku ni a los botones.
+// Va en la sala. Dibuja los muebles que el jugador coloco, cada uno en su lugar fijo: no se arrastran,
+// asi la sala siempre queda armada y nada tapa a Poku ni a los botones.
 public class RoomDecor : MonoBehaviour
 {
     [Header("Referencias")]

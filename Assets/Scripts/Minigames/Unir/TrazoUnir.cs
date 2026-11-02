@@ -6,8 +6,8 @@ using UnityEngine.UI;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
-/// El trazo con el dedo: arranca sobre un personaje, gasta tinta y avisa si llego al otro o si
-/// fallo. No sabe de vidas ni de monedas, eso lo decide UnirGame.
+// El trazo con el dedo: arranca sobre un personaje, gasta tinta y avisa si llego al otro o si
+// fallo. No sabe de vidas ni de monedas, eso lo decide UnirGame.
 [RequireComponent(typeof(LineRenderer))]
 public class TrazoUnir : MonoBehaviour
 {

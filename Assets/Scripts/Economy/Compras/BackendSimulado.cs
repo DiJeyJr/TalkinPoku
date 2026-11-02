@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-/// Hace de tienda sin cobrar nada: espera como si hablara con Google Play y contesta lo que diga el
-/// Inspector. Sin ficha publicada en Play Console no hay productos reales para probar.
+// Hace de tienda sin cobrar nada: espera como si hablara con Google Play y contesta lo que diga el
+// Inspector. Sin ficha publicada en Play Console no hay productos reales para probar.
 public class BackendSimulado : MonoBehaviour, IPurchaseBackend
 {
     [Header("Simulacion")]

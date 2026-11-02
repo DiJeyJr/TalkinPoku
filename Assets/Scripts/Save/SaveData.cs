@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-/// Lo que se escribe a disco. Solo campos publicos, arrays y listas: es lo que entiende JsonUtility
-/// (no serializa Dictionary ni DateTime).
+// Lo que se escribe a disco. Solo campos publicos, arrays y listas: es lo que entiende JsonUtility
+// (no serializa Dictionary ni DateTime).
 [Serializable]
 public class SaveData
 {

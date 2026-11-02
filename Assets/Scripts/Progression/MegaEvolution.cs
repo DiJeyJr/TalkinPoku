@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-/// La Mega Evolucion: desde el nivel 50 las actividades cargan la Energia Mega, y con la barra
-/// llena el jugador puede convertir a Pokuchan en Mega-Pokuchan por media hora. Mientras dura los
-/// minijuegos pagan mas monedas (MinigameReward).
+// La Mega Evolucion: desde el nivel 50 las actividades cargan la Energia Mega, y con la barra
+// llena el jugador puede convertir a Pokuchan en Mega-Pokuchan por media hora. Mientras dura los
+// minijuegos pagan mas monedas (MinigameReward).
 public class MegaEvolution : MonoBehaviour
 {
     [Header("Referencias")]

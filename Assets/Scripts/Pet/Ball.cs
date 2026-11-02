@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Pelota de la sala de juegos: se agarra, se tira con el dedo y rebota contra los bordes y contra
-/// Poku. Cada vez que le pega a Poku lo divierte y lo pone contento un par de segundos.
+// Pelota de la sala de juegos: se agarra, se tira con el dedo y rebota contra los bordes y contra
+// Poku. Cada vez que le pega a Poku lo divierte y lo pone contento un par de segundos.
 [RequireComponent(typeof(Draggable))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class Ball : MonoBehaviour

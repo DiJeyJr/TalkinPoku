@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-/// Arranca el minijuego de la escena, muestra el resultado y vuelve a la casa. Es el mismo para
-/// todos los minijuegos: busca el Minijuego que tiene al lado y no sabe cual es.
+// Arranca el minijuego de la escena, muestra el resultado y vuelve a la casa. Es el mismo para
+// todos los minijuegos: busca el Minijuego que tiene al lado y no sabe cual es.
 public class MinigameFlow : MonoBehaviour
 {
     [Header("Escenas")]

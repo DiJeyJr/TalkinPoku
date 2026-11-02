@@ -3,8 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// Un paquete en la tienda de dinero real: cuanto trae y cuanto sale. Como ShopSlot, no compra: avisa
-/// a TiendaPacks, que pide la puerta para adultos y cobra.
+// Un paquete en la tienda de dinero real: cuanto trae y cuanto sale. Como ShopSlot, no compra: avisa
+// a TiendaPacks, que pide la puerta para adultos y cobra.
 public class PackSlot : MonoBehaviour
 {
     [Header("Referencias")]

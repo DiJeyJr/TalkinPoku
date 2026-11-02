@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-/// La bandeja de inventario de una habitacion: la comida en la cocina, la ropa en el dormitorio y los
-/// muebles en la sala. El boton que la abre solo aparece en su habitacion. Se abre como una pantalla
-/// del ScreenStack: asi se apaga el input de la casa y arrastrar comida no cambia de habitacion.
+// La bandeja de inventario de una habitacion: la comida en la cocina, la ropa en el dormitorio y los
+// muebles en la sala. El boton que la abre solo aparece en su habitacion. Se abre como una pantalla
+// del ScreenStack: asi se apaga el input de la casa y arrastrar comida no cambia de habitacion.
 public class InventoryTray : MonoBehaviour
 {
     [Header("Referencias")]

@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/// Boton invisible arriba a la derecha: siete toques seguidos abren o cierran el panel de admin.
-/// Seguidos quiere decir sin pausas largas, asi un toque suelto de vez en cuando no va sumando.
+// Boton invisible arriba a la derecha: siete toques seguidos abren o cierran el panel de admin.
+// Seguidos quiere decir sin pausas largas, asi un toque suelto de vez en cuando no va sumando.
 [RequireComponent(typeof(Button))]
 public class AdminTrigger : MonoBehaviour
 {

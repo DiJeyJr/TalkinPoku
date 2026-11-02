@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Cama del dormitorio: un tap acuesta o despierta a la mascota. Mientras duerme, NeedsSystem
-/// recupera energia en vez de gastarla, y la despierta solo al llegar a 100.
+// Cama del dormitorio: un tap acuesta o despierta a la mascota. Mientras duerme, NeedsSystem
+// recupera energia en vez de gastarla, y la despierta solo al llegar a 100.
 [RequireComponent(typeof(TouchTarget))]
 public class Bed : MonoBehaviour
 {

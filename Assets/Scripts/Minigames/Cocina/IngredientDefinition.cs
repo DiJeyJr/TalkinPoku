@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Un ingrediente de la cocina. Lo que se compara (y lo que se guardaria) es el id: renombrar el
-/// asset o cambiarle el dibujo no rompe ninguna receta.
+// Un ingrediente de la cocina. Lo que se compara (y lo que se guardaria) es el id: renombrar el
+// asset o cambiarle el dibujo no rompe ninguna receta.
 [CreateAssetMenu(menuName = "TalkinPoku/Ingrediente", fileName = "Ing_Nuevo")]
 public class IngredientDefinition : ScriptableObject
 {

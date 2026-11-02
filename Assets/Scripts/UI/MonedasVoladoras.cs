@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/// Las monedas ganadas aparecen en el centro de la pantalla y vuelan en curva hasta el contador,
-/// cada vez mas rapido. El saldo ya esta acreditado; el contador las va sumando recien cuando llegan.
-/// Va en un RectTransform que cubre la pantalla, ultimo en el Canvas para dibujarse arriba de todo.
+// Las monedas ganadas aparecen en el centro de la pantalla y vuelan en curva hasta el contador,
+// cada vez mas rapido. El saldo ya esta acreditado; el contador las va sumando recien cuando llegan.
+// Va en un RectTransform que cubre la pantalla, ultimo en el Canvas para dibujarse arriba de todo.
 public class MonedasVoladoras : MonoBehaviour
 {
     [Header("Referencias")]

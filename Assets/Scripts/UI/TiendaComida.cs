@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// La pestana Comida de la tienda: arma un producto por ingrediente, en el orden de la lista. Para
-/// vender uno nuevo alcanza con crear su asset y sumarlo aca.
+// La pestana Comida de la tienda: arma un producto por ingrediente, en el orden de la lista. Para
+// vender uno nuevo alcanza con crear su asset y sumarlo aca.
 public class TiendaComida : MonoBehaviour
 {
     [Header("Referencias")]

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-/// Cuantos tiene el jugador de cada cosa, por id. Hay uno para los ingredientes que se compran en
-/// la tienda y otro para los platos que se cocinan. Estaticos como la billetera: sobreviven a ir y
-/// volver de un minijuego, y los guarda SaveSystem.
+// Cuantos tiene el jugador de cada cosa, por id. Hay uno para los ingredientes que se compran en
+// la tienda y otro para los platos que se cocinan. Estaticos como la billetera: sobreviven a ir y
+// volver de un minijuego, y los guarda SaveSystem.
 public class Despensa
 {
     public static readonly Despensa Ingredientes = new Despensa();

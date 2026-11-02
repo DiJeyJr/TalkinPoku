@@ -1,8 +1,8 @@
 using TMPro;
 using UnityEngine;
 
-/// Panel para probar el juego sin esperar horas: cambia la velocidad del tiempo, y sus filas
-/// (AdminNeedRow) suben o bajan cada necesidad. No es parte del juego: se abre con AdminTrigger.
+// Panel para probar el juego sin esperar horas: cambia la velocidad del tiempo, y sus filas
+// (AdminNeedRow) suben o bajan cada necesidad. No es parte del juego: se abre con AdminTrigger.
 public class AdminPanel : MonoBehaviour
 {
     [Header("Referencias")]

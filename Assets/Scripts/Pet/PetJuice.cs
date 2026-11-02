@@ -1,8 +1,8 @@
 using UnityEngine;
 
-/// Movimiento de Poku por codigo, sin Animator: se aplasta al tocarlo, rebota al comer, se sacude
-/// cuando esta enojado o sucio y respira en reposo. Va en el mismo objeto que PetEvolution, que
-/// tambien escribe la escala; los otros scripts solo llaman a Aplastar, Rebotar y Sacudir.
+// Movimiento de Poku por codigo, sin Animator: se aplasta al tocarlo, rebota al comer, se sacude
+// cuando esta enojado o sucio y respira en reposo. Va en el mismo objeto que PetEvolution, que
+// tambien escribe la escala; los otros scripts solo llaman a Aplastar, Rebotar y Sacudir.
 public class PetJuice : MonoBehaviour
 {
     [Header("Aplastar (tap y caricia)")]

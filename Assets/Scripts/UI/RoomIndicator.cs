@@ -3,9 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// Muestra en que habitacion esta el jugador: el nombre arriba y abajo un icono por habitacion
-/// (un puntito si todavia no tiene icono). Tocar uno lleva a esa habitacion.
-/// Se entera por el evento del RoomNavigator, asi no revisa nada en Update.
+// Muestra en que habitacion esta el jugador: el nombre arriba y abajo un icono por habitacion
+// (un puntito si todavia no tiene icono). Tocar uno lleva a esa habitacion.
+// Se entera por el evento del RoomNavigator, asi no revisa nada en Update.
 public class RoomIndicator : MonoBehaviour
 {
     [Header("Referencias")]

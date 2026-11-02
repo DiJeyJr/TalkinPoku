@@ -2,8 +2,8 @@ using System;
 using System.Globalization;
 using UnityEngine;
 
-/// Guarda el estado de las necesidades de la mascota y avisa cuando cambian. No conoce la UI ni
-/// las habitaciones: las barras y las actividades se enganchan a los eventos.
+// Guarda el estado de las necesidades de la mascota y avisa cuando cambian. No conoce la UI ni
+// las habitaciones: las barras y las actividades se enganchan a los eventos.
 public class NeedsSystem : MonoBehaviour
 {
     public const float Maximo = 100f;
@@ -18,14 +18,12 @@ public class NeedsSystem : MonoBehaviour
     public event Action<NeedType, float> NeedChanged;
     public event Action<bool> DormidoCambiado;
 
-    // Hambre, Higiene, Diversion y Energia, en el orden del enum.
     private readonly float[] valores = new float[4];
 
     public bool Dormido { get; private set; }
     public float UmbralBajo => config.UmbralBajo;
     public float UmbralCritico => config.UmbralCritico;
 
-    // Lo cambia el panel de admin para probar sin esperar horas.
     public float MultiplicadorTiempo
     {
         get => multiplicadorTiempo;
@@ -49,7 +47,6 @@ public class NeedsSystem : MonoBehaviour
     private float Bonus => MegaEvolution.Activa ? config.MultiplicadorMega : 1f;
     private float EnergiaDurmiendoPorHora => config.EnergiaDurmiendoPorHora * Bonus;
 
-    // Cuanta higiene interna representa cada mancha: con 50 y cinco manchas, 10.
     private float TramoPorMancha => config.HigieneSinManchas / config.ManchasMaximas;
 
     // Ir a un minijuego recarga la escena de la casa, y con ella este componente. Lo estatico
@@ -58,15 +55,13 @@ public class NeedsSystem : MonoBehaviour
     // La de la casa mientras esta cargada, para que el guardado pueda sacarle una foto desde afuera.
     private static NeedsSystem enEscena;
 
-    // Lo que hay que guardar: la foto de ahora si se esta en la casa, o la que quedo al salir si se
-    // esta en un minijuego. null si todavia no hubo ninguna.
+    // Desde un minijuego no hay casa cargada: se guarda la foto que quedo al salir.
     public static NeedsState Foto()
     {
         return enEscena != null ? enEscena.SacarFoto() : estadoAlSalir;
     }
 
-    // La llama el guardado al abrir la app, antes de que cargue la casa. Awake la toma igual que al
-    // volver de un minijuego y descuenta el tiempo que estuvo cerrada.
+    // Awake la toma igual que al volver de un minijuego y descuenta el tiempo que estuvo cerrada.
     public static void Restaurar(NeedsState guardado)
     {
         estadoAlSalir = guardado;
@@ -164,8 +159,7 @@ public class NeedsSystem : MonoBehaviour
         return valores[(int)tipo];
     }
 
-    // La llama PetStains cuando la esponja borra una mancha. Devuelve su tramo, y la ultima deja la
-    // higiene en 100: banarlo lo deja limpio del todo.
+    // La ultima mancha deja la higiene en 100: banarlo lo deja limpio del todo.
     public void LimpiarMancha()
     {
         int manchas = Manchas;

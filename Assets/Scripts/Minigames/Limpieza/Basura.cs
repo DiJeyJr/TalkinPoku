@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-/// Una basura del escenario. No detecta gestos: escucha a TouchTarget (tap y hold) y a Draggable
-/// (arrastre), y segun su tipo decide cual de esos gestos la junta.
+// Una basura del escenario. No detecta gestos: escucha a TouchTarget (tap y hold) y a Draggable
+// (arrastre), y segun su tipo decide cual de esos gestos la junta.
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(TouchTarget))]

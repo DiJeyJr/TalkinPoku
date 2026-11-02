@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// Un lugar para limpiar: sus dos fondos, donde esta cada basura y cuanto paga. Para sumar un
-/// escenario se crea otro asset y se agrega a la lista de LimpiezaGame, sin tocar codigo.
+// Un lugar para limpiar: sus dos fondos, donde esta cada basura y cuanto paga. Para sumar un
+// escenario se crea otro asset y se agrega a la lista de LimpiezaGame, sin tocar codigo.
 [CreateAssetMenu(menuName = "TalkinPoku/Escenario", fileName = "Escenario_Nuevo")]
 public class Escenario : ScriptableObject
 {

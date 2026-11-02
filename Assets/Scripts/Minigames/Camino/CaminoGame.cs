@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-/// Reglas de Camino a casa, un Simon espacial: se muestra un camino desde la casa de Poku hasta la
-/// del amigo y hay que repetirlo tocando las celdas en orden. Cada camino completo sube un nivel.
+// Reglas de Camino a casa, un Simon espacial: se muestra un camino desde la casa de Poku hasta la
+// del amigo y hay que repetirlo tocando las celdas en orden. Cada camino completo sube un nivel.
 public class CaminoGame : Minijuego
 {
     [Header("Referencias")]

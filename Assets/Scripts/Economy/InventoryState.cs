@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// El inventario como lo entiende JsonUtility: listas paralelas en vez de diccionarios.
 [Serializable]
 public class InventoryState
 {

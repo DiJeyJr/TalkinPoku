@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
 
-/// La billetera: cuantas monedas y gemas tiene el jugador. Avisa por evento cuando cambia el saldo,
-/// asi los contadores de la UI no tienen que preguntar en cada frame.
+// La billetera: cuantas monedas y gemas tiene el jugador. Avisa por evento cuando cambia el saldo,
+// asi los contadores de la UI no tienen que preguntar en cada frame.
 public class Wallet : MonoBehaviour
 {
     [Header("Saldo inicial")]

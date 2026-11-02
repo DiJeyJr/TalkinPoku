@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// Un ingrediente a la venta: dibujo, nombre, precio y cuantos tenes. Cada toque compra uno.
+// Un ingrediente a la venta: dibujo, nombre, precio y cuantos tenes. Cada toque compra uno.
 public class ProductoTienda : MonoBehaviour
 {
     [Header("Referencias")]

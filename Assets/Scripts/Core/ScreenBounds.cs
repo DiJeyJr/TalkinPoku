@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Paredes invisibles en los bordes de la pantalla y un piso, para que la pelota rebote contra
-/// todos lados. Se arman al arrancar con lo que ve la camara, asi andan en cualquier celular.
+// Paredes invisibles en los bordes de la pantalla y un piso, para que la pelota rebote contra
+// todos lados. Se arman al arrancar con lo que ve la camara, asi andan en cualquier celular.
 [RequireComponent(typeof(EdgeCollider2D))]
 public class ScreenBounds : MonoBehaviour
 {

@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Las caras de una etapa de la mascota (Poku, Pokucha, Pokuchan). PetMoodController elige cual
-/// mostrar; PetEvolution cambia de apariencia al evolucionar.
+// Las caras de una etapa de la mascota (Poku, Pokucha, Pokuchan). PetMoodController elige cual
+// mostrar; PetEvolution cambia de apariencia al evolucionar.
 [CreateAssetMenu(menuName = "TalkinPoku/Apariencia de mascota", fileName = "Apariencia_")]
 public class PetAppearance : ScriptableObject
 {

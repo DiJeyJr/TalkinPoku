@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Las manchas de Poku. Cuantas hay lo decide NeedsSystem (la higiene se mide en manchas); este
-/// script prende las que tocan y, cuando la esponja borra una, le avisa para que la descuente.
+// Las manchas de Poku. Cuantas hay lo decide NeedsSystem (la higiene se mide en manchas); este
+// script prende las que tocan y, cuando la esponja borra una, le avisa para que la descuente.
 public class PetStains : MonoBehaviour
 {
     [Header("Referencias")]

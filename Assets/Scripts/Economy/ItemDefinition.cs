@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
 
-/// Un objeto del juego: comida, ropa o un mueble. El id es lo que va a ir al guardado: si se renombra
-/// el asset, las partidas guardadas siguen funcionando.
+// Un objeto del juego: comida, ropa o un mueble. El id es lo que va a ir al guardado: si se renombra
+// el asset, las partidas guardadas siguen funcionando.
 [CreateAssetMenu(menuName = "TalkinPoku/Item", fileName = "Item_")]
 public class ItemDefinition : ScriptableObject
 {

@@ -4,8 +4,8 @@ using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
-/// Permite arrastrar este objeto con el dedo. No sabe que es ni que pasa al soltarlo: avisa por
-/// evento y el que lo usa (comida, esponja) decide.
+// Permite arrastrar este objeto con el dedo. No sabe que es ni que pasa al soltarlo: avisa por
+// evento y el que lo usa (comida, esponja) decide.
 [RequireComponent(typeof(Collider2D))]
 public class Draggable : MonoBehaviour
 {

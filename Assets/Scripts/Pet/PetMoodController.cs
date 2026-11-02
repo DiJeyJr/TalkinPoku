@@ -1,9 +1,9 @@
 using UnityEngine;
 
-/// Elige la cara de Poku. Dormido y acariciado duran lo que dura eso. Contento es una reaccion de
-/// unos segundos (al volver de un minijuego o cuando la pelota le pega). El resto del tiempo manda
-/// la necesidad que esta peor si ya se nota (debajo del umbral bajo de NeedsConfig), y si ninguna
-/// se nota, la cara normal. Las caras salen de la apariencia de la etapa actual (Poku, Pokucha...).
+// Elige la cara de Poku. Dormido y acariciado duran lo que dura eso. Contento es una reaccion de
+// unos segundos (al volver de un minijuego o cuando la pelota le pega). El resto del tiempo manda
+// la necesidad que esta peor si ya se nota (debajo del umbral bajo de NeedsConfig), y si ninguna
+// se nota, la cara normal. Las caras salen de la apariencia de la etapa actual (Poku, Pokucha...).
 [RequireComponent(typeof(SpriteRenderer))]
 public class PetMoodController : MonoBehaviour
 {

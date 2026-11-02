@@ -1,9 +1,9 @@
 using TMPro;
 using UnityEngine;
 
-/// Un ingrediente del estante. Se arrastra con el mismo Draggable de la casa y, si se suelta sobre
-/// la olla, entra. Solo se usan los que se compraron en la tienda: muestra cuantos quedan y, sin
-/// stock, se apaga y no se puede agarrar.
+// Un ingrediente del estante. Se arrastra con el mismo Draggable de la casa y, si se suelta sobre
+// la olla, entra. Solo se usan los que se compraron en la tienda: muestra cuantos quedan y, sin
+// stock, se apaga y no se puede agarrar.
 [RequireComponent(typeof(Draggable))]
 public class Ingrediente : MonoBehaviour
 {

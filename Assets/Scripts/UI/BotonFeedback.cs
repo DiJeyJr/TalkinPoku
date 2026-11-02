@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-/// Feedback de un boton: se achica mientras se lo aprieta y hace "pop" cuando se lo toca.
+// Feedback de un boton: se achica mientras se lo aprieta y hace "pop" cuando se lo toca.
 [RequireComponent(typeof(Button))]
 public class BotonFeedback : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {

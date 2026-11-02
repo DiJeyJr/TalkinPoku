@@ -2,8 +2,8 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-/// Reglas del minijuego de atrapar: un punto por ingrediente atrapado y tres vidas. Se pierde una
-/// al atrapar algo malo o al dejar caer un ingrediente; sin vidas, termina la partida.
+// Reglas del minijuego de atrapar: un punto por ingrediente atrapado y tres vidas. Se pierde una
+// al atrapar algo malo o al dejar caer un ingrediente; sin vidas, termina la partida.
 public class AtraparGame : Minijuego
 {
     [Header("Referencias")]

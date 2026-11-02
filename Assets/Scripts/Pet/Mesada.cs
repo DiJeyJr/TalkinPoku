@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// La mesada de la cocina: pone en sus lugares los platos que hay en el inventario. Si hay mas
-/// platos que lugares, las flechas los corren de a uno, como un carrusel.
+// La mesada de la cocina: pone en sus lugares los platos que hay en el inventario. Si hay mas
+// platos que lugares, las flechas los corren de a uno, como un carrusel.
 public class Mesada : MonoBehaviour
 {
     [Header("Referencias")]

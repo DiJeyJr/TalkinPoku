@@ -1,8 +1,8 @@
 using UnityEngine;
 
-/// Reproduce los efectos de sonido. Una sola AudioSource para todo el juego: PlayOneShot deja que
-/// varios suenen a la vez sin cortarse. Se crea al primer uso y sobrevive a los cambios de escena,
-/// asi el pop del boton que carga un minijuego no se corta a la mitad.
+// Reproduce los efectos de sonido. Una sola AudioSource para todo el juego: PlayOneShot deja que
+// varios suenen a la vez sin cortarse. Se crea al primer uso y sobrevive a los cambios de escena,
+// asi el pop del boton que carga un minijuego no se corta a la mitad.
 public static class SoundPlayer
 {
     private static AudioSource fuente;

@@ -3,9 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// El libro de recetas: una fila por receta, con el plato y sus ingredientes si ya se descubrio, o
-/// la silueta y signos de pregunta si no. Mientras esta abierto se apaga la cocina de atras, porque
-/// el arrastre de los ingredientes lee el touch directo y no se entera de que hay UI encima.
+// El libro de recetas: una fila por receta, con el plato y sus ingredientes si ya se descubrio, o
+// la silueta y signos de pregunta si no. Mientras esta abierto se apaga la cocina de atras, porque
+// el arrastre de los ingredientes lee el touch directo y no se entera de que hay UI encima.
 public class LibroDeRecetas : MonoBehaviour
 {
     [Header("Referencias")]

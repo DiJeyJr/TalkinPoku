@@ -2,8 +2,8 @@ using System;
 using System.IO;
 using UnityEngine;
 
-/// Guarda el dibujo del cuadro como PNG aparte del save en JSON: una imagen en base64 adentro del
-/// JSON lo haria pesado de escribir en cada autoguardado, y el dibujo solo cambia al tocar Guardar.
+// Guarda el dibujo del cuadro como PNG aparte del save en JSON: una imagen en base64 adentro del
+// JSON lo haria pesado de escribir en cada autoguardado, y el dibujo solo cambia al tocar Guardar.
 public static class DrawingStorage
 {
     public const int Ancho = 512;

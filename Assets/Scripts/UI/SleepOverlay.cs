@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Oscurece la pantalla mientras la mascota duerme. Va en el Canvas y no en la cama porque la cama
-/// se apaga al cambiar de habitacion, y la mascota se puede despertar sola estando en otra.
+// Oscurece la pantalla mientras la mascota duerme. Va en el Canvas y no en la cama porque la cama
+// se apaga al cambiar de habitacion, y la mascota se puede despertar sola estando en otra.
 public class SleepOverlay : MonoBehaviour
 {
     [Header("Referencias")]

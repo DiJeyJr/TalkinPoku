@@ -1,8 +1,8 @@
 using TMPro;
 using UnityEngine;
 
-/// Cartel que aparece unos segundos al subir de nivel. PetEvolution lo usa tambien para avisar que
-/// la mascota evoluciono: como eso pasa justo despues de subir, su mensaje tapa al del nivel.
+// Cartel que aparece unos segundos al subir de nivel. PetEvolution lo usa tambien para avisar que
+// la mascota evoluciono: como eso pasa justo despues de subir, su mensaje tapa al del nivel.
 public class LevelUpBanner : MonoBehaviour
 {
     [Header("Referencias")]

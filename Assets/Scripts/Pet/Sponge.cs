@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Esponja del bano: frotarla sobre las manchas de Poku las va borrando. Cuenta la distancia
-/// recorrida encima y no el tiempo, para que dejarla quieta no limpie.
+// Esponja del bano: frotarla sobre las manchas de Poku las va borrando. Cuenta la distancia
+// recorrida encima y no el tiempo, para que dejarla quieta no limpie.
 [RequireComponent(typeof(Draggable))]
 public class Sponge : MonoBehaviour
 {

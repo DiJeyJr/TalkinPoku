@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-/// Una fila del panel de admin: muestra cuanto tiene una necesidad y la sube o baja de a saltos.
+// Una fila del panel de admin: muestra cuanto tiene una necesidad y la sube o baja de a saltos.
 public class AdminNeedRow : MonoBehaviour
 {
     [Header("Referencias")]

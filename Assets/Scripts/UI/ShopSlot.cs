@@ -3,8 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// Un producto en el estante de la tienda: icono, nombre, precio y si ya lo tiene. No compra: avisa
-/// al estante, que es el que pregunta y cobra.
+// Un producto en el estante de la tienda: icono, nombre, precio y si ya lo tiene. No compra: avisa
+// al estante, que es el que pregunta y cobra.
 public class ShopSlot : MonoBehaviour
 {
     [Header("Referencias")]

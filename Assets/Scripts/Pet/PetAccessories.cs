@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Va en la mascota. Dibuja la ropa que tiene puesta, una por ranura, en el ancla que dice la
-/// apariencia de la etapa: asi el sombrero sigue en la cabeza cuando Poku evoluciona.
+// Va en la mascota. Dibuja la ropa que tiene puesta, una por ranura, en el ancla que dice la
+// apariencia de la etapa: asi el sombrero sigue en la cabeza cuando Poku evoluciona.
 [RequireComponent(typeof(SpriteRenderer))]
 public class PetAccessories : MonoBehaviour
 {

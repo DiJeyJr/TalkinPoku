@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
 
-/// Una celda de la grilla. Solo sabe pintarse segun su estado y avisar que la tocaron; si el toque
-/// estuvo bien o mal lo decide CaminoGame.
+// Una celda de la grilla. Solo sabe pintarse segun su estado y avisar que la tocaron; si el toque
+// estuvo bien o mal lo decide CaminoGame.
 [RequireComponent(typeof(SpriteRenderer), typeof(TouchTarget))]
 public class CeldaCamino : MonoBehaviour
 {

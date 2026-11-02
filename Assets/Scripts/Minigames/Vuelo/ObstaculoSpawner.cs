@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Lanza obstaculos desde la derecha cada cierto tiempo. Los crea todos al arrancar y los recicla,
-/// porque instanciar y destruir uno por tubo genera basura y el GC da tirones en el celular.
+// Lanza obstaculos desde la derecha cada cierto tiempo. Los crea todos al arrancar y los recicla,
+// porque instanciar y destruir uno por tubo genera basura y el GC da tirones en el celular.
 public class ObstaculoSpawner : MonoBehaviour
 {
     [Header("Referencias")]

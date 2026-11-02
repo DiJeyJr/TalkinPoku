@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Un paquete de monedas o gemas que se compra con dinero real. El id es el nuestro y no cambia;
-/// el productId es el codigo con el que lo conoce la tienda (Google Play), y puede no coincidir.
+// Un paquete de monedas o gemas que se compra con dinero real. El id es el nuestro y no cambia;
+// el productId es el codigo con el que lo conoce la tienda (Google Play), y puede no coincidir.
 [CreateAssetMenu(menuName = "TalkinPoku/Pack", fileName = "Pack_")]
 public class PackDefinition : ScriptableObject
 {

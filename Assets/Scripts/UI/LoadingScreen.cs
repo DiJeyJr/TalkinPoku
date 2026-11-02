@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-/// La pantalla de carga de Martina al abrir el juego: queda un momento y se desvanece. Tapa todo
-/// mientras se restaura el guardado y se arma la casa, que es lo que tarda en el primer cuadro.
+// La pantalla de carga de Martina al abrir el juego: queda un momento y se desvanece. Tapa todo
+// mientras se restaura el guardado y se arma la casa, que es lo que tarda en el primer cuadro.
 [RequireComponent(typeof(CanvasGroup))]
 public class LoadingScreen : MonoBehaviour
 {

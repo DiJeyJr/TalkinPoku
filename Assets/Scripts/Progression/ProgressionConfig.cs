@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// Numeros de la progresion: cuanta experiencia pide cada nivel, cuanta da cada actividad y en que
-/// nivel empieza cada evolucion. Van en un asset para poder balancear sin tocar codigo.
+// Numeros de la progresion: cuanta experiencia pide cada nivel, cuanta da cada actividad y en que
+// nivel empieza cada evolucion. Van en un asset para poder balancear sin tocar codigo.
 [CreateAssetMenu(menuName = "TalkinPoku/Progression Config", fileName = "ProgressionConfig")]
 public class ProgressionConfig : ScriptableObject
 {

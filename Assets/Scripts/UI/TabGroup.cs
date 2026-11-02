@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/// Pestanas de la tienda: muestra un panel y apaga los demas. Cada boton de pestana llama a
-/// Mostrar con su numero desde el OnClick del Inspector.
+// Pestanas de la tienda: muestra un panel y apaga los demas. Cada boton de pestana llama a
+// Mostrar con su numero desde el OnClick del Inspector.
 public class TabGroup : MonoBehaviour
 {
     [Header("Referencias")]

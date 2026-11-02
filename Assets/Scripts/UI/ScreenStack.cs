@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-/// Abre y cierra las pantallas de menu (tienda, minijuegos) como una pila: volver siempre cierra
-/// la ultima que se abrio. El boton atras de Android hace lo mismo que el boton de volver.
+// Abre y cierra las pantallas de menu (tienda, minijuegos) como una pila: volver siempre cierra
+// la ultima que se abrio. El boton atras de Android hace lo mismo que el boton de volver.
 public class ScreenStack : MonoBehaviour
 {
     [Header("Referencias")]

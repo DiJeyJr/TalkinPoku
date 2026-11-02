@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-/// Cobra la ultima partida al volver a la casa: acredita las monedas, le da a Poku la diversion y
-/// lo pone contento unos segundos. Va en la casa y no en el minijuego porque aca viven la billetera
-/// y las necesidades, y es el unico lugar que paga: un solo lugar para balancear.
+// Cobra la ultima partida al volver a la casa: acredita las monedas, le da a Poku la diversion y
+// lo pone contento unos segundos. Va en la casa y no en el minijuego porque aca viven la billetera
+// y las necesidades, y es el unico lugar que paga: un solo lugar para balancear.
 public class MinigameReward : MonoBehaviour
 {
     [Header("Referencias")]

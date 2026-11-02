@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// La olla: recibe los ingredientes que se sueltan encima, muestra cuales tiene y se vacia al
-/// tocarla. No sabe de recetas; que sale lo decide CocinaGame.
+// La olla: recibe los ingredientes que se sueltan encima, muestra cuales tiene y se vacia al
+// tocarla. No sabe de recetas; que sale lo decide CocinaGame.
 [RequireComponent(typeof(Collider2D))]
 public class Olla : MonoBehaviour
 {

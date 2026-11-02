@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
 
-/// Arma la grilla de celdas por codigo a partir de un prefab, con el tamano que entra en el ancho
-/// de la camara. Asi no hay que acomodar veinte objetos a mano y anda en cualquier celular.
+// Arma la grilla de celdas por codigo a partir de un prefab, con el tamano que entra en el ancho
+// de la camara. Asi no hay que acomodar veinte objetos a mano y anda en cualquier celular.
 public class GrillaCamino : MonoBehaviour
 {
     [Header("Referencias")]

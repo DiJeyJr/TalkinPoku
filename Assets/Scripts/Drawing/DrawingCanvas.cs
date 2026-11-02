@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 public enum DrawingTool { Pincel, Borrador }
 
-/// La hoja del atril: pinta sobre una textura siguiendo el dedo. Entre dos eventos de arrastre el
-/// dedo puede saltar varios pixeles, asi que se estampan circulos a lo largo de la linea: si no,
-/// un trazo rapido queda como puntos sueltos.
+// La hoja del atril: pinta sobre una textura siguiendo el dedo. Entre dos eventos de arrastre el
+// dedo puede saltar varios pixeles, asi que se estampan circulos a lo largo de la linea: si no,
+// un trazo rapido queda como puntos sueltos.
 [RequireComponent(typeof(RawImage))]
 public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
 {

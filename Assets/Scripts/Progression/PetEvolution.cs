@@ -1,8 +1,8 @@
 using UnityEngine;
 
-/// Va en la mascota. Al arrancar le pone la apariencia de la etapa en la que esta, y cuando la
-/// progresion la hace evolucionar la cambia con un "pop", el cartel y un sonido. Lo mismo al
-/// activarse y terminarse la Mega Evolucion.
+// Va en la mascota. Al arrancar le pone la apariencia de la etapa en la que esta, y cuando la
+// progresion la hace evolucionar la cambia con un "pop", el cartel y un sonido. Lo mismo al
+// activarse y terminarse la Mega Evolucion.
 [RequireComponent(typeof(PetMoodController))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class PetEvolution : MonoBehaviour

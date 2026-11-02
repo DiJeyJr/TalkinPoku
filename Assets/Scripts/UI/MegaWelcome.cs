@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-/// El cartel de la primera Mega Evolucion: felicita por llegar al maximo y explica que se gana
-/// mientras dura. Sale una sola vez por partida. Los numeros salen de los configs, asi el texto
-/// sigue siendo cierto si se rebalancea.
+// El cartel de la primera Mega Evolucion: felicita por llegar al maximo y explica que se gana
+// mientras dura. Sale una sola vez por partida. Los numeros salen de los configs, asi el texto
+// sigue siendo cierto si se rebalancea.
 public class MegaWelcome : MonoBehaviour
 {
     [Header("Referencias")]

@@ -2,9 +2,9 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-/// Detecta una sacudida del celular como en la clase 5: compara la aceleracion cruda de este frame
-/// con la del anterior. No suaviza: suavizar borraria justo el pico que se quiere detectar.
-/// Avisa por evento; que significa sacudir (mezclar, despertar) lo decide otro script.
+// Detecta una sacudida del celular como en la clase 5: compara la aceleracion cruda de este frame
+// con la del anterior. No suaviza: suavizar borraria justo el pico que se quiere detectar.
+// Avisa por evento; que significa sacudir (mezclar, despertar) lo decide otro script.
 public class ShakeDetector : MonoBehaviour
 {
     [Header("Shake")]

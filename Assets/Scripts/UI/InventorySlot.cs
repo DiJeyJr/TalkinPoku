@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-/// Un objeto en la bandeja de inventario. La ropa y los muebles se tocan para ponerlos o sacarlos;
-/// la comida se arrastra hasta Poku. El arrastre lo maneja la bandeja: aca solo se avisa.
+// Un objeto en la bandeja de inventario. La ropa y los muebles se tocan para ponerlos o sacarlos;
+// la comida se arrastra hasta Poku. El arrastre lo maneja la bandeja: aca solo se avisa.
 public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [Header("Referencias")]

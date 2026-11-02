@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Hace latir un elemento: crece de golpe y vuelve a su tamano. Lo usan las barras cuando suben de
-/// golpe y el contador de monedas cuando entra una.
+// Hace latir un elemento: crece de golpe y vuelve a su tamano. Lo usan las barras cuando suben de
+// golpe y el contador de monedas cuando entra una.
 public class Latido : MonoBehaviour
 {
     [Header("Feedback")]

@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Numeros del sistema de necesidades. Van en un asset y no en el script para poder balancear
-/// sin tocar codigo.
+// Numeros del sistema de necesidades. Van en un asset y no en el script para poder balancear
+// sin tocar codigo.
 [CreateAssetMenu(menuName = "TalkinPoku/Needs Config", fileName = "NeedsConfig")]
 public class NeedsConfig : ScriptableObject
 {

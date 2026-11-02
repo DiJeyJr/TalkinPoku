@@ -1,8 +1,8 @@
 using TMPro;
 using UnityEngine;
 
-/// Muestra el saldo de una moneda. Cuando cambia no salta al numero nuevo: lo va contando en un rato
-/// corto, asi el jugador ve cuanto gano.
+// Muestra el saldo de una moneda. Cuando cambia no salta al numero nuevo: lo va contando en un rato
+// corto, asi el jugador ve cuanto gano.
 public class CurrencyLabel : MonoBehaviour
 {
     [Header("Referencias")]

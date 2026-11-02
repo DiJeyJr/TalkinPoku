@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-/// El estante de una pestana de la tienda: arma un ShopSlot por cada producto de su categoria y
-/// cobra cuando el jugador confirma la compra.
+// El estante de una pestana de la tienda: arma un ShopSlot por cada producto de su categoria y
+// cobra cuando el jugador confirma la compra.
 public class ShopShelf : MonoBehaviour
 {
     [Header("Referencias")]

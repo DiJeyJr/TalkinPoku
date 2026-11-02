@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// Va en una habitacion donde Poku tiene que pararse en otro lugar (en la sala de arte, mas abajo para
-/// no tapar el cuadro). Al salir lo devuelve: la mascota es la misma en todas las habitaciones.
+// Va en una habitacion donde Poku tiene que pararse en otro lugar (en la sala de arte, mas abajo para
+// no tapar el cuadro). Al salir lo devuelve: la mascota es la misma en todas las habitaciones.
 public class RoomPetPosition : MonoBehaviour
 {
     [Header("Referencias")]
