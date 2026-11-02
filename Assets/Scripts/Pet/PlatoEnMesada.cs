@@ -8,16 +8,7 @@ public class PlatoEnMesada : MonoBehaviour
 {
     [Header("Referencias")]
     [SerializeField] private PetDropTarget mascota;
-    [SerializeField] private PetMoodController cara;
-    [SerializeField] private Progression progreso;
-    [SerializeField] private PetJuice juice;
     [SerializeField] private TMP_Text cantidad;
-
-    [Header("Feedback")]
-    [SerializeField] private float segundosContento = 1.5f;
-
-    [Header("Sonidos")]
-    [SerializeField] private AudioClip sonidoComer;
 
     private Draggable arrastre;
     private SpriteRenderer dibujo;
@@ -59,12 +50,7 @@ public class PlatoEnMesada : MonoBehaviour
         RecipeDefinition comido = receta;
         if (!Despensa.Platos.Gastar(comido.Id)) return;
 
-        mascota.Aplicar(NeedType.Energia, comido.Energia);
-        SoundPlayer.Reproducir(sonidoComer);
-        if (cara != null) cara.Alegrar(segundosContento);
-        if (progreso != null) progreso.Ganar(XpSource.Comer);
-        if (juice != null) juice.Rebotar();
-        Vibracion.Vibrar();
+        mascota.Comer(NeedType.Energia, comido.Energia);
         // El plato ya no esta en el inventario: que no vuelva si la app se cierra antes del autoguardado.
         SaveSystem.Guardar();
     }

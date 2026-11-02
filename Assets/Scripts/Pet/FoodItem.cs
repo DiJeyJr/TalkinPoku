@@ -8,15 +8,6 @@ public class FoodItem : MonoBehaviour
     [Header("Referencias")]
     [SerializeField] private ItemDefinition item;
     [SerializeField] private PetDropTarget mascota;
-    [SerializeField] private PetMoodController cara;
-    [SerializeField] private Progression progreso;
-    [SerializeField] private PetJuice juice;
-
-    [Header("Feedback")]
-    [SerializeField] private float segundosContento = 1.5f;
-
-    [Header("Sonidos")]
-    [SerializeField] private AudioClip sonidoComer;
 
     private Draggable draggable;
 
@@ -40,12 +31,6 @@ public class FoodItem : MonoBehaviour
         if (item == null || mascota == null) return;
         if (!mascota.Contiene(puntoMundo)) return;
 
-        mascota.Aplicar(item.Necesidad, item.Cantidad);
-        // Que comer se note: el sonido, la cara y (en NeedBar) la barra que late.
-        SoundPlayer.Reproducir(sonidoComer);
-        if (cara != null) cara.Alegrar(segundosContento);
-        if (progreso != null) progreso.Ganar(XpSource.Comer);
-        if (juice != null) juice.Rebotar();
-        Vibracion.Vibrar();
+        mascota.Comer(item.Necesidad, item.Cantidad);
     }
 }

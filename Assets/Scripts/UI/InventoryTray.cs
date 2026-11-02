@@ -28,10 +28,6 @@ public class InventoryTray : MonoBehaviour
     // Solo para la de la cocina: la copia del icono que sigue al dedo, y a quien se le da.
     [SerializeField] private Image fantasma;
     [SerializeField] private PetDropTarget mascota;
-    [SerializeField] private PetMoodController cara;
-    [SerializeField] private Progression progreso;
-    [SerializeField] private float segundosContento = 1.5f;
-    [SerializeField] private AudioClip sonidoComer;
 
     [Header("Sonidos")]
     [SerializeField] private AudioClip sonidoPoner;
@@ -156,10 +152,6 @@ public class InventoryTray : MonoBehaviour
         if (mascota == null) return;
         ItemDefinition item = slot.Item;
         if (!mascota.Contiene(Camera.main.ScreenToWorldPoint(evento.position)) || !inventario.Usar(item)) return;
-
-        mascota.Aplicar(item.Necesidad, item.Cantidad);
-        SoundPlayer.Reproducir(sonidoComer);
-        if (cara != null) cara.Alegrar(segundosContento);
-        if (progreso != null) progreso.Ganar(XpSource.Comer);
+        mascota.Comer(item.Necesidad, item.Cantidad);
     }
 }
