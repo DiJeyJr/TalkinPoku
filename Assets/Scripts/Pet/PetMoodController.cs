@@ -136,7 +136,7 @@ public class PetMoodController : MonoBehaviour
         // Si acaricia, PetInteraction ya la aplasta: rebotar encima seria doble.
         if (juice != null)
         {
-            if (nueva == Emocion.Feliz && !acariciando) juice.Rebotar();
+            if (nueva == Emocion.Feliz && !acariciando) juice.Saltar();
             else if (nueva == Emocion.Enojado) juice.Sacudir();
         }
 

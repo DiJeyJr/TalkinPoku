@@ -22,6 +22,14 @@ public class PetJuice : MonoBehaviour
     [SerializeField] private float sacudidaDuracion = 0.45f;
     [SerializeField] private float sacudidaFrecuencia = 14f;
 
+    [Header("Salto (feliz)")]
+    [SerializeField] private float saltoAltura = 0.6f;
+    [SerializeField] private float saltoAnticipacion = 0.12f;
+    [SerializeField] private float saltoVuelo = 0.4f;
+    [SerializeField] private float saltoAterrizaje = 0.12f;
+    [SerializeField] private float saltoAplaste = 0.25f;
+    [SerializeField] private float saltoEstiramiento = 0.2f;
+
     [Header("Respirar")]
     [SerializeField] private float respirarAmplitud = 0.02f;
     [SerializeField, Min(0.1f)] private float respirarPeriodo = 3.2f;
@@ -30,11 +38,15 @@ public class PetJuice : MonoBehaviour
     private Quaternion rotacionBase;
     // Lo ultimo que escribi yo. Si la escala es otra, la cambio PetEvolution y esa pasa a ser la base.
     private Vector3 ultimaEscala;
+    // Lo mismo para la posicion: si otro script mueve a Poku (cambio de habitacion), esa es la base.
+    private Vector3 posicionBase;
+    private Vector3 ultimaPosicion;
 
     // Segundos desde que arranco cada reaccion. Infinito = no esta corriendo.
     private float tAplastar = float.PositiveInfinity;
     private float tRebote = float.PositiveInfinity;
     private float tSacudida = float.PositiveInfinity;
+    private float tSalto = float.PositiveInfinity;
     private float tRespirar;
     private float fuerzaAplastar = 1f;
 
@@ -47,6 +59,7 @@ public class PetJuice : MonoBehaviour
     private void OnEnable()
     {
         ultimaEscala = transform.localScale;
+        posicionBase = ultimaPosicion = transform.localPosition;
     }
 
     private void OnDisable()
@@ -54,7 +67,8 @@ public class PetJuice : MonoBehaviour
         // Sin esto, desactivarlo en medio de una reaccion dejaria a Poku torcido o aplastado.
         if (transform.localScale == ultimaEscala) transform.localScale = escalaBase;
         transform.localRotation = rotacionBase;
-        tAplastar = tRebote = tSacudida = float.PositiveInfinity;
+        if (transform.localPosition == ultimaPosicion) transform.localPosition = posicionBase;
+        tAplastar = tRebote = tSacudida = tSalto = float.PositiveInfinity;
     }
 
     // Se aplasta en vertical y se ensancha; vuelve con un pequeno rebote. La intensidad deja usar
@@ -76,15 +90,24 @@ public class PetJuice : MonoBehaviour
         tSacudida = 0f;
     }
 
+    // Salto de alegria con los tres tiempos de una animacion exagerada: se agacha para tomar
+    // impulso (anticipacion), se estira mientras sube y baja, y se aplasta al caer.
+    public void Saltar()
+    {
+        tSalto = 0f;
+    }
+
     // LateUpdate y no Update: asi corre despues del pop de PetEvolution y se compone sobre el.
     private void LateUpdate()
     {
         if (transform.localScale != ultimaEscala) escalaBase = transform.localScale;
+        if (transform.localPosition != ultimaPosicion) posicionBase = transform.localPosition;
 
         float dt = Time.deltaTime;
         tAplastar += dt;
         tRebote += dt;
         tSacudida += dt;
+        tSalto += dt;
         tRespirar = Mathf.Repeat(tRespirar + dt, respirarPeriodo);
 
         float y = 1f;
@@ -92,6 +115,10 @@ public class PetJuice : MonoBehaviour
             Oscilar(tAplastar, aplastarDuracion, aplastarOscilaciones, aplastarAmortiguacion);
         y *= 1f + reboteAmplitud * Oscilar(tRebote, reboteDuracion, reboteOscilaciones, reboteAmortiguacion);
         y *= 1f + respirarAmplitud * Mathf.Sin(2f * Mathf.PI * tRespirar / respirarPeriodo);
+        y *= Salto(out float altura);
+
+        ultimaPosicion = posicionBase + Vector3.up * altura;
+        transform.localPosition = ultimaPosicion;
 
         // El ancho es la inversa del alto: el volumen se conserva y se lee como algo blando, no como
         // un sprite que se estira.
@@ -108,6 +135,32 @@ public class PetJuice : MonoBehaviour
         if (t >= duracion) return 0f;
         float u = t / duracion;
         return Mathf.Exp(-amortiguacion * u) * Mathf.Cos(2f * Mathf.PI * oscilaciones * u);
+    }
+
+    // Devuelve el factor de alto y, por out, cuanto esta despegado del piso.
+    private float Salto(out float altura)
+    {
+        altura = 0f;
+        float t = tSalto;
+
+        if (t < saltoAnticipacion)
+            return 1f - saltoAplaste * Mathf.Sin(Mathf.PI * t / saltoAnticipacion);
+
+        t -= saltoAnticipacion;
+        if (t < saltoVuelo)
+        {
+            float u = t / saltoVuelo;
+            // Parabola: 0 al despegar y al caer, maxima en la mitad.
+            altura = saltoAltura * 4f * u * (1f - u);
+            // Estirado al despegar y antes de tocar el piso; redondo arriba, donde casi no se mueve.
+            return 1f + saltoEstiramiento * Mathf.Abs(2f * u - 1f);
+        }
+
+        t -= saltoVuelo;
+        if (t < saltoAterrizaje)
+            return 1f - saltoAplaste * Mathf.Sin(Mathf.PI * t / saltoAterrizaje);
+
+        return 1f;
     }
 
     private float Sacudida()
