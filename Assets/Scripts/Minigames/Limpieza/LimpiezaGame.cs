@@ -31,6 +31,8 @@ public class LimpiezaGame : Minijuego
     [SerializeField] private float segundosLimite = 0f;
     // Pausa entre la ultima basura y el resultado, para que se vea el lugar limpio.
     [SerializeField] private float segundosAntesDelResultado = 1f;
+    // Un escenario ya limpio paga menos: si no, repetir el mas facil rinde mas que avanzar.
+    [SerializeField, Range(0f, 1f)] private float pagoAlRepetir = 0.3f;
 
     [Header("Sonidos")]
     [SerializeField] private AudioClip sonidoJuntar;
@@ -38,6 +40,7 @@ public class LimpiezaGame : Minijuego
 
     private readonly List<Basura> basuras = new List<Basura>();
     private Escenario actual;
+    private bool repetido;
     private int juntadas;
     private float tiempoRestante;
     private int segundosMostrados;
@@ -55,6 +58,8 @@ public class LimpiezaGame : Minijuego
     public override void StartGame()
     {
         actual = ElegirEscenario();
+        // Se mira antes de jugar: al terminar ya figura como limpio aunque sea la primera vez.
+        repetido = RegistroIds.EscenariosLimpios.Contiene(actual.Id);
         juntadas = 0;
         terminado = false;
 
@@ -162,7 +167,9 @@ public class LimpiezaGame : Minijuego
         }
 
         // Si se acabo el tiempo se paga la parte limpiada: el feedback celebra lo hecho, no castiga.
-        int monedas = Mathf.RoundToInt(actual.Monedas * juntadas / (float)Mathf.Max(1, basuras.Count));
+        float pago = actual.Monedas * juntadas / (float)Mathf.Max(1, basuras.Count);
+        if (repetido) pago *= pagoAlRepetir;
+        int monedas = Mathf.RoundToInt(pago);
         Terminar(new MinigameResult(juntadas, monedas, true, limpioTodo), segundosAntesDelResultado);
     }
 }
