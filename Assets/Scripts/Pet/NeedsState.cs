@@ -1,8 +1,7 @@
 using System;
 
-/// Foto de las necesidades en un momento dado. Hoy sirve para pasar de una escena a otra; cuando
-/// exista el guardado, es lo mismo que se va a escribir a disco (por eso campos publicos y la
-/// fecha como texto: JsonUtility no serializa DateTime).
+// Foto de las necesidades: pasa de una escena a otra y es lo que se escribe en el guardado. La fecha
+// va como texto porque JsonUtility no serializa DateTime.
 [Serializable]
 public class NeedsState
 {

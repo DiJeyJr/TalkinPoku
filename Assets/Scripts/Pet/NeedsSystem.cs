@@ -16,7 +16,6 @@ public class NeedsSystem : MonoBehaviour
     [SerializeField] private float multiplicadorTiempo = 1f;
 
     public event Action<NeedType, float> NeedChanged;
-    public event Action<NeedType> NeedCritical;
     public event Action<bool> DormidoCambiado;
 
     // Hambre, Higiene, Diversion y Energia, en el orden del enum.
@@ -125,7 +124,7 @@ public class NeedsSystem : MonoBehaviour
 
     // Recibe horas y no segundos porque al abrir la app se usa este mismo metodo con el tiempo que
     // estuvo cerrada (DateTime.UtcNow contra el momento en que se guardo).
-    public void Avanzar(float horas)
+    private void Avanzar(float horas)
     {
         if (Dormido)
         {
@@ -216,11 +215,5 @@ public class NeedsSystem : MonoBehaviour
 
         NeedChanged?.Invoke(tipo, despues);
         NeedChanged?.Invoke(NeedType.Felicidad, Felicidad);
-
-        // Solo al cruzar el umbral, no en cada frame que sigue abajo.
-        if (antes >= config.UmbralCritico && despues < config.UmbralCritico)
-        {
-            NeedCritical?.Invoke(tipo);
-        }
     }
 }

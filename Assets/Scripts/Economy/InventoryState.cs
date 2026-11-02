@@ -11,7 +11,6 @@ public class InventoryState
     public List<int> cantidades = new List<int>();
     // Lo que tiene puesto Poku, uno por ranura en el orden de AccessorySlot. "" = nada.
     public string[] puestos = new string[4];
-    // Los muebles que estan en la sala y donde los dejo el jugador.
+    // Los muebles que estan en la sala.
     public List<string> colocados = new List<string>();
-    public List<Vector2> posiciones = new List<Vector2>();
 }

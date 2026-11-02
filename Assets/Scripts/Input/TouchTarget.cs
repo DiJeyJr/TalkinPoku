@@ -20,7 +20,6 @@ public class TouchTarget : MonoBehaviour
 
     public event Action Tocado;
     public event Action HoldEmpezado;
-    public event Action HoldTerminado;
 
     private Collider2D miCollider;
     private int dedoActivo = -1;
@@ -77,13 +76,11 @@ public class TouchTarget : MonoBehaviour
             }
             else if (touch.phase == TouchPhase.Ended)
             {
-                if (holdDetectado) HoldTerminado?.Invoke();
-                else if (duracion <= tapMaxDuration && distancia <= moveTolerance) Tocado?.Invoke();
+                if (!holdDetectado && duracion <= tapMaxDuration && distancia <= moveTolerance) Tocado?.Invoke();
                 Limpiar();
             }
             else if (touch.phase == TouchPhase.Canceled)
             {
-                if (holdDetectado) HoldTerminado?.Invoke();
                 Limpiar();
             }
         }

@@ -84,16 +84,6 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
         Aplicar();
     }
 
-    // Publico para probarlo sin dedo: un trazo de un punto a otro, en fracciones de la hoja.
-    public void Trazar(Vector2 desde, Vector2 hasta)
-    {
-        Vector2 a = Vector2.Scale(desde, new Vector2(textura.width, textura.height));
-        Vector2 b = Vector2.Scale(hasta, new Vector2(textura.width, textura.height));
-        int pasos = Mathf.Max(1, Mathf.CeilToInt(Vector2.Distance(a, b) / Mathf.Max(1f, Radio() * 0.5f)));
-        for (int i = 0; i <= pasos; i++) Estampar(Vector2.Lerp(a, b, (float)i / pasos));
-        Aplicar();
-    }
-
     private int Radio()
     {
         if (Herramienta == DrawingTool.Borrador) return Mathf.RoundToInt(Grosor * 1.5f);

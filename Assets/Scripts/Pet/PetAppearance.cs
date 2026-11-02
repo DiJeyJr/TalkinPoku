@@ -28,11 +28,9 @@ public class PetAppearance : ScriptableObject
     // Las evoluciones tienen la cabeza mas chica en proporcion al cuerpo.
     [SerializeField] private float escalaAccesorios = 1f;
 
-    [Header("Provisorio")]
-    // Mientras no esten los dibujos de una evolucion se usan los de Poku mas grandes y tenidos, asi el
-    // cambio se nota. Con el arte final, escala 1 y tinte blanco.
+    [Header("Tamano")]
+    // Cada evolucion es un poco mas grande que la anterior.
     [SerializeField] private float escala = 1f;
-    [SerializeField] private Color tinte = Color.white;
 
     // Una etapa a medio dibujar usa la cara normal en las que le faltan, asi no aparecen las de Poku
     // mezcladas. Dormido y Acariciado no: PetMoodController ya sigue de largo si no estan.
@@ -58,5 +56,4 @@ public class PetAppearance : ScriptableObject
             default: return anclaEspalda;
         }
     }
-    public Color Tinte => tinte;
 }

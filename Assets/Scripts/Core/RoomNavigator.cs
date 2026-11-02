@@ -43,13 +43,13 @@ public class RoomNavigator : MonoBehaviour
         else Anterior();
     }
 
-    public void Siguiente()
+    private void Siguiente()
     {
         if (habitaciones == null || habitaciones.Length == 0) return;
         Mostrar((actual + 1) % habitaciones.Length);
     }
 
-    public void Anterior()
+    private void Anterior()
     {
         if (habitaciones == null || habitaciones.Length == 0) return;
         Mostrar((actual - 1 + habitaciones.Length) % habitaciones.Length);

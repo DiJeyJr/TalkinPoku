@@ -4,13 +4,10 @@ using UnityEngine;
 /// desde cualquier lado sin chequear la plataforma.
 public static class Vibracion
 {
-    // Interruptor para una futura pantalla de opciones.
-    public static bool Activada = true;
-
     public static void Vibrar()
     {
 #if UNITY_ANDROID || UNITY_IOS
-        if (Activada) Handheld.Vibrate();
+        Handheld.Vibrate();
 #endif
     }
 }

@@ -23,7 +23,7 @@ public class Draggable : MonoBehaviour
 
     public bool Arrastrando => arrastrando;
 
-    // Para lo que se crea por codigo (los muebles), que no pasa por el Inspector.
+    // Para lo que se crea por codigo (las basuras de Limpieza), que no pasa por el Inspector.
     public bool VolverAlOrigen
     {
         get => volverAlOrigen;

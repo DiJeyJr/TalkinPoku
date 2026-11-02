@@ -106,8 +106,6 @@ public class Inventory : MonoBehaviour
             for (int j = ocupados.Count - lugares; j >= 0; j--) Sacar(ocupados[j]);
 
             estado.colocados.Add(item.Id);
-            // Las posiciones ya no se usan (los muebles van a su lugar fijo), pero el guardado las espera.
-            estado.posiciones.Add(item.PosicionInicial);
         }
         Cambiado?.Invoke();
     }
@@ -115,7 +113,6 @@ public class Inventory : MonoBehaviour
     private void Sacar(int i)
     {
         estado.colocados.RemoveAt(i);
-        if (i < estado.posiciones.Count) estado.posiciones.RemoveAt(i);
     }
 
     // Para el panel de admin.

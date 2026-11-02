@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// El estante de una pestana de la tienda: arma un ShopSlot por cada producto de su categoria y
@@ -27,20 +28,11 @@ public class ShopShelf : MonoBehaviour
     private void Awake()
     {
         plantilla.gameObject.SetActive(false);
-        // Por nivel, asi lo que ya puede comprar queda primero y los candados al final. El orden del
-        // catalogo desempata.
-        List<ItemDefinition> ordenados = new List<ItemDefinition>();
-        foreach (ItemDefinition item in inventario.Catalogo.Items)
-        {
-            if (item != null && item.Categoria == categoria && item.Precio > 0) ordenados.Add(item);
-        }
-        for (int i = 1; i < ordenados.Count; i++)
-        {
-            ItemDefinition actual = ordenados[i];
-            int j = i - 1;
-            for (; j >= 0 && ordenados[j].NivelRequerido > actual.NivelRequerido; j--) ordenados[j + 1] = ordenados[j];
-            ordenados[j + 1] = actual;
-        }
+        // Por nivel, asi lo que ya puede comprar queda primero y los candados al final. OrderBy no
+        // desordena los del mismo nivel: entre ellos queda el orden del catalogo.
+        IEnumerable<ItemDefinition> ordenados = inventario.Catalogo.Items
+            .Where(item => item != null && item.Categoria == categoria && item.Precio > 0)
+            .OrderBy(item => item.NivelRequerido);
 
         foreach (ItemDefinition item in ordenados)
         {

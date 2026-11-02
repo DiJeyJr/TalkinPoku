@@ -8,7 +8,7 @@ public class BackendSimulado : MonoBehaviour, IPurchaseBackend
 {
     [Header("Simulacion")]
     [SerializeField] private float demora = 1.5f;
-    // Para la defensa: con Fallo o Cancelado se ve como responde la tienda cuando algo sale mal.
+    // Con Fallo o Cancelado se prueba como responde la tienda cuando algo sale mal.
     [SerializeField] private ResultadoCompra respuesta = ResultadoCompra.Exito;
 
     public bool Listo => true;

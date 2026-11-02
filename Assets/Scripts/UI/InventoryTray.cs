@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -37,9 +36,6 @@ public class InventoryTray : MonoBehaviour
     [Header("Sonidos")]
     [SerializeField] private AudioClip sonidoPoner;
 
-    // La sala la escucha para dejar mover los muebles solo con la bandeja abierta.
-    public event Action<bool> AbiertaCambiada;
-
     private readonly List<InventorySlot> slots = new List<InventorySlot>();
     private bool abiertaAntes;
 
@@ -75,7 +71,6 @@ public class InventoryTray : MonoBehaviour
         abiertaAntes = panel.activeSelf;
         if (abiertaAntes) Refrescar();
         else if (fantasma != null) fantasma.gameObject.SetActive(false);
-        AbiertaCambiada?.Invoke(abiertaAntes);
     }
 
     // La llama el boton del HUD.
@@ -154,22 +149,17 @@ public class InventoryTray : MonoBehaviour
         if (fantasma != null && fantasma.gameObject.activeSelf) fantasma.transform.position = evento.position;
     }
 
+    // Como FoodItem: solo cuenta si se suelta encima de Poku.
     private void AlSoltar(InventorySlot slot, PointerEventData evento)
     {
         if (fantasma != null) fantasma.gameObject.SetActive(false);
         if (mascota == null) return;
-        Comer(slot.Item, Camera.main.ScreenToWorldPoint(evento.position));
-    }
-
-    // Publico para probarlo sin dedo. Como FoodItem: solo cuenta si se suelta encima de Poku.
-    public bool Comer(ItemDefinition item, Vector2 puntoMundo)
-    {
-        if (!mascota.Contiene(puntoMundo) || !inventario.Usar(item)) return false;
+        ItemDefinition item = slot.Item;
+        if (!mascota.Contiene(Camera.main.ScreenToWorldPoint(evento.position)) || !inventario.Usar(item)) return;
 
         mascota.Aplicar(item.Necesidad, item.Cantidad);
         SoundPlayer.Reproducir(sonidoComer);
         if (cara != null) cara.Alegrar(segundosContento);
         if (progreso != null) progreso.Ganar(XpSource.Comer);
-        return true;
     }
 }

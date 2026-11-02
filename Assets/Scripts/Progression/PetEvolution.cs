@@ -21,7 +21,6 @@ public class PetEvolution : MonoBehaviour
     [SerializeField] private AudioClip sonidoEvolucion;
 
     private PetMoodController cara;
-    private SpriteRenderer spriteRenderer;
     private Vector3 escalaBase;
     private float escalaEtapa = 1f;
     private float extra;
@@ -30,7 +29,6 @@ public class PetEvolution : MonoBehaviour
     private void Awake()
     {
         cara = GetComponent<PetMoodController>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         escalaBase = transform.localScale;
     }
 
@@ -101,7 +99,6 @@ public class PetEvolution : MonoBehaviour
         if (apariencia == null) return;
 
         cara.CambiarApariencia(apariencia);
-        spriteRenderer.color = apariencia.Tinte;
         escalaEtapa = apariencia.Escala;
         transform.localScale = escalaBase * escalaEtapa;
     }

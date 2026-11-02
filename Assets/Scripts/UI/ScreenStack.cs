@@ -14,8 +14,6 @@ public class ScreenStack : MonoBehaviour
     private readonly Stack<GameObject> pila = new Stack<GameObject>();
     private InputAction volver;
 
-    public bool HayPantallaAbierta => pila.Count > 0;
-
     private void Start()
     {
         // En Android el boton atras llega como la tecla Escape, y Escape ya esta en la accion
