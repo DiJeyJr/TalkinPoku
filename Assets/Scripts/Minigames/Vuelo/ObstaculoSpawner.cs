@@ -63,8 +63,7 @@ public class ObstaculoSpawner : MonoBehaviour
     // Solo afecta a los obstaculos que se lancen de ahi en adelante: los que ya vuelan no cambian de velocidad.
     public void ActualizarDificultad(int puntos)
     {
-        float avance = puntosParaMaximo > 0 ? Mathf.Clamp01((float)puntos / puntosParaMaximo) : 1f;
-        float k = Mathf.Clamp01(curvaDificultad.Evaluate(avance));
+        float k = Minijuego.Avance(puntos, puntosParaMaximo, curvaDificultad);
         velocidadActual = Mathf.Lerp(velocidad, velocidadMaxima, k);
         intervaloActual = Mathf.Lerp(intervalo, intervaloMinimo, k);
     }

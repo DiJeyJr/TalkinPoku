@@ -1,11 +1,10 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 
 /// Reglas del minijuego de atrapar: un punto por ingrediente atrapado y tres vidas. Se pierde una
 /// al atrapar algo malo o al dejar caer un ingrediente; sin vidas, termina la partida.
-public class AtraparGame : MonoBehaviour, IMinigame
+public class AtraparGame : Minijuego
 {
     [Header("Referencias")]
     [SerializeField] private Canasta canasta;
@@ -35,13 +34,11 @@ public class AtraparGame : MonoBehaviour, IMinigame
     [SerializeField] private AudioClip sonidoMalo;
     [SerializeField] private AudioClip sonidoSeCayo;
 
-    public event Action<MinigameResult> Finished;
-
     private int puntos;
     private int vidas;
     private bool terminado;
 
-    public void StartGame()
+    public override void StartGame()
     {
         puntos = 0;
         vidas = vidasIniciales;
@@ -118,15 +115,9 @@ public class AtraparGame : MonoBehaviour, IMinigame
         spawner.Frenar();
         // Apagar la canasta suelta el touch y el acelerometro (lo hace su OnDisable).
         canasta.enabled = false;
-        StartCoroutine(TerminarConDemora());
-    }
-
-    private IEnumerator TerminarConDemora()
-    {
-        yield return new WaitForSeconds(segundosAntesDelResultado);
 
         // Lineal con techo, para que una partida muy larga no rompa la economia.
         int monedas = Mathf.Min(puntos * monedasPorPunto, maximoMonedas);
-        Finished?.Invoke(new MinigameResult(puntos, monedas, true, puntos >= puntosVictoria));
+        Terminar(new MinigameResult(puntos, monedas, true, puntos >= puntosVictoria), segundosAntesDelResultado);
     }
 }

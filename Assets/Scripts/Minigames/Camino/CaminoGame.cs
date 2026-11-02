@@ -6,7 +6,7 @@ using UnityEngine;
 
 /// Reglas de Camino a casa, un Simon espacial: se muestra un camino desde la casa de Poku hasta la
 /// del amigo y hay que repetirlo tocando las celdas en orden. Cada camino completo sube un nivel.
-public class CaminoGame : MonoBehaviour, IMinigame
+public class CaminoGame : Minijuego
 {
     [Header("Referencias")]
     [SerializeField] private GrillaCamino grilla;
@@ -45,8 +45,6 @@ public class CaminoGame : MonoBehaviour, IMinigame
     [SerializeField] private AudioClip sonidoNivel;
     [SerializeField] private AudioClip sonidoError;
 
-    public event Action<MinigameResult> Finished;
-
     private static readonly Vector2Int[] Direcciones =
     {
         Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right
@@ -65,7 +63,7 @@ public class CaminoGame : MonoBehaviour, IMinigame
     // Apagado mientras se muestra el camino: un toque sin querer haria perder antes de empezar.
     private bool inputHabilitado;
 
-    public void StartGame()
+    public override void StartGame()
     {
         nivel = 0;
         monedas = 0;
@@ -177,7 +175,7 @@ public class CaminoGame : MonoBehaviour, IMinigame
 
         if (nivel >= nivelesVictoria)
         {
-            StartCoroutine(Terminar(true));
+            Terminar(new MinigameResult(nivel, monedas, true, true), segundosAntesDelResultado);
             return;
         }
 
@@ -193,12 +191,6 @@ public class CaminoGame : MonoBehaviour, IMinigame
         grilla.Celda(camino[siguientePaso]).CambiarEstado(CeldaCamino.Estado.Resaltada);
         SoundPlayer.Reproducir(sonidoError);
         Vibracion.Vibrar();
-        StartCoroutine(Terminar(false));
-    }
-
-    private IEnumerator Terminar(bool gano)
-    {
-        yield return new WaitForSeconds(segundosAntesDelResultado);
-        Finished?.Invoke(new MinigameResult(nivel, monedas, true, gano));
+        Terminar(new MinigameResult(nivel, monedas, true, false), segundosAntesDelResultado);
     }
 }

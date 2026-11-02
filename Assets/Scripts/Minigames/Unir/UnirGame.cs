@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,7 +5,7 @@ using UnityEngine;
 
 /// Reglas de Unir a los personajes: arma cada nivel, cobra una vida por cada trazo fallido y paga
 /// monedas por los que llegan.
-public class UnirGame : MonoBehaviour, IMinigame
+public class UnirGame : Minijuego
 {
     [Header("Referencias")]
     [SerializeField] private Camera camara;
@@ -39,8 +38,6 @@ public class UnirGame : MonoBehaviour, IMinigame
     [SerializeField] private AudioClip sonidoFallo;
     [SerializeField] private AudioClip sonidoMoneda;
 
-    public event Action<MinigameResult> Finished;
-
     private int nivelActual;
     private int vidas;
     private int monedas;
@@ -60,7 +57,7 @@ public class UnirGame : MonoBehaviour, IMinigame
         }
     }
 
-    public void StartGame()
+    public override void StartGame()
     {
         nivelActual = 0;
         vidas = vidasIniciales;
@@ -194,7 +191,7 @@ public class UnirGame : MonoBehaviour, IMinigame
     {
         trazo.Deshabilitar();
         bool completoTodos = nivelActual >= niveles.Length;
-        Finished?.Invoke(new MinigameResult(nivelActual, monedas, true, completoTodos));
+        Terminar(new MinigameResult(nivelActual, monedas, true, completoTodos));
     }
 
     private Vector3 AMundo(Vector2 fraccionPantalla)

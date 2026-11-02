@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// Arranca el minijuego de la escena, muestra el resultado y vuelve a la casa. Es el mismo para
-/// todos los minijuegos: busca el IMinigame que tiene al lado y no sabe cual es.
+/// todos los minijuegos: busca el Minijuego que tiene al lado y no sabe cual es.
 public class MinigameFlow : MonoBehaviour
 {
     [Header("Escenas")]
@@ -18,7 +18,7 @@ public class MinigameFlow : MonoBehaviour
     // otra escena y este componente deja de existir.
     private static MinigameResult? resultadoPendiente;
 
-    private IMinigame minijuego;
+    private Minijuego minijuego;
 
     // La llama MinigameReward al arrancar la casa. Devuelve false si no hay partida para cobrar, y
     // la borra para que no se cobre dos veces.
@@ -32,8 +32,8 @@ public class MinigameFlow : MonoBehaviour
 
     private void Awake()
     {
-        // GetComponent acepta interfaces; un [SerializeField] de tipo IMinigame no se veria en el Inspector.
-        minijuego = GetComponent<IMinigame>();
+        // Pidiendo la clase base, GetComponent encuentra cualquiera de los seis.
+        minijuego = GetComponent<Minijuego>();
         minijuego.Finished += MostrarResultado;
         pantalla.PidioReintentar += Reintentar;
         pantalla.PidioVolver += VolverACasa;

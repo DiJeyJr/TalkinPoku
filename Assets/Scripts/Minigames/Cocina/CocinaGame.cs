@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -9,7 +8,7 @@ using UnityEngine.UI;
 /// Reglas de la cocina: con dos o tres ingredientes en la olla, mezclar (sacudiendo el celular o con
 /// el boton Mezclar) busca la receta. Una nueva paga mas que una repetida y una que no existe no
 /// cobra nada: es un juego de descubrir, y equivocarse tiene que ser gratis.
-public class CocinaGame : MonoBehaviour, IMinigame
+public class CocinaGame : Minijuego
 {
     [Header("Referencias")]
     [SerializeField] private Olla olla;
@@ -48,8 +47,6 @@ public class CocinaGame : MonoBehaviour, IMinigame
     [SerializeField] private AudioClip sonidoRecetaRepetida;
     [SerializeField] private AudioClip sonidoPuaj;
 
-    public event Action<MinigameResult> Finished;
-
     private readonly Dictionary<string, RecipeDefinition> porClave = new Dictionary<string, RecipeDefinition>();
     private InputAction mezclar;
     private int monedas;
@@ -59,7 +56,7 @@ public class CocinaGame : MonoBehaviour, IMinigame
     private int mezclasHechas;
     private bool terminado;
 
-    public void StartGame()
+    public override void StartGame()
     {
         // Se arma una vez: despues, probar una combinacion es una sola consulta al diccionario.
         porClave.Clear();
@@ -162,8 +159,7 @@ public class CocinaGame : MonoBehaviour, IMinigame
 
     private void ActualizarDificultad()
     {
-        float avance = recetasParaMaximo > 0 ? Mathf.Clamp01((float)cocinadas / recetasParaMaximo) : 1f;
-        float k = Mathf.Clamp01(curvaDificultad.Evaluate(avance));
+        float k = Avance(cocinadas, recetasParaMaximo, curvaDificultad);
         mezclasNecesarias = Mathf.RoundToInt(Mathf.Lerp(mezclasIniciales, mezclasMaximas, k));
     }
 
@@ -175,6 +171,6 @@ public class CocinaGame : MonoBehaviour, IMinigame
         // Entrar y salir sin cocinar nada cuenta como abandonar: no paga ni divierte, y tampoco es
         // victoria. Con una receta cocinada ya se gana: equivocarse no tiene que castigar.
         bool cocino = cocinadas > 0;
-        Finished?.Invoke(new MinigameResult(cocinadas, monedas, cocino, cocino));
+        Terminar(new MinigameResult(cocinadas, monedas, cocino, cocino));
     }
 }

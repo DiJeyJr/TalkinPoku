@@ -1,10 +1,8 @@
-using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 
 /// Reglas del minijuego de vuelo: un punto por obstaculo que se pasa, y se termina al chocar.
-public class VueloGame : MonoBehaviour, IMinigame
+public class VueloGame : Minijuego
 {
     [Header("Referencias")]
     [SerializeField] private Volador volador;
@@ -26,11 +24,9 @@ public class VueloGame : MonoBehaviour, IMinigame
     // Cada obstaculo pasado es una moneda ganada.
     [SerializeField] private AudioClip sonidoPunto;
 
-    public event Action<MinigameResult> Finished;
-
     private int puntos;
 
-    public void StartGame()
+    public override void StartGame()
     {
         puntos = 0;
         textoPuntos.SetText("{0}", puntos);
@@ -59,15 +55,9 @@ public class VueloGame : MonoBehaviour, IMinigame
     private void Perder()
     {
         spawner.Frenar();
-        StartCoroutine(TerminarConDemora());
-    }
-
-    private IEnumerator TerminarConDemora()
-    {
-        yield return new WaitForSeconds(segundosAntesDelResultado);
 
         // Lineal con techo, para que una partida muy larga no rompa la economia.
         int monedas = Mathf.Min(puntos * monedasPorPunto, maximoMonedas);
-        Finished?.Invoke(new MinigameResult(puntos, monedas, true, puntos >= puntosVictoria));
+        Terminar(new MinigameResult(puntos, monedas, true, puntos >= puntosVictoria), segundosAntesDelResultado);
     }
 }

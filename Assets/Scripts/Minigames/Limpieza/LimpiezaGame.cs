@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,7 +5,7 @@ using UnityEngine;
 
 /// Reglas del minijuego de limpieza: arma el escenario, cuenta la basura juntada y aclara el fondo
 /// a medida que se limpia. Se gana al juntar todo; si hay tiempo limite y se acaba, se cobra la parte.
-public class LimpiezaGame : MonoBehaviour, IMinigame
+public class LimpiezaGame : Minijuego
 {
     [Header("Escenarios")]
     // En orden de desbloqueo: playa, parque, bosque.
@@ -37,8 +36,6 @@ public class LimpiezaGame : MonoBehaviour, IMinigame
     [SerializeField] private AudioClip sonidoJuntar;
     [SerializeField] private AudioClip sonidoSacudir;
 
-    public event Action<MinigameResult> Finished;
-
     private readonly List<Basura> basuras = new List<Basura>();
     private Escenario actual;
     private int juntadas;
@@ -55,7 +52,7 @@ public class LimpiezaGame : MonoBehaviour, IMinigame
 
     private void OnDisable() => shakeDetector.Sacudido -= AlSacudir;
 
-    public void StartGame()
+    public override void StartGame()
     {
         actual = ElegirEscenario();
         juntadas = 0;
@@ -164,15 +161,8 @@ public class LimpiezaGame : MonoBehaviour, IMinigame
             SaveSystem.Guardar();
         }
 
-        StartCoroutine(TerminarConDemora(limpioTodo));
-    }
-
-    private IEnumerator TerminarConDemora(bool limpioTodo)
-    {
-        yield return new WaitForSeconds(segundosAntesDelResultado);
-
         // Si se acabo el tiempo se paga la parte limpiada: el feedback celebra lo hecho, no castiga.
         int monedas = Mathf.RoundToInt(actual.Monedas * juntadas / (float)Mathf.Max(1, basuras.Count));
-        Finished?.Invoke(new MinigameResult(juntadas, monedas, true, limpioTodo));
+        Terminar(new MinigameResult(juntadas, monedas, true, limpioTodo), segundosAntesDelResultado);
     }
 }
