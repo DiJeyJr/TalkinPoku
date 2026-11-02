@@ -51,8 +51,7 @@ public class Volador : MonoBehaviour
     {
         // Sin config o sin dibujo para esa etapa queda el sprite que tiene la escena (el de Poku).
         if (progresion == null) return;
-        PetAppearance apariencia = progresion.Etapas[progresion.EtapaDe(Progression.NivelActual)].apariencia;
-        if (MegaEvolution.Activa && progresion.AparienciaMega != null) apariencia = progresion.AparienciaMega;
+        PetAppearance apariencia = progresion.AparienciaPara(Progression.NivelActual);
         if (apariencia == null || apariencia.Avion == null) return;
         dibujo.GetComponent<SpriteRenderer>().sprite = apariencia.Avion;
     }

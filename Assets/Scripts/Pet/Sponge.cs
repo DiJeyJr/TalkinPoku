@@ -19,7 +19,6 @@ public class Sponge : MonoBehaviour
     [SerializeField] private float burbujasPorUnidad = 12f;
 
     private Draggable draggable;
-    private Stain[] manchasHijas;
     private float burbujasPendientes;
     private Vector2 ultimoPunto;
     private bool hayUltimoPunto;
@@ -27,8 +26,6 @@ public class Sponge : MonoBehaviour
     private void Awake()
     {
         draggable = GetComponent<Draggable>();
-        // Las manchas son hijas de PetStains. Se buscan una vez para saber si la esponja esta encima de alguna.
-        if (manchas != null) manchasHijas = manchas.GetComponentsInChildren<Stain>(true);
     }
 
     private void OnEnable()
@@ -58,22 +55,11 @@ public class Sponge : MonoBehaviour
         if (hayUltimoPunto)
         {
             float distancia = Vector2.Distance(ultimoPunto, punto);
-            // Se pregunta antes de frotar: la ultima pasada apaga la mancha y igual tiene que hacer espuma.
-            if (burbujas != null && TocaAlgunaMancha(punto)) Burbujear(distancia);
-            manchas.Frotar(punto, alcance, distancia);
+            if (manchas.Frotar(punto, alcance, distancia) && burbujas != null) Burbujear(distancia);
         }
 
         ultimoPunto = punto;
         hayUltimoPunto = true;
-    }
-
-    private bool TocaAlgunaMancha(Vector2 punto)
-    {
-        foreach (Stain mancha in manchasHijas)
-        {
-            if (mancha.Activa && mancha.Toca(punto, alcance)) return true;
-        }
-        return false;
     }
 
     private void Burbujear(float distancia)

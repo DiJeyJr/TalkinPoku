@@ -48,7 +48,7 @@ public class PetEvolution : MonoBehaviour
     {
         // Sin festejo: al abrir la app ya estaba en esa etapa.
         etapaActual = progreso.Etapa;
-        Aplicar(AparienciaActual());
+        Aplicar(progreso.Config.AparienciaPara(progreso.Nivel));
     }
 
     private void Update()
@@ -65,7 +65,7 @@ public class PetEvolution : MonoBehaviour
         bool subio = etapa > etapaActual;
         string antes = progreso.Config.Etapas[etapaActual].nombre;
         etapaActual = etapa;
-        Aplicar(AparienciaActual());
+        Aplicar(progreso.Config.AparienciaPara(progreso.Nivel));
         if (!subio) return;
 
         Festejar("¡" + antes + " evolucionó a " + progreso.Config.Etapas[etapa].nombre + "!");
@@ -74,17 +74,10 @@ public class PetEvolution : MonoBehaviour
     private void AlCambiarMega(bool activa)
     {
         string nombre = progreso.Config.Etapas[etapaActual].nombre;
-        Aplicar(AparienciaActual());
+        Aplicar(progreso.Config.AparienciaPara(progreso.Nivel));
         // Al terminarse vuelve sin pop ni sonido: no es un logro, solo avisa por que cambio.
         if (activa) Festejar("¡" + nombre + " Mega Evolucionó!");
         else if (cartel != null) cartel.Mostrar("Mega-" + nombre + " volvió a ser " + nombre);
-    }
-
-    private PetAppearance AparienciaActual()
-    {
-        PetAppearance megaApariencia = progreso.Config.AparienciaMega;
-        if (mega != null && MegaEvolution.Activa && megaApariencia != null) return megaApariencia;
-        return progreso.Config.Etapas[etapaActual].apariencia;
     }
 
     private void Festejar(string mensaje)

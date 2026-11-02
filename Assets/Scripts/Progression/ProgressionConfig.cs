@@ -54,7 +54,6 @@ public class ProgressionConfig : ScriptableObject
     public int EnergiaMega => energiaMega;
     public float MinutosMega => minutosMega;
     public float MultiplicadorMonedasMega => multiplicadorMonedasMega;
-    public PetAppearance AparienciaMega => aparienciaMega;
 
     public int XpParaSubir(int nivel)
     {
@@ -72,6 +71,14 @@ public class ProgressionConfig : ScriptableObject
 
         premio = default;
         return false;
+    }
+
+    // La de Mega-Pokuchan mientras dure, si no la de la etapa de ese nivel. La usan la mascota de la
+    // casa y el avion de Vuelo.
+    public PetAppearance AparienciaPara(int nivel)
+    {
+        if (MegaEvolution.Activa && aparienciaMega != null) return aparienciaMega;
+        return etapas[EtapaDe(nivel)].apariencia;
     }
 
     public int EtapaDe(int nivel)

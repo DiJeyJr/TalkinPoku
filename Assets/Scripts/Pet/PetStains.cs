@@ -30,13 +30,18 @@ public class PetStains : MonoBehaviour
         Sincronizar();
     }
 
-    // Frota todas las que la esponja tiene abajo, no solo una: si cubre dos, limpia las dos.
-    public void Frotar(Vector2 centro, float alcance, float distancia)
+    // Frota todas las que la esponja tiene abajo, no solo una: si cubre dos, limpia las dos. Devuelve
+    // si toco alguna, mirado antes de frotar: la pasada que borra la ultima tambien hace espuma.
+    public bool Frotar(Vector2 centro, float alcance, float distancia)
     {
+        bool tocoAlguna = false;
         foreach (Stain mancha in manchas)
         {
-            if (mancha.Activa && mancha.Toca(centro, alcance)) mancha.Frotar(distancia);
+            if (!mancha.Activa || !mancha.Toca(centro, alcance)) continue;
+            tocoAlguna = true;
+            mancha.Frotar(distancia);
         }
+        return tocoAlguna;
     }
 
     private void AlCambiar(NeedType tipo, float valor)
