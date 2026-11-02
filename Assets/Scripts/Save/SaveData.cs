@@ -24,6 +24,8 @@ public class SaveData
     // megaHasta en ticks UTC: JsonUtility no guarda DateTime. 0 = la Mega no estaba activa.
     public int energiaMega;
     public long megaHasta;
+    // Una partida vieja lo trae en false: si ya habia usado la Mega, ve el cartel una vez mas.
+    public bool megaPresentada;
     public InventoryState inventario;
     public List<ItemCantidad> ingredientes = new List<ItemCantidad>();
     public List<ItemCantidad> platos = new List<ItemCantidad>();

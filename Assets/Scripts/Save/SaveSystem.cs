@@ -38,7 +38,7 @@ public static class SaveSystem
         Wallet.Restaurar(datos.saldo);
         RecipeBook.Restaurar(datos.recetas);
         Progression.Restaurar(datos.nivel, datos.xp);
-        MegaEvolution.Restaurar(datos.energiaMega, datos.megaHasta);
+        MegaEvolution.Restaurar(datos.energiaMega, datos.megaHasta, datos.megaPresentada);
         Inventory.Restaurar(datos.inventario);
         Despensa.Ingredientes.Restaurar(datos.ingredientes);
         Despensa.Platos.Restaurar(datos.platos);
@@ -80,6 +80,7 @@ public static class SaveSystem
         datos.xp = Progression.XpActual;
         datos.energiaMega = MegaEvolution.EnergiaActual;
         datos.megaHasta = MegaEvolution.MegaHasta;
+        datos.megaPresentada = MegaEvolution.Presentada;
         datos.inventario = Inventory.Foto();
         datos.ingredientes = Despensa.Ingredientes.Foto();
         datos.platos = Despensa.Platos.Foto();

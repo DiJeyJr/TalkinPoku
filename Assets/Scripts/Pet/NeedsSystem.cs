@@ -46,6 +46,10 @@ public class NeedsSystem : MonoBehaviour
         }
     }
 
+    // Lo que rinde cada cuidado. Se mira en el momento y no se guarda: si la Mega termina, deja de valer.
+    private float Bonus => MegaEvolution.Activa ? config.MultiplicadorMega : 1f;
+    private float EnergiaDurmiendoPorHora => config.EnergiaDurmiendoPorHora * Bonus;
+
     // Cuanta higiene interna representa cada mancha: con 50 y cinco manchas, 10.
     private float TramoPorMancha => config.HigieneSinManchas / config.ManchasMaximas;
 
@@ -127,11 +131,11 @@ public class NeedsSystem : MonoBehaviour
         {
             // Con la app cerrada pueden ser horas: si la energia se llena antes de que termine el tramo,
             // se despierta en ese momento y lo que sobra corre despierto.
-            float hastaLlenarse = (Maximo - valores[(int)NeedType.Energia]) / config.EnergiaDurmiendoPorHora;
+            float hastaLlenarse = (Maximo - valores[(int)NeedType.Energia]) / EnergiaDurmiendoPorHora;
             float dormidas = Mathf.Min(horas, hastaLlenarse);
 
             Bajar(dormidas * config.FactorDormido);
-            Cambiar(NeedType.Energia, config.EnergiaDurmiendoPorHora * dormidas);
+            Cambiar(NeedType.Energia, EnergiaDurmiendoPorHora * dormidas);
             if (horas < hastaLlenarse) return;
 
             Dormir(false);
@@ -189,7 +193,8 @@ public class NeedsSystem : MonoBehaviour
     {
         // Felicidad no se sube directo: sube cuando sube cualquiera de las otras.
         if (tipo == NeedType.Felicidad) return;
-        Cambiar(tipo, cantidad);
+        // Solo lo que sube: el panel de admin tambien resta por aca.
+        Cambiar(tipo, cantidad > 0f ? cantidad * Bonus : cantidad);
     }
 
     public void Dormir(bool dormir)
