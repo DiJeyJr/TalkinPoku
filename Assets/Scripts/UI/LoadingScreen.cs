@@ -10,6 +10,14 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] private float segundosVisible = 1.5f;
     [SerializeField] private float segundosFundido = 0.4f;
 
+    // Para lo que no tiene que pasar detras de la pantalla de carga, como las monedas que vuelan al
+    // volver de un minijuego. Se prende en Awake porque los Start de los demas pueden correr antes.
+    public static bool Tapando { get; private set; }
+
+    private void Awake() => Tapando = true;
+
+    private void OnDestroy() => Tapando = false;
+
     private IEnumerator Start()
     {
         CanvasGroup grupo = GetComponent<CanvasGroup>();
@@ -22,6 +30,7 @@ public class LoadingScreen : MonoBehaviour
             grupo.alpha = 1f - t / segundosFundido;
             yield return null;
         }
+        Tapando = false;
         gameObject.SetActive(false);
     }
 }

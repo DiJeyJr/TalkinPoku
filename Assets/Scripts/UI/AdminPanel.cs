@@ -61,6 +61,9 @@ public class AdminPanel : MonoBehaviour
 
     public void LlenarMega()
     {
+        // Mientras dura la Mega la barra no se carga (es la regla del juego), asi que para poder
+        // probarla de nuevo primero se corta la que esta activa.
+        mega.Terminar();
         mega.LlenarEnergia();
     }
 

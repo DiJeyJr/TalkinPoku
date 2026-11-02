@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// Cobra la ultima partida al volver a la casa: acredita las monedas, le da a Poku la diversion y
@@ -37,11 +38,14 @@ public class MinigameReward : MonoBehaviour
         return config.BuscarPremio(XpSource.Minijuego, out ProgressionConfig.Premio premio) ? premio.xp : 0;
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
-        if (!MinigameFlow.TomarResultado(out MinigameResult resultado)) return;
+        if (!MinigameFlow.TomarResultado(out MinigameResult resultado)) yield break;
 
-        if (!resultado.Completed) return;
+        if (!resultado.Completed) yield break;
+
+        // Si las monedas salen mientras la pantalla de carga tapa la casa, el jugador no las ve volar.
+        while (LoadingScreen.Tapando) yield return null;
 
         int monedas = MonedasCobradas(resultado, progreso != null ? progreso.Config : null);
 

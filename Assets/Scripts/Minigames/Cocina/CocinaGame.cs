@@ -32,6 +32,16 @@ public class CocinaGame : MonoBehaviour, IMinigame
     [SerializeField] private int minimoIngredientes = 2;
     [SerializeField] private float segundosPlato = 1.5f;
 
+    [Header("Dificultad")]
+    // Cuantas veces hay que mezclar (sacudir o apretar Mezclar) para que la olla cocine. Arranca en
+    // las iniciales y con las recetas cocinadas se acerca al tope: no castiga equivocarse, pide mas trabajo.
+    [SerializeField] private int mezclasIniciales = 1;
+    [SerializeField] private int mezclasMaximas = 4;
+    // Recetas cocinadas en la partida para llegar al tope.
+    [SerializeField] private int recetasParaMaximo = 8;
+    // Igual que en Vuelo. Eje X: avance (0 a 1) hasta el tope; eje Y: cuanto del camino ya se recorrio.
+    [SerializeField] private AnimationCurve curvaDificultad = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+
     [Header("Sonidos")]
     [SerializeField] private AudioClip sonidoRecetaNueva;
     // Una repetida igual paga monedas: suena la moneda.
@@ -45,6 +55,8 @@ public class CocinaGame : MonoBehaviour, IMinigame
     private int monedas;
     private int cocinadas;
     private float ocultarPlatoEn;
+    private int mezclasNecesarias;
+    private int mezclasHechas;
     private bool terminado;
 
     public void StartGame()
@@ -57,10 +69,12 @@ public class CocinaGame : MonoBehaviour, IMinigame
         // El boton Mezclar de la pantalla es un OnScreenButton que aprieta esa accion.
         mezclar = InputSystem.actions.FindAction("Mezclar");
         shake.Sacudido += Cocinar;
+        olla.ContenidoCambiado += ReiniciarMezcla;
         botonListo.onClick.AddListener(Terminar);
 
         monedas = 0;
         cocinadas = 0;
+        ActualizarDificultad();
         terminado = false;
         plato.enabled = false;
         textoMonedas.SetText("{0}", monedas);
@@ -74,6 +88,7 @@ public class CocinaGame : MonoBehaviour, IMinigame
     private void OnDestroy()
     {
         if (shake != null) shake.Sacudido -= Cocinar;
+        if (olla != null) olla.ContenidoCambiado -= ReiniciarMezcla;
     }
 
     private void Update()
@@ -93,6 +108,14 @@ public class CocinaGame : MonoBehaviour, IMinigame
         if (olla.Contenido.Count < minimoIngredientes)
         {
             textoMensaje.SetText("Poné al menos {0} ingredientes", minimoIngredientes);
+            return;
+        }
+
+        // La olla vacia (receta o puaj) dispara ContenidoCambiado y la cuenta vuelve a cero sola.
+        mezclasHechas++;
+        if (mezclasHechas < mezclasNecesarias)
+        {
+            textoMensaje.SetText("¡Seguí mezclando! Faltan {0}", mezclasNecesarias - mezclasHechas);
             return;
         }
 
@@ -116,6 +139,7 @@ public class CocinaGame : MonoBehaviour, IMinigame
 
         bool nueva = RecipeBook.Registrar(receta.Id);
         cocinadas++;
+        ActualizarDificultad();
 
         // Tope por partida: repetir la misma receta muchas veces no rompe la economia.
         int premio = nueva ? monedasRecetaNueva : monedasRecetaRepetida;
@@ -129,6 +153,18 @@ public class CocinaGame : MonoBehaviour, IMinigame
         ocultarPlatoEn = Time.time + segundosPlato;
 
         if (nueva) libro.Mostrar(recetas);
+    }
+
+    private void ReiniciarMezcla()
+    {
+        mezclasHechas = 0;
+    }
+
+    private void ActualizarDificultad()
+    {
+        float avance = recetasParaMaximo > 0 ? Mathf.Clamp01((float)cocinadas / recetasParaMaximo) : 1f;
+        float k = Mathf.Clamp01(curvaDificultad.Evaluate(avance));
+        mezclasNecesarias = Mathf.RoundToInt(Mathf.Lerp(mezclasIniciales, mezclasMaximas, k));
     }
 
     private void Terminar()
