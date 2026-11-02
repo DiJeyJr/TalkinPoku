@@ -206,14 +206,15 @@ public class NeedsSystem : MonoBehaviour
     private void Cambiar(NeedType tipo, float delta)
     {
         int i = (int)tipo;
-        // Se compara lo que se ve y no el valor interno: la higiene cambia por dentro en cada frame,
-        // pero solo avisa cuando aparece o se va una mancha.
         float antes = Obtener(tipo);
+        float felicidadAntes = Felicidad;
         valores[i] = Mathf.Clamp(valores[i] + delta, 0f, Maximo);
-        float despues = Obtener(tipo);
-        if (despues == antes) return;
 
-        NeedChanged?.Invoke(tipo, despues);
-        NeedChanged?.Invoke(NeedType.Felicidad, Felicidad);
+        // El decaimiento mueve los valores un poquito en cada frame, y cada aviso repinta las barras
+        // y la cara. Se avisa solo cuando cambia lo que se ve: el numero redondeado, o una mancha en
+        // la higiene.
+        float despues = Obtener(tipo);
+        if (Mathf.Round(despues) != Mathf.Round(antes)) NeedChanged?.Invoke(tipo, despues);
+        if (Mathf.Round(Felicidad) != Mathf.Round(felicidadAntes)) NeedChanged?.Invoke(NeedType.Felicidad, Felicidad);
     }
 }

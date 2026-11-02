@@ -27,7 +27,8 @@ public class ShakeDetector : MonoBehaviour
 
     private void OnDisable()
     {
-        // Se apaga al salir para no gastar bateria con un sensor que nadie lee.
+        // Se apaga al salir para no gastar bateria con un sensor que nadie lee. Sin contador: la
+        // Canasta de Atrapar es el otro que lo usa y nunca estan en la misma escena.
         if (Accelerometer.current != null) InputSystem.DisableDevice(Accelerometer.current);
     }
 

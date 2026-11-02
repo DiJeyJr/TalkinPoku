@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// Va en la sala. Dibuja los muebles que el jugador coloco, cada uno en su lugar fijo: no se arrastran,
@@ -17,6 +18,8 @@ public class RoomDecor : MonoBehaviour
     [SerializeField] private Vector2 lamparaSinMesita = new Vector2(3.2f, -0.5f);
 
     private readonly List<GameObject> muebles = new List<GameObject>();
+    // Los ids con los que se armo la sala la ultima vez.
+    private readonly List<string> armados = new List<string>();
 
     private void OnEnable()
     {
@@ -31,6 +34,12 @@ public class RoomDecor : MonoBehaviour
 
     private void Refrescar()
     {
+        // El inventario avisa por cualquier cambio (comer, comprar ropa): solo se rearma si cambio lo
+        // que hay colocado.
+        if (armados.SequenceEqual(inventario.Colocados)) return;
+        armados.Clear();
+        armados.AddRange(inventario.Colocados);
+
         // Son pocos muebles: rearmarlos todos es mas simple que seguir cual cambio, y un cuadro que se
         // saca puede correr al otro de lugar.
         foreach (GameObject mueble in muebles) Destroy(mueble);

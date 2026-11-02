@@ -66,6 +66,7 @@ public class Canasta : MonoBehaviour
     private void OnDisable()
     {
         EnhancedTouchSupport.Disable();
+        // Sin contador: ShakeDetector es el otro que lo usa y nunca estan en la misma escena.
         if (Accelerometer.current != null) InputSystem.DisableDevice(Accelerometer.current);
         dedoActivo = -1;
     }

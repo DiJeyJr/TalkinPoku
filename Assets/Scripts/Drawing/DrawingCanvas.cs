@@ -22,6 +22,9 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
     private Texture2D textura;
     private Color32[] pixeles;
     private Vector2 anterior;
+    // Subir la textura entera a la placa es caro, y OnDrag puede llegar varias veces por frame: los
+    // trazos se juntan y se aplican una sola vez en LateUpdate.
+    private bool sucia;
 
     private void Awake()
     {
@@ -71,7 +74,6 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
     {
         if (!APixel(evento, out anterior)) return;
         Estampar(anterior);
-        Aplicar();
     }
 
     public void OnDrag(PointerEventData evento)
@@ -81,6 +83,12 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
         int pasos = Mathf.Max(1, Mathf.CeilToInt(distancia / Mathf.Max(1f, Radio() * 0.5f)));
         for (int i = 1; i <= pasos; i++) Estampar(Vector2.Lerp(anterior, actual, (float)i / pasos));
         anterior = actual;
+    }
+
+    private void LateUpdate()
+    {
+        if (!sucia) return;
+        sucia = false;
         Aplicar();
     }
 
@@ -107,6 +115,7 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
         int cx = Mathf.RoundToInt(centro.x);
         int cy = Mathf.RoundToInt(centro.y);
         int ancho = textura.width;
+        sucia = true;
         for (int y = Mathf.Max(0, cy - r); y <= Mathf.Min(textura.height - 1, cy + r); y++)
         {
             for (int x = Mathf.Max(0, cx - r); x <= Mathf.Min(ancho - 1, cx + r); x++)

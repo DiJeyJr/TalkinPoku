@@ -24,6 +24,7 @@ public class MegaEvolution : MonoBehaviour
     private static bool presentada;
 
     private bool estabaActiva;
+    private int segundosAvisados;
 
     public static int EnergiaActual => energia;
     public static long MegaHasta => megaHasta;
@@ -74,8 +75,17 @@ public class MegaEvolution : MonoBehaviour
         if (!estabaActiva) return;
 
         // Ningun evento avisa cuando pasa la media hora: se mira el reloj.
-        if (Activa) EnergiaCambiada?.Invoke(Fraccion);
-        else Terminar();
+        if (!Activa)
+        {
+            Terminar();
+            return;
+        }
+
+        // El boton muestra minutos y segundos: con avisar una vez por segundo alcanza.
+        int segundos = Mathf.CeilToInt((float)SegundosRestantes);
+        if (segundos == segundosAvisados) return;
+        segundosAvisados = segundos;
+        EnergiaCambiada?.Invoke(Fraccion);
     }
 
     public void Activar()
