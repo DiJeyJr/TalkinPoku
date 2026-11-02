@@ -37,6 +37,10 @@ public class ObstaculoSpawner : MonoBehaviour
     private float velocidadActual;
     private float intervaloActual;
 
+    // A esta velocidad se corre el escenario: el piso va igual que los obstaculos y el fondo mas lento.
+    // Antes de arrancar y despues de chocar es 0, asi el escenario se queda quieto.
+    public float VelocidadEscenario => corriendo ? velocidadActual : 0f;
+
     private void Awake()
     {
         velocidadActual = velocidad;
