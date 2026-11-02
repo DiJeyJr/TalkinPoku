@@ -1654,7 +1654,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 52
+  m_fontSize: 56
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3064,12 +3064,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 600e11d077d21dd4a8793ba36408f448, type: 3}
   - {fileID: 21300000, guid: e93c1935f85f22a47afb82a008df653a, type: 3}
   - {fileID: 21300000, guid: 3127e06abdcc517469ee962e2bd5a1b1, type: 3}
-  - {fileID: 21300000, guid: 54af2248e5491fd498b2be960f9d2b3b, type: 2}
   spritesMalos:
-  - {fileID: 21300000, guid: b022aca8b5f6f9d4abd68609734ff72d, type: 2}
-  - {fileID: 21300000, guid: b3a8fe3866f79434bb131237e801229a, type: 2}
-  - {fileID: 21300000, guid: b78e251dd61ee694a99f1e15e7ea5dc5, type: 2}
+  - {fileID: 21300000, guid: cfd2ee3a34df3974382b340cf0099fc3, type: 3}
+  - {fileID: 21300000, guid: 8b902a5c110bf9e46926d68b2f0914de, type: 3}
+  - {fileID: 21300000, guid: 2de1084a4dd0a5a47a3350fb72ec9cb5, type: 3}
   - {fileID: 21300000, guid: b8a6f2fe96a39f541a67f79f9c43d70d, type: 2}
+  - {fileID: 21300000, guid: 54af2248e5491fd498b2be960f9d2b3b, type: 2}
   yAparicion: 10.6
   yReciclado: -10.6
   margenLateral: 0.9

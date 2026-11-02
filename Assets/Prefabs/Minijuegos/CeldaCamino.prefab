@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ebade905947c2e444bc34e10ed98ab62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6073a2d126801d478568fdfb05a5aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CeldaCamino
-  colorNormal: {r: 1, g: 1, b: 1, a: 0.35}
+  colorNormal: {r: 1, g: 1, b: 1, a: 0.55}
   colorResaltada: {r: 1, g: 0.85, b: 0.3, a: 0.9}
   colorAcertada: {r: 0.45, g: 0.85, b: 0.45, a: 0.85}
   colorError: {r: 0.95, g: 0.35, b: 0.35, a: 0.9}

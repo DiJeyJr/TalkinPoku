@@ -30,6 +30,10 @@ public class PetJuice : MonoBehaviour
     [SerializeField] private float saltoAplaste = 0.25f;
     [SerializeField] private float saltoEstiramiento = 0.2f;
 
+    [Header("Desinflarse (triste)")]
+    [SerializeField] private float desinflarAmplitud = 0.14f;
+    [SerializeField] private float desinflarDuracion = 1.4f;
+
     [Header("Respirar")]
     [SerializeField] private float respirarAmplitud = 0.02f;
     [SerializeField, Min(0.1f)] private float respirarPeriodo = 3.2f;
@@ -47,6 +51,7 @@ public class PetJuice : MonoBehaviour
     private float tRebote = float.PositiveInfinity;
     private float tSacudida = float.PositiveInfinity;
     private float tSalto = float.PositiveInfinity;
+    private float tDesinflar = float.PositiveInfinity;
     private float tRespirar;
     private float fuerzaAplastar = 1f;
 
@@ -68,7 +73,7 @@ public class PetJuice : MonoBehaviour
         if (transform.localScale == ultimaEscala) transform.localScale = escalaBase;
         transform.localRotation = rotacionBase;
         if (transform.localPosition == ultimaPosicion) transform.localPosition = posicionBase;
-        tAplastar = tRebote = tSacudida = tSalto = float.PositiveInfinity;
+        tAplastar = tRebote = tSacudida = tSalto = tDesinflar = float.PositiveInfinity;
     }
 
     // Se aplasta en vertical y se ensancha; vuelve con un pequeno rebote. La intensidad deja usar
@@ -97,6 +102,12 @@ public class PetJuice : MonoBehaviour
         tSalto = 0f;
     }
 
+    // Lo opuesto al salto: se aplasta despacio, como un suspiro, y tarda mas en volver que en bajar.
+    public void Desinflar()
+    {
+        tDesinflar = 0f;
+    }
+
     // LateUpdate y no Update: asi corre despues del pop de PetEvolution y se compone sobre el.
     private void LateUpdate()
     {
@@ -108,6 +119,7 @@ public class PetJuice : MonoBehaviour
         tRebote += dt;
         tSacudida += dt;
         tSalto += dt;
+        tDesinflar += dt;
         tRespirar = Mathf.Repeat(tRespirar + dt, respirarPeriodo);
 
         float y = 1f;
@@ -116,6 +128,7 @@ public class PetJuice : MonoBehaviour
         y *= 1f + reboteAmplitud * Oscilar(tRebote, reboteDuracion, reboteOscilaciones, reboteAmortiguacion);
         y *= 1f + respirarAmplitud * Mathf.Sin(2f * Mathf.PI * tRespirar / respirarPeriodo);
         y *= Salto(out float altura);
+        y *= 1f - desinflarAmplitud * Desinflado();
 
         ultimaPosicion = posicionBase + Vector3.up * altura;
         transform.localPosition = ultimaPosicion;
@@ -161,6 +174,14 @@ public class PetJuice : MonoBehaviour
             return 1f - saltoAplaste * Mathf.Sin(Mathf.PI * t / saltoAterrizaje);
 
         return 1f;
+    }
+
+    // Baja en el primer cuarto y vuelve en los otros tres: sin rebote, para que se lea cansado.
+    private float Desinflado()
+    {
+        if (tDesinflar >= desinflarDuracion) return 0f;
+        float u = tDesinflar / desinflarDuracion;
+        return u < 0.25f ? Mathf.SmoothStep(0f, 1f, u / 0.25f) : Mathf.SmoothStep(1f, 0f, (u - 0.25f) / 0.75f);
     }
 
     private float Sacudida()

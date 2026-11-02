@@ -138,6 +138,7 @@ public class PetMoodController : MonoBehaviour
         {
             if (nueva == Emocion.Feliz && !acariciando) juice.Saltar();
             else if (nueva == Emocion.Enojado) juice.Sacudir();
+            else if (nueva == Emocion.Triste) juice.Desinflar();
         }
 
         if (Time.time < silencioHasta) return;
