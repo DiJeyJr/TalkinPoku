@@ -34,7 +34,7 @@ public class LibroDeRecetas : MonoBehaviour
         int descubiertas = 0;
         for (int i = 0; i < recetas.Count; i++)
         {
-            bool conocida = RecipeBook.EstaDescubierta(recetas[i].Id);
+            bool conocida = RegistroIds.Recetas.Contiene(recetas[i].Id);
             if (conocida) descubiertas++;
             filas[i].Mostrar(recetas[i], conocida);
         }

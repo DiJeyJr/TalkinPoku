@@ -137,7 +137,7 @@ public class CocinaGame : MonoBehaviour, IMinigame
         olla.Vaciar();
         Despensa.Platos.Sumar(receta.Id);
 
-        bool nueva = RecipeBook.Registrar(receta.Id);
+        bool nueva = RegistroIds.Recetas.Registrar(receta.Id);
         cocinadas++;
         ActualizarDificultad();
 

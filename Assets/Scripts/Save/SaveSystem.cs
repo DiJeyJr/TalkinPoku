@@ -36,13 +36,13 @@ public static class SaveSystem
         datos = Migrar(leidos);
         NeedsSystem.Restaurar(datos.necesidades);
         Wallet.Restaurar(datos.saldo);
-        RecipeBook.Restaurar(datos.recetas);
+        RegistroIds.Recetas.Restaurar(datos.recetas);
         Progression.Restaurar(datos.nivel, datos.xp);
         MegaEvolution.Restaurar(datos.energiaMega, datos.megaHasta, datos.megaPresentada);
         Inventory.Restaurar(datos.inventario);
         Despensa.Ingredientes.Restaurar(datos.ingredientes);
         Despensa.Platos.Restaurar(datos.platos);
-        EscenariosLimpios.Restaurar(datos.escenariosLimpios);
+        RegistroIds.EscenariosLimpios.Restaurar(datos.escenariosLimpios);
     }
 
     // Un paso por version, en cascada, sin borrar nunca lo que no se entiende: una partida vieja se
@@ -75,7 +75,7 @@ public static class SaveSystem
         int[] saldo = Wallet.Foto();
         if (saldo != null) datos.saldo = saldo;
 
-        datos.recetas = RecipeBook.Foto();
+        datos.recetas = RegistroIds.Recetas.Foto();
         datos.nivel = Progression.NivelActual;
         datos.xp = Progression.XpActual;
         datos.energiaMega = MegaEvolution.EnergiaActual;
@@ -84,7 +84,7 @@ public static class SaveSystem
         datos.inventario = Inventory.Foto();
         datos.ingredientes = Despensa.Ingredientes.Foto();
         datos.platos = Despensa.Platos.Foto();
-        datos.escenariosLimpios = EscenariosLimpios.Foto();
+        datos.escenariosLimpios = RegistroIds.EscenariosLimpios.Foto();
         datos.version = SaveData.VersionActual;
 
         try

@@ -87,7 +87,7 @@ public class LimpiezaGame : MonoBehaviour, IMinigame
         // El primero que falta limpiar: limpiar uno es lo que desbloquea el siguiente.
         foreach (Escenario escenario in escenarios)
         {
-            if (!EscenariosLimpios.EstaLimpio(escenario.Id)) return escenario;
+            if (!RegistroIds.EscenariosLimpios.Contiene(escenario.Id)) return escenario;
         }
 
         // Con todos limpios se repite uno al azar, para que el minijuego siga sirviendo.
@@ -159,7 +159,7 @@ public class LimpiezaGame : MonoBehaviour, IMinigame
 
         if (limpioTodo)
         {
-            EscenariosLimpios.Registrar(actual.Id);
+            RegistroIds.EscenariosLimpios.Registrar(actual.Id);
             // Se guarda ya y no en el proximo autoguardado: desbloquear un escenario no se tiene que perder.
             SaveSystem.Guardar();
         }
