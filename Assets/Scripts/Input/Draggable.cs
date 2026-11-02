@@ -13,7 +13,8 @@ public class Draggable : MonoBehaviour
     [SerializeField] private Camera camara;
 
     [Header("Umbrales")]
-    [SerializeField] private float moveTolerance = 80f;
+    // En milimetros, igual que en TouchTarget.
+    [SerializeField] private float moveToleranceMm = 5f;
     [SerializeField] private bool volverAlOrigen = true;
 
     public event Action Levantado;
@@ -73,7 +74,7 @@ public class Draggable : MonoBehaviour
             if (touch.phase == TouchPhase.Moved)
             {
                 // Igual que en clase: un temblor chico al tocar no cuenta como arrastre.
-                if (!arrastrando && Vector2.Distance(posicionInicialPantalla, touch.screenPosition) >= moveTolerance)
+                if (!arrastrando && Vector2.Distance(posicionInicialPantalla, touch.screenPosition) >= Pantalla.MmAPixeles(moveToleranceMm))
                 {
                     arrastrando = true;
                     Levantado?.Invoke();

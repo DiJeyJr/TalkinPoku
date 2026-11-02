@@ -18,7 +18,8 @@ public class SwipeDetector : MonoBehaviour
     [SerializeField] private Camera camara;
 
     [Header("Umbrales")]
-    [SerializeField] private float swipeMinDistance = 150f;
+    // En milimetros: los 150 px de clase equivalen a unos 9 mm en un celular de 400 dpi.
+    [SerializeField] private float swipeMinDistanceMm = 9f;
     [SerializeField] private float swipeMaxDuration = 0.6f;
     [SerializeField] private LayerMask capasQueBloquean = ~0;
 
@@ -86,7 +87,7 @@ public class SwipeDetector : MonoBehaviour
 
         // Solo importa el eje horizontal: un swipe vertical no tiene que cambiar de habitacion.
         if (Mathf.Abs(delta.x) < Mathf.Abs(delta.y)) return;
-        if (Mathf.Abs(delta.x) < swipeMinDistance) return;
+        if (Mathf.Abs(delta.x) < Pantalla.MmAPixeles(swipeMinDistanceMm)) return;
 
         Swiped?.Invoke(delta.x > 0f ? SwipeDirection.Derecha : SwipeDirection.Izquierda);
     }

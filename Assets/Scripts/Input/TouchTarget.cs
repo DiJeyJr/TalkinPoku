@@ -15,7 +15,8 @@ public class TouchTarget : MonoBehaviour
     [Header("Umbrales")]
     [SerializeField] private float tapMaxDuration = 0.35f;
     [SerializeField] private float holdMinDuration = 0.8f;
-    [SerializeField] private float moveTolerance = 80f;
+    // En milimetros: los 80 px de clase equivalen a unos 5 mm en un celular de 400 dpi.
+    [SerializeField] private float moveToleranceMm = 5f;
 
     public event Action Tocado;
     public event Action HoldEmpezado;
@@ -62,6 +63,7 @@ public class TouchTarget : MonoBehaviour
 
             float duracion = Time.time - tiempoInicial;
             float distancia = Vector2.Distance(posicionInicial, touch.screenPosition);
+            float moveTolerance = Pantalla.MmAPixeles(moveToleranceMm);
 
             // En clase el hold se mira solo en Stationary. Aca tambien en Moved, porque en un
             // celular real el dedo apoyado tiembla y a veces no llega a quedar Stationary.
