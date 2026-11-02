@@ -25,6 +25,14 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
 
     private void Awake()
     {
+        Preparar();
+    }
+
+    // La hoja es hija del atril, que arranca apagado: la primera vez que se abre, el OnEnable del
+    // atril llama a Cargar antes que este Awake. Por eso se prepara en el primer uso, sea cual sea.
+    private void Preparar()
+    {
+        if (textura != null) return;
         imagen = GetComponent<RawImage>();
         textura = new Texture2D(DrawingStorage.Ancho, DrawingStorage.Alto, TextureFormat.RGBA32, false);
         textura.wrapMode = TextureWrapMode.Clamp;
@@ -40,6 +48,7 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
 
     public void Limpiar()
     {
+        Preparar();
         Color32 c = fondo;
         for (int i = 0; i < pixeles.Length; i++) pixeles[i] = c;
         Aplicar();
@@ -48,6 +57,7 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
     // Arranca desde el dibujo guardado, para seguirlo en vez de empezar de cero.
     public void Cargar(Texture2D guardado)
     {
+        Preparar();
         if (guardado == null || guardado.width != textura.width || guardado.height != textura.height)
         {
             Limpiar();
