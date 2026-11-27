@@ -2,6 +2,17 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+// ============================================================================
+// Escenario.cs  (minijuego "Limpieza")
+// QUE HACE: describe un lugar para limpiar: nombre, fondo sucio y limpio, donde
+//           esta cada basura (y de que tipo) y cuantas monedas paga.
+// DONDE ESTA: un asset por escenario en Data/Escenarios (Playa, Parque, Bosque).
+// PARA CAMBIAR: monedas -> "Monedas". Basuras -> lista "Basuras" (sprite,
+//               posicion y tipo de cada una).
+// PARA UNO NUEVO: Create > TalkinPoku > Escenario y sumarlo a la lista
+//                 "Escenarios" de LimpiezaGame.
+// ============================================================================
+
 // Un lugar para limpiar: sus dos fondos, donde esta cada basura y cuanto paga. Para sumar un
 // escenario se crea otro asset y se agrega a la lista de LimpiezaGame, sin tocar codigo.
 [CreateAssetMenu(menuName = "TalkinPoku/Escenario", fileName = "Escenario_Nuevo")]
@@ -11,7 +22,9 @@ public class Escenario : ScriptableObject
     [SerializeField] private string nombre;
     [SerializeField] private Sprite fondoSucio;
     [SerializeField] private Sprite fondoLimpio;
+    // [AJUSTE] Basuras del escenario.
     [SerializeField] private BasuraEnEscenario[] basuras;
+    // [AJUSTE] Monedas por limpiarlo entero.
     [SerializeField] private int monedas = 30;
 
     public string Id => id;

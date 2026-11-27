@@ -2,12 +2,26 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+// ============================================================================
+// Inventory.cs
+// QUE HACE: guarda lo que el jugador compro (comida, ropa y muebles), que ropa
+//           tiene puesta Poku y que muebles estan en la sala. Comprar descuenta
+//           de la billetera (Wallet).
+// DONDE ESTA: en el objeto "Sistemas" de SampleScene.
+// PARA CAMBIAR: reglas de compra (precio, nivel, si alcanza) -> PuedeComprar().
+//               cuantos cuadros entran en la pared -> "lugares" en AlternarColocado().
+//               precio/nivel de un item puntual -> su asset en Data/Items.
+// AVISA: el evento Cambiado cada vez que cambia algo (lo escuchan la tienda, las
+//        bandejas, PetAccessories y RoomDecor para actualizarse).
+// ============================================================================
+
 // Lo que el jugador compro: comida para darle, ropa para ponerle a Poku y muebles para la sala.
 // Comprar descuenta de la billetera; usar, poner y colocar avisan con Cambiado para que la UI, Poku
 // y la sala se actualicen.
 public class Inventory : MonoBehaviour
 {
     [Header("Referencias")]
+    // Lista de todos los items que existen.
     [SerializeField] private ItemCatalog catalogo;
     [SerializeField] private Wallet billetera;
 
@@ -16,8 +30,10 @@ public class Inventory : MonoBehaviour
     // Estatico como el saldo: sobrevive a ir a un minijuego y volver. Al abrir la app lo llena el guardado.
     private static InventoryState estado = new InventoryState();
 
+    // Para el guardado.
     public static InventoryState Foto() => estado;
 
+    // Al abrir el juego: recupera el inventario guardado.
     public static void Restaurar(InventoryState guardado)
     {
         if (guardado == null) return;
@@ -29,6 +45,7 @@ public class Inventory : MonoBehaviour
 
     public ItemCatalog Catalogo => catalogo;
 
+    // Cuantos tiene de un item (la comida puede ser mas de 1).
     public int Cantidad(ItemDefinition item)
     {
         int i = estado.ids.IndexOf(item.Id);
@@ -37,6 +54,7 @@ public class Inventory : MonoBehaviour
 
     public bool Tiene(ItemDefinition item) => Cantidad(item) > 0;
 
+    // Regla de compra: se vende, esta desbloqueado por nivel, no lo tiene (si no se acumula) y le alcanza la plata.
     // Ropa y muebles se compran una sola vez.
     public bool PuedeComprar(ItemDefinition item)
     {
@@ -45,6 +63,7 @@ public class Inventory : MonoBehaviour
         return billetera.Obtener(item.Moneda) >= item.Precio;
     }
 
+    // Cobra el precio y agrega el item. Devuelve false si no se pudo comprar.
     public bool Comprar(ItemDefinition item)
     {
         if (!PuedeComprar(item) || !billetera.Gastar(item.Moneda, item.Precio)) return false;
@@ -62,8 +81,12 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
+    // ---------- Ropa ----------
+
+    // Si Poku tiene puesto este item.
     public bool Puesto(ItemDefinition item) => estado.puestos[(int)item.Ranura] == item.Id;
 
+    // Que tiene puesto en una ranura (null = nada).
     public ItemDefinition PuestoEn(AccessorySlot ranura)
     {
         string id = estado.puestos[(int)ranura];
@@ -79,11 +102,15 @@ public class Inventory : MonoBehaviour
         Cambiado?.Invoke();
     }
 
+    // ---------- Muebles ----------
+
+    // Si el mueble esta puesto en la sala.
     public bool Colocado(ItemDefinition item) => estado.colocados.Contains(item.Id);
 
     // En el orden en que se pusieron: RoomDecor reparte los cuadros por ese orden.
     public IReadOnlyList<string> Colocados => estado.colocados;
 
+    // Pone el mueble en la sala, o lo saca si ya estaba. Si el lugar estaba ocupado, saca el anterior.
     public void AlternarColocado(ItemDefinition item)
     {
         if (!Tiene(item) || item.Categoria != ItemCategory.Decoracion) return;
@@ -96,6 +123,7 @@ public class Inventory : MonoBehaviour
         {
             // Un mueble por lugar: el nuevo guarda al que estaba. Con los dos cuadros colgados, sale el
             // mas viejo.
+            // [AJUSTE] cuantos muebles entran por lugar (2 para los cuadros, 1 para el resto).
             int lugares = item.Lugar == FurnitureSpot.Cuadro ? 2 : 1;
             List<int> ocupados = new List<int>();
             for (int j = 0; j < estado.colocados.Count; j++)
@@ -122,6 +150,7 @@ public class Inventory : MonoBehaviour
         Cambiado?.Invoke();
     }
 
+    // Suma o resta unidades de un item. Si llega a 0 lo borra de la lista.
     private void Agregar(ItemDefinition item, int cuantos)
     {
         int i = estado.ids.IndexOf(item.Id);

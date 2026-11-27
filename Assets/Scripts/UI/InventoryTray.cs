@@ -4,6 +4,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+// ============================================================================
+// InventoryTray.cs
+// QUE HACE: la bandeja de inventario de una habitacion: comida en la cocina,
+//           ropa en el dormitorio y muebles en la sala. Muestra lo que el
+//           jugador tiene de esa categoria. Tocar ropa o un mueble lo pone/saca;
+//           la comida se arrastra hasta Poku.
+// DONDE ESTA: en "Canvas/SafeArea/BandejaComida", "BandejaArmario" y
+//             "BandejaDecorar" de SampleScene.
+// PARA CAMBIAR: en que habitacion aparece el boton -> "Habitacion" (indice de
+//               RoomNavigator). Que categoria muestra -> "Categoria".
+// ============================================================================
+
 // La bandeja de inventario de una habitacion: la comida en la cocina, la ropa en el dormitorio y los
 // muebles en la sala. El boton que la abre solo aparece en su habitacion. Se abre como una pantalla
 // del ScreenStack: asi se apaga el input de la casa y arrastrar comida no cambia de habitacion.
@@ -16,11 +28,14 @@ public class InventoryTray : MonoBehaviour
     // El boton del HUD que la abre: se esconde en las otras habitaciones.
     [SerializeField] private GameObject boton;
     [SerializeField] private GameObject panel;
+    // Casillero modelo que se copia por cada item.
     [SerializeField] private InventorySlot plantilla;
     [SerializeField] private Transform contenedor;
+    // Texto "no tenes nada" cuando esta vacia.
     [SerializeField] private TMP_Text vacio;
 
     [Header("Bandeja")]
+    // [AJUSTE] Que items muestra y en que habitacion (indice) aparece.
     [SerializeField] private ItemCategory categoria;
     [SerializeField] private int habitacion;
 
@@ -80,6 +95,7 @@ public class InventoryTray : MonoBehaviour
         }
     }
 
+    // Muestra el boton de la bandeja solo en su habitacion.
     private void AlCambiarHabitacion(int actual)
     {
         // Los puntitos del indicador siguen andando con la bandeja abierta: si se va a otra
@@ -88,6 +104,7 @@ public class InventoryTray : MonoBehaviour
         boton.SetActive(actual == habitacion);
     }
 
+    // Rearma los casilleros con lo que el jugador tiene de esta categoria.
     private void Refrescar()
     {
         if (!panel.activeSelf) return;
@@ -106,6 +123,7 @@ public class InventoryTray : MonoBehaviour
         vacio.gameObject.SetActive(i == 0);
     }
 
+    // Crea un casillero nuevo copiando la plantilla y se engancha a sus eventos.
     private InventorySlot CrearSlot()
     {
         InventorySlot slot = Instantiate(plantilla, contenedor);
@@ -116,6 +134,7 @@ public class InventoryTray : MonoBehaviour
         return slot;
     }
 
+    // true si la ropa esta puesta o el mueble colocado.
     private bool EstaActivo(ItemDefinition item)
     {
         if (item.Categoria == ItemCategory.Ropa) return inventario.Puesto(item);
@@ -123,6 +142,7 @@ public class InventoryTray : MonoBehaviour
         return false;
     }
 
+    // Tap en un casillero: pone/saca la ropa o el mueble.
     private void AlTocar(InventorySlot slot)
     {
         ItemDefinition item = slot.Item;
@@ -132,6 +152,7 @@ public class InventoryTray : MonoBehaviour
         SoundPlayer.Reproducir(sonidoPoner);
     }
 
+    // Empieza a arrastrar comida: aparece el icono "fantasma" bajo el dedo.
     private void AlEmpezarArrastre(InventorySlot slot, PointerEventData evento)
     {
         if (fantasma == null) return;

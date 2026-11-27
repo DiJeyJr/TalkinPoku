@@ -2,6 +2,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// ============================================================================
+// ProductoTienda.cs
+// QUE HACE: un ingrediente a la venta en la pestana "Ingredientes" de la
+//           tienda. Cada toque compra uno con monedas. Si no alcanza, el precio
+//           se pone rojo un momento.
+// DONDE ESTA: es el prefab ProductoTienda; TiendaComida crea uno por ingrediente.
+// PARA CAMBIAR: precio y nombre -> el asset del ingrediente (Data/Cocina/Ing_*).
+//               colores del precio -> colorPrecio / colorSinPlata.
+//               cuanto queda rojo -> segundosSinPlata.
+// ============================================================================
+
 // Un ingrediente a la venta: dibujo, nombre, precio y cuantos tenes. Cada toque compra uno.
 public class ProductoTienda : MonoBehaviour
 {
@@ -14,10 +25,12 @@ public class ProductoTienda : MonoBehaviour
     [SerializeField] private Latido latido;
 
     [Header("Colores")]
+    // [AJUSTE] Color del precio normal y cuando no alcanza.
     [SerializeField] private Color colorPrecio = new Color(0.35f, 0.2f, 0.13f);
     [SerializeField] private Color colorSinPlata = new Color(0.85f, 0.2f, 0.15f);
 
     [Header("Feedback")]
+    // [AJUSTE] Segundos que el precio queda rojo.
     [SerializeField] private float segundosSinPlata = 0.6f;
 
     [Header("Sonidos")]
@@ -54,6 +67,7 @@ public class ProductoTienda : MonoBehaviour
         Despensa.Ingredientes.Cambio -= AlCambiar;
     }
 
+    // Devuelve el precio a su color cuando pasa el tiempo.
     private void Update()
     {
         if (volverColorEn < 0f || Time.unscaledTime < volverColorEn) return;
@@ -66,6 +80,7 @@ public class ProductoTienda : MonoBehaviour
         if (ingrediente != null && id == ingrediente.Id) cantidad.SetText("x{0}", cantidadNueva);
     }
 
+    // Intenta cobrar. Si alcanza, suma un ingrediente a la despensa y guarda.
     private void Comprar()
     {
         if (!billetera.Gastar(CurrencyType.Monedas, ingrediente.Precio))

@@ -3,6 +3,21 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+// ============================================================================
+// UnirGame.cs  (minijuego "Unir personajes")
+// QUE HACE: las reglas de Unir: en cada nivel hay que dibujar con el dedo una
+//           linea que una a Poku con su amigo, sin tocar los obstaculos y sin
+//           quedarse sin tinta. Cada trazo fallido cuesta una vida; cada nivel
+//           completo paga monedas (con bonus por tinta que sobro).
+// DONDE ESTA: en el objeto "Minijuego" de la escena Unir.
+// PARA CAMBIAR (Inspector de "Minijuego"):
+//   - niveles y su orden -> lista "Niveles" (assets Data/Unir/Nivel*)
+//   - vidas -> vidasIniciales
+//   - monedas por nivel / bonus maximo por tinta -> monedasPorNivel / bonusMaximoTinta
+//   - velocidad con que camina el personaje -> velocidadCaminata
+//   - tinta y obstaculos de un nivel -> el asset de ese nivel
+// ============================================================================
+
 // Reglas de Unir a los personajes: arma cada nivel, cobra una vida por cada trazo fallido y paga
 // monedas por los que llegan.
 public class UnirGame : Minijuego
@@ -19,11 +34,15 @@ public class UnirGame : Minijuego
     [SerializeField] private TMP_Text textoMonedas;
 
     [Header("Niveles")]
+    // [AJUSTE] Niveles en orden.
     [SerializeField] private NivelUnir[] niveles;
+    // [AJUSTE] Vidas al empezar.
     [SerializeField] private int vidasIniciales = 3;
 
     [Header("Recompensa")]
+    // [AJUSTE] Monedas por nivel completo.
     [SerializeField] private int monedasPorNivel = 3;
+    // [AJUSTE] Bonus extra si sobra tinta.
     // Se cobra entero si sobro toda la tinta; si no, en proporcion a lo que sobro.
     [SerializeField] private int bonusMaximoTinta = 3;
 
@@ -44,6 +63,7 @@ public class UnirGame : Minijuego
     private BoxCollider2D[] cajas;
     private SpriteRenderer[] dibujos;
 
+    // Guarda el collider y el dibujo de cada obstaculo.
     private void Awake()
     {
         if (camara == null) camara = Camera.main;
@@ -57,6 +77,7 @@ public class UnirGame : Minijuego
         }
     }
 
+    // Arranca: reinicia vidas y monedas, escucha el trazo y arma el primer nivel.
     public override void StartGame()
     {
         nivelActual = 0;
@@ -78,6 +99,7 @@ public class UnirGame : Minijuego
         trazo.Fallo -= AlFallar;
     }
 
+    // Pone a los personajes y los obstaculos del nivel actual y habilita el trazo.
     private void ArmarNivel()
     {
         NivelUnir nivel = niveles[nivelActual];
@@ -125,6 +147,7 @@ public class UnirGame : Minijuego
         dibujo.size = new Vector2(tamano.x / escala, altoSprite);
     }
 
+    // El trazo choco o se quedo sin tinta: -1 vida.
     private void AlFallar()
     {
         vidas--;
@@ -134,6 +157,7 @@ public class UnirGame : Minijuego
         StartCoroutine(DespuesDelFallo());
     }
 
+    // Espera para que se vea el error; despues termina (sin vidas) o deja intentar de nuevo.
     private IEnumerator DespuesDelFallo()
     {
         yield return new WaitForSeconds(segundosMostrarFallo);
@@ -142,12 +166,14 @@ public class UnirGame : Minijuego
         else trazo.Habilitar(niveles[nivelActual].Tinta, poku, amigo);
     }
 
+    // El trazo llego al otro personaje: lo hace caminar por la linea.
     private void AlUnir(Collider2D desde, Collider2D hasta)
     {
         SoundPlayer.Reproducir(sonidoUnio);
         StartCoroutine(Caminar(desde.transform));
     }
 
+    // Corrutina: el personaje recorre la linea, festeja, cobra y pasa al siguiente nivel.
     private IEnumerator Caminar(Transform caminante)
     {
         List<Vector3> puntos = trazo.Puntos;
@@ -163,6 +189,7 @@ public class UnirGame : Minijuego
 
         yield return Festejar(caminante);
 
+        // Monedas del nivel + bonus proporcional a la tinta que sobro.
         monedas += monedasPorNivel + Mathf.RoundToInt(bonusMaximoTinta * trazo.TintaRestante);
         textoMonedas.SetText("{0}", monedas);
         SoundPlayer.Reproducir(sonidoMoneda);
@@ -172,6 +199,7 @@ public class UnirGame : Minijuego
         else ArmarNivel();
     }
 
+    // Corrutina: dos saltitos.
     private IEnumerator Festejar(Transform personaje)
     {
         // El valor absoluto del seno da dos saltitos que terminan justo en el piso.
@@ -187,6 +215,7 @@ public class UnirGame : Minijuego
         personaje.position = piso;
     }
 
+    // Fin: gana si completo todos los niveles.
     private void Terminar()
     {
         trazo.Deshabilitar();
@@ -194,6 +223,7 @@ public class UnirGame : Minijuego
         Terminar(new MinigameResult(nivelActual, monedas, true, completoTodos));
     }
 
+    // Convierte una fraccion de pantalla (0 a 1) a posicion del mundo.
     private Vector3 AMundo(Vector2 fraccionPantalla)
     {
         Vector3 mundo = camara.ViewportToWorldPoint(fraccionPantalla);

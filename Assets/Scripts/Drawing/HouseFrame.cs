@@ -1,5 +1,14 @@
 using UnityEngine;
 
+// ============================================================================
+// HouseFrame.cs
+// QUE HACE: el cuadro de la Sala de arte. Muestra el ultimo dibujo guardado y,
+//           con un tap, abre la pantalla de dibujo.
+// DONDE ESTA: en "Habitaciones/Sala de arte/CuadroDibujo" de SampleScene.
+// PARA CAMBIAR: tamano del dibujo dentro del marco -> anchoHueco.
+//               posicion/tamano del cuadro -> el Transform de CuadroDibujo.
+// ============================================================================
+
 // El cuadro colgado en la casa: muestra el ultimo dibujo guardado y un tap abre el atril.
 [RequireComponent(typeof(TouchTarget))]
 public class HouseFrame : MonoBehaviour
@@ -11,6 +20,7 @@ public class HouseFrame : MonoBehaviour
     [SerializeField] private SpriteRenderer dibujo;
 
     [Header("Hueco del marco")]
+    // [AJUSTE] Ancho del dibujo dentro del marco.
     // Ancho del hueco en unidades locales del marco: el dibujo se escala para llenarlo.
     [SerializeField] private float anchoHueco = 15f;
 
@@ -37,6 +47,7 @@ public class HouseFrame : MonoBehaviour
         DrawingStorage.Guardado -= Mostrar;
     }
 
+    // Al arrancar muestra el dibujo guardado (si hay).
     private void Start()
     {
         Texture2D guardado = DrawingStorage.Cargar();
@@ -45,6 +56,7 @@ public class HouseFrame : MonoBehaviour
         Destroy(guardado);
     }
 
+    // Tap en el cuadro: abre la pantalla de dibujo.
     private void AlTocar()
     {
         SoundPlayer.Reproducir(sonidoTocar);

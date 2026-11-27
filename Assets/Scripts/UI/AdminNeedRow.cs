@@ -1,6 +1,14 @@
 using TMPro;
 using UnityEngine;
 
+// ============================================================================
+// AdminNeedRow.cs
+// QUE HACE: una fila del panel de admin (para probar). Muestra el valor de una
+//           necesidad y tiene botones - y + para bajarla o subirla.
+// DONDE ESTA: en "Canvas/Admin/Panel/FilaHambre", "FilaHigiene", etc.
+// PARA CAMBIAR: cuanto sube/baja cada toque -> salto (Inspector de la fila).
+// ============================================================================
+
 // Una fila del panel de admin: muestra cuanto tiene una necesidad y la sube o baja de a saltos.
 public class AdminNeedRow : MonoBehaviour
 {
@@ -9,9 +17,11 @@ public class AdminNeedRow : MonoBehaviour
     [SerializeField] private TMP_Text textoValor;
 
     [Header("Necesidad")]
+    // Que necesidad controla esta fila.
     [SerializeField] private NeedType tipo;
 
     [Header("Valores")]
+    // [AJUSTE] Puntos que suma o resta cada boton.
     [SerializeField] private float salto = 10f;
 
     private int mostrado = -1;

@@ -1,6 +1,14 @@
 using System;
 using UnityEngine;
 
+// ============================================================================
+// CeldaCamino.cs  (minijuego "Camino a casa")
+// QUE HACE: una celda de la grilla. Se pinta segun su estado (normal,
+//           resaltada, acertada, error) y avisa cuando la tocan.
+// DONDE ESTA: es el prefab CeldaCamino; GrillaCamino crea una por casillero.
+// PARA CAMBIAR: los colores de cada estado -> los campos de Colores del prefab.
+// ============================================================================
+
 // Una celda de la grilla. Solo sabe pintarse segun su estado y avisar que la tocaron; si el toque
 // estuvo bien o mal lo decide CaminoGame.
 [RequireComponent(typeof(SpriteRenderer), typeof(TouchTarget))]
@@ -9,6 +17,7 @@ public class CeldaCamino : MonoBehaviour
     public enum Estado { Normal, Resaltada, Acertada, Error }
 
     [Header("Colores")]
+    // [AJUSTE] Color de cada estado.
     [SerializeField] private Color colorNormal = new Color(0.85f, 0.85f, 0.85f);
     [SerializeField] private Color colorResaltada = new Color(1f, 0.85f, 0.3f);
     [SerializeField] private Color colorAcertada = new Color(0.45f, 0.85f, 0.45f);
@@ -32,12 +41,14 @@ public class CeldaCamino : MonoBehaviour
     private void OnEnable() => touchTarget.Tocado += AvisarToque;
     private void OnDisable() => touchTarget.Tocado -= AvisarToque;
 
+    // La llama la grilla al crearla.
     public void Inicializar(Vector2Int posicion)
     {
         Posicion = posicion;
         CambiarEstado(Estado.Normal);
     }
 
+    // Cambia el color segun el estado.
     public void CambiarEstado(Estado estado)
     {
         switch (estado)

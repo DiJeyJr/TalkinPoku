@@ -1,6 +1,23 @@
 using System;
 using UnityEngine;
 
+// ============================================================================
+// MegaEvolution.cs
+// QUE HACE: la Mega Evolucion. Desde el nivel maximo, la XP que gana el jugador
+//           carga una barra de "Energia Mega". Con la barra llena se puede
+//           activar: Pokuchan pasa a Mega-Pokuchan por un tiempo y los
+//           minijuegos y cuidados rinden mas.
+// DONDE ESTA: en el objeto "Sistemas" de SampleScene. El boton es MegaButton.
+// PARA CAMBIAR (en Data/Progression/ProgressionConfig.asset, seccion Mega):
+//   - desde que nivel se carga -> Nivel Mega
+//   - cuanta energia hace falta -> Energia Mega
+//   - cuanto dura -> Minutos Mega
+//   - bonus de monedas -> Multiplicador Monedas Mega
+//   - bonus en comida/juegos/sueno -> Multiplicador Mega en NeedsConfig.asset
+// USO DESDE OTRO SCRIPT: MegaEvolution.Activa (true si esta activa ahora).
+// AVISA: EnergiaCambiada(fraccion 0..1), MegaCambiada(activa) y PrimeraVez.
+// ============================================================================
+
 // La Mega Evolucion: desde el nivel 50 las actividades cargan la Energia Mega, y con la barra
 // llena el jugador puede convertir a Pokuchan en Mega-Pokuchan por media hora. Mientras dura los
 // minijuegos pagan mas monedas (MinigameReward).
@@ -32,6 +49,7 @@ public class MegaEvolution : MonoBehaviour
     // Se calcula con la hora y no con un flag: los minijuegos lo leen sin tener este componente.
     public static bool Activa => megaHasta > DateTime.UtcNow.Ticks;
 
+    // Al abrir el juego: recupera la energia, hasta cuando dura y si ya vio el cartel.
     public static void Restaurar(int energiaGuardada, long megaHastaGuardada, bool presentadaGuardada)
     {
         energia = Mathf.Max(0, energiaGuardada);
@@ -40,9 +58,12 @@ public class MegaEvolution : MonoBehaviour
     }
 
     private ProgressionConfig Config => progreso.Config;
+    // true si ya llego al nivel de la Mega.
     public bool Desbloqueada => progreso.Nivel >= Config.NivelMega;
+    // true si se puede activar ahora (desbloqueada, no activa y con la barra llena).
     public bool Lista => Desbloqueada && !Activa && energia >= Config.EnergiaMega;
 
+    // Lo que muestra la barra del boton: tiempo restante si esta activa, carga si no.
     public float Fraccion
     {
         get
@@ -70,6 +91,7 @@ public class MegaEvolution : MonoBehaviour
         estabaActiva = Activa;
     }
 
+    // Mientras esta activa: revisa si se termino el tiempo y avisa una vez por segundo.
     private void Update()
     {
         if (!estabaActiva) return;
@@ -88,6 +110,7 @@ public class MegaEvolution : MonoBehaviour
         EnergiaCambiada?.Invoke(Fraccion);
     }
 
+    // La llama el boton Mega. Vacia la barra y arranca el tiempo.
     public void Activar()
     {
         if (!Lista) return;
@@ -125,6 +148,7 @@ public class MegaEvolution : MonoBehaviour
         EnergiaCambiada?.Invoke(Fraccion);
     }
 
+    // Cada vez que el jugador gana XP, la misma cantidad carga la barra de la Mega.
     private void AlPremiar(int xp)
     {
         // Mientras dura no se carga: si no, al terminar ya estaria lista para otra media hora.

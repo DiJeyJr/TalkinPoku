@@ -1,5 +1,19 @@
 using UnityEngine;
 
+// ============================================================================
+// PetEvolution.cs
+// QUE HACE: cambia el aspecto de Poku segun su evolucion. Al evolucionar (o al
+//           activar/terminar la Mega) hace el festejo: "pop" de tamano, cartel,
+//           sonido, vibracion, particulas y una micro pausa del juego. Al subir
+//           de nivel hace un salto.
+// DONDE ESTA: en el objeto "Poku" de SampleScene.
+// PARA CAMBIAR: que tan grande es el pop -> escalaPop / escalaPopMega.
+//               cuanto dura -> duracionPop. Pausas -> pausaNivel/Evolucion/Mega.
+//               cantidad de particulas -> particulasNivel/Evolucion/Mega.
+//               texto del cartel de evolucion -> Evolucionar() y AlCambiarMega().
+//               en que nivel evoluciona -> ProgressionConfig.asset (Etapas).
+// ============================================================================
+
 // Va en la mascota. Al arrancar le pone la apariencia de la etapa en la que esta, y cuando la
 // progresion la hace evolucionar la cambia con un "pop", el cartel y un sonido. Lo mismo al
 // activarse y terminarse la Mega Evolucion. Tambien festeja la subida de nivel con un salto.
@@ -16,9 +30,11 @@ public class PetEvolution : MonoBehaviour
     [SerializeField] private LevelUpBanner cartel;
 
     [Header("Feedback")]
+    // [AJUSTE] Cuanto crece en el pop (1.35 = 35% mas grande).
     [SerializeField] private float escalaPop = 1.35f;
     [SerializeField] private float escalaPopMega = 1.5f;
     [SerializeField] private float duracionPop = 0.6f;
+    // [AJUSTE] Segundos que se congela el juego en cada festejo.
     // Todo queda quieto un instante en el pico del pop, asi el ojo registra el cambio. Mas de 0.3 s
     // ya se lee como que el juego se trabo.
     [SerializeField] private float pausaNivel = 0.08f;
@@ -28,6 +44,7 @@ public class PetEvolution : MonoBehaviour
     [Header("Particulas")]
     // Opcional: un ParticleSystem hijo de la mascota, con Play On Awake apagado.
     [SerializeField] private ParticleSystem particulas;
+    // [AJUSTE] Particulas de cada festejo.
     [SerializeField] private int particulasNivel = 12;
     [SerializeField] private int particulasEvolucion = 25;
     [SerializeField] private int particulasMega = 40;
@@ -38,7 +55,9 @@ public class PetEvolution : MonoBehaviour
     private PetMoodController cara;
     private PetJuice juice;
     private Vector3 escalaBase;
+    // Escala de la evolucion actual (sale de PetAppearance.Escala).
     private float escalaEtapa = 1f;
+    // Cuanto extra crece por el pop (vuelve a 0 de a poco).
     private float extra;
     private int etapaActual;
     private bool pausado;
@@ -75,6 +94,7 @@ public class PetEvolution : MonoBehaviour
         Aplicar(progreso.Config.AparienciaPara(progreso.Nivel));
     }
 
+    // Termina la pausa cuando corresponde y achica el pop de a poco.
     private void Update()
     {
         // Tiempo sin escala: con timeScale en 0 Time.time no avanza y la pausa no terminaria nunca.
@@ -86,6 +106,7 @@ public class PetEvolution : MonoBehaviour
         transform.localScale = escalaBase * escalaEtapa * (1f + extra);
     }
 
+    // Cambio de etapa (evolucion). Si subio, festeja con cartel.
     private void Evolucionar(int etapa)
     {
         // Reiniciar desde el panel de admin tambien cambia de etapa, pero para atras: eso no se festeja.
@@ -99,6 +120,7 @@ public class PetEvolution : MonoBehaviour
             escalaPop, pausaEvolucion, particulasEvolucion);
     }
 
+    // Se activo o termino la Mega: cambia la apariencia y muestra el cartel.
     private void AlCambiarMega(bool activa)
     {
         string nombre = progreso.Config.Etapas[etapaActual].nombre;
@@ -115,6 +137,7 @@ public class PetEvolution : MonoBehaviour
         Impacto(pausaNivel, particulasNivel);
     }
 
+    // Pop + sonido + cartel + impacto.
     private void Festejar(string mensaje, float escala, float pausa, int cantidadParticulas)
     {
         extra = escala - 1f;
@@ -123,6 +146,7 @@ public class PetEvolution : MonoBehaviour
         Impacto(pausa, cantidadParticulas);
     }
 
+    // Vibracion + particulas + micro pausa.
     private void Impacto(float pausa, int cantidadParticulas)
     {
         Vibracion.Vibrar();
@@ -130,6 +154,7 @@ public class PetEvolution : MonoBehaviour
         Pausar(pausa);
     }
 
+    // Congela el juego (timeScale 0) por unos segundos.
     private void Pausar(float segundos)
     {
         if (segundos <= 0f) return;
@@ -147,6 +172,7 @@ public class PetEvolution : MonoBehaviour
         Time.timeScale = escalaDeTiempo;
     }
 
+    // Pone las caras y el tamano de una evolucion.
     private void Aplicar(PetAppearance apariencia)
     {
         if (apariencia == null) return;

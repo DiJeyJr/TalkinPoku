@@ -3,6 +3,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// ============================================================================
+// ShopSlot.cs
+// QUE HACE: un producto en la tienda: icono, nombre, precio (o "Nivel N" con
+//           candado si esta bloqueado) y si ya lo tiene. No compra: avisa al
+//           estante (ShopShelf), que pregunta y cobra.
+// DONDE ESTA: es la plantilla "Producto" dentro de cada panel de la tienda.
+// PARA CAMBIAR: que tan apagado se ve lo que no alcanza -> el 0.55f en Refrescar().
+//               el texto del candado -> "Nivel {0}" en Refrescar().
+// ============================================================================
+
 // Un producto en el estante de la tienda: icono, nombre, precio y si ya lo tiene. No compra: avisa
 // al estante, que es el que pregunta y cobra.
 public class ShopSlot : MonoBehaviour
@@ -32,6 +42,7 @@ public class ShopSlot : MonoBehaviour
         boton.onClick.AddListener(() => alTocar?.Invoke(item));
     }
 
+    // Carga el item en el casillero (se llama una vez al armar la tienda).
     public void Mostrar(ItemDefinition nuevo, Sprite iconoDeMoneda, Action<ItemDefinition> tocado)
     {
         item = nuevo;
@@ -42,6 +53,7 @@ public class ShopSlot : MonoBehaviour
         nombre.SetText(item.Nombre);
     }
 
+    // Actualiza el estado: comprado, alcanza o no, bloqueado por nivel.
     public void Refrescar(int cantidad, bool comprable)
     {
         // La comida muestra cuantas tiene; ropa y muebles, que ya estan comprados.

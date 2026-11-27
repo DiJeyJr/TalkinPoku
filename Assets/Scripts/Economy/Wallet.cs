@@ -1,11 +1,27 @@
 using System;
 using UnityEngine;
 
+// ============================================================================
+// Wallet.cs
+// QUE HACE: la billetera. Guarda cuantas monedas y gemas tiene el jugador y deja
+//           sumar y gastar.
+// DONDE ESTA: en el objeto "Sistemas" de SampleScene.
+// PARA CAMBIAR: con cuanta plata arranca una partida nueva -> "Monedas Iniciales"
+//               y "Gemas Iniciales" en el Inspector de Sistemas (solo afecta a
+//               partidas nuevas; una partida guardada ya tiene su saldo).
+// USO DESDE OTRO SCRIPT: billetera.Sumar(CurrencyType.Monedas, 50);
+//                        billetera.Gastar(CurrencyType.Gemas, 5);
+//   Para reaccionar a "cuando junta X monedas", escuchar SaldoCambiado o agregar
+//   la logica en Sumar().
+// AVISA: SaldoCambiado(tipo, saldoNuevo). Lo escuchan los contadores de la UI.
+// ============================================================================
+
 // La billetera: cuantas monedas y gemas tiene el jugador. Avisa por evento cuando cambia el saldo,
 // asi los contadores de la UI no tienen que preguntar en cada frame.
 public class Wallet : MonoBehaviour
 {
     [Header("Saldo inicial")]
+    // [AJUSTE] Saldo de una partida nueva.
     [SerializeField] private int monedasIniciales = 100;
     [SerializeField] private int gemasIniciales = 5;
 
@@ -22,6 +38,7 @@ public class Wallet : MonoBehaviour
         return empezado ? (int[])saldo.Clone() : null;
     }
 
+    // Al abrir el juego: recupera el saldo guardado.
     public static void Restaurar(int[] guardado)
     {
         if (guardado == null || guardado.Length != saldo.Length) return;
@@ -30,12 +47,14 @@ public class Wallet : MonoBehaviour
         empezado = true;
     }
 
+    // Cuanto tiene de una moneda.
     public int Obtener(CurrencyType tipo)
     {
         Empezar();
         return saldo[(int)tipo];
     }
 
+    // Suma plata (premios de minijuegos, packs, admin) y avisa.
     public void Sumar(CurrencyType tipo, int cantidad)
     {
         if (cantidad <= 0) return;
@@ -44,6 +63,7 @@ public class Wallet : MonoBehaviour
         SaldoCambiado?.Invoke(tipo, saldo[(int)tipo]);
     }
 
+    // Resta plata si alcanza y avisa.
     // Devuelve false sin tocar nada si no alcanza: el que compra decide que mostrar.
     public bool Gastar(CurrencyType tipo, int cantidad)
     {

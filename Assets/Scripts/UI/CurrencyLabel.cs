@@ -1,6 +1,16 @@
 using TMPro;
 using UnityEngine;
 
+// ============================================================================
+// CurrencyLabel.cs
+// QUE HACE: el contador de monedas o gemas de la pantalla. Cuando cambia el
+//           saldo no salta de golpe: va contando hasta el numero nuevo.
+// DONDE ESTA: en "Canvas/SafeArea/HUD/Saldo/Monedas" y "Gemas", y en el saldo
+//             de la tienda.
+// PARA CAMBIAR: cuanto tarda en contar -> duracionConteo.
+//               que moneda muestra -> "Tipo" en el Inspector.
+// ============================================================================
+
 // Muestra el saldo de una moneda. Cuando cambia no salta al numero nuevo: lo va contando en un rato
 // corto, asi el jugador ve cuanto gano.
 public class CurrencyLabel : MonoBehaviour
@@ -13,11 +23,14 @@ public class CurrencyLabel : MonoBehaviour
     [SerializeField] private CurrencyType tipo;
 
     [Header("Feedback")]
+    // [AJUSTE] Segundos que tarda en contar hasta el saldo nuevo.
     [SerializeField] private float duracionConteo = 0.6f;
     // Opcional: late cada vez que entra una moneda que venia volando.
     [SerializeField] private Latido latido;
 
+    // Numero que se ve ahora (con decimales mientras cuenta).
     private float mostrado;
+    // Numero al que tiene que llegar.
     private int objetivo;
     private float velocidad;
     private int escrito = -1;
@@ -58,6 +71,7 @@ public class CurrencyLabel : MonoBehaviour
         if (cambiada == tipo) Contar(saldo);
     }
 
+    // Fija el nuevo objetivo y la velocidad para llegar en duracionConteo segundos.
     private void Contar(int saldo)
     {
         objetivo = saldo - retenidas;
@@ -65,6 +79,7 @@ public class CurrencyLabel : MonoBehaviour
         velocidad = Mathf.Abs(objetivo - mostrado) / duracionConteo;
     }
 
+    // Cada frame acerca el numero mostrado al objetivo.
     private void Update()
     {
         if (mostrado == objetivo) return;

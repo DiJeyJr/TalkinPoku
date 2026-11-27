@@ -1,6 +1,16 @@
 using TMPro;
 using UnityEngine;
 
+// ============================================================================
+// Ingrediente.cs  (minijuego "Cocina")
+// QUE HACE: un ingrediente del estante de la cocina. Se arrastra hasta la olla
+//           (usa Draggable). Muestra cuantos quedan; sin stock se ve apagado y
+//           no se puede agarrar.
+// DONDE ESTA: en "Cocina/Estante/Harina", "Huevo", "Leche", etc. (escena Cocina).
+// PARA CAMBIAR: que ingrediente es -> "Definicion" (asset Ing_*).
+//               color sin stock -> colorSinStock.
+// ============================================================================
+
 // Un ingrediente del estante. Se arrastra con el mismo Draggable de la casa y, si se suelta sobre
 // la olla, entra. Solo se usan los que se compraron en la tienda: muestra cuantos quedan y, sin
 // stock, se apaga y no se puede agarrar.
@@ -51,6 +61,7 @@ public class Ingrediente : MonoBehaviour
         if (id == definicion.Id) Actualizar();
     }
 
+    // Actualiza el texto "xN", el color y si se puede arrastrar.
     private void Actualizar()
     {
         int quedan = Mathf.Max(0, Disponibles);
@@ -60,6 +71,7 @@ public class Ingrediente : MonoBehaviour
         arrastre.enabled = quedan > 0;
     }
 
+    // Si se solto sobre la olla, entra.
     private void AlSoltar(Vector2 puntoMundo)
     {
         if (Disponibles > 0 && olla.Contiene(puntoMundo)) olla.Agregar(definicion);

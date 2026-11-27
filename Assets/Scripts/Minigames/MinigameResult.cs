@@ -1,6 +1,13 @@
+// ============================================================================
+// MinigameResult.cs
+// QUE HACE: el resultado de una partida de minijuego: puntaje, monedas ganadas,
+//           si se completo y si se gano. Cada minijuego lo crea al terminar con
+//           new MinigameResult(puntos, monedas, completo, gano).
+// ============================================================================
 public readonly struct MinigameResult
 {
     public int Score { get; }
+    // Monedas ganadas (antes del bonus de la Mega).
     public int Coins { get; }
     // false si el jugador abandono a la mitad, para no pagar partidas cortadas.
     public bool Completed { get; }

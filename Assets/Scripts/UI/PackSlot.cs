@@ -3,6 +3,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// ============================================================================
+// PackSlot.cs
+// QUE HACE: un pack en la pestana "Dinero real" de la tienda: muestra cuanto
+//           trae y cuanto cuesta. Al tocarlo avisa a TiendaPacks, que pide la
+//           puerta para adultos y cobra.
+// DONDE ESTA: es la plantilla "Plantilla" de "Tienda/Contenido/Paneles/PanelPacks".
+// PARA CAMBIAR: lo que muestra sale del asset del pack (Data/Packs/Pack_*).
+// ============================================================================
+
 // Un paquete en la tienda de dinero real: cuanto trae y cuanto sale. Como ShopSlot, no compra: avisa
 // a TiendaPacks, que pide la puerta para adultos y cobra.
 public class PackSlot : MonoBehaviour
@@ -23,6 +32,7 @@ public class PackSlot : MonoBehaviour
         boton.onClick.AddListener(() => alTocar?.Invoke(pack));
     }
 
+    // Llena el casillero con los datos del pack.
     public void Mostrar(PackDefinition nuevo, Sprite iconoDeMoneda, Action<PackDefinition> tocado)
     {
         pack = nuevo;

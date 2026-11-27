@@ -1,5 +1,19 @@
 using UnityEngine;
 
+// ============================================================================
+// PetMoodController.cs
+// QUE HACE: elige que cara mostrar en Poku segun su estado: dormido, acariciado,
+//           contento (reaccion de unos segundos) o la necesidad que este peor
+//           (hambre, sucio, aburrido, cansado). Si todo esta bien, cara normal.
+//           Ademas dispara la animacion y el sonido de cada emocion.
+// DONDE ESTA: en el objeto "Poku" de SampleScene.
+// PARA CAMBIAR: desde que valor se pone triste -> "Umbral Bajo" en NeedsConfig.asset.
+//               los sprites de las caras -> assets Data/Pet/Apariencia_*.
+//               que cara corresponde a cada necesidad -> el switch en Elegir().
+//               sonidos y volumen -> sonidoFeliz/Triste/Enojado y volumenEmocion.
+// USO DESDE OTRO SCRIPT: cara.Alegrar(segundos) pone la cara contenta un rato.
+// ============================================================================
+
 // Elige la cara de Poku. Dormido y acariciado duran lo que dura eso. Contento es una reaccion de
 // unos segundos (al volver de un minijuego o cuando la pelota le pega). El resto del tiempo manda
 // la necesidad que esta peor si ya se nota (debajo del umbral bajo de NeedsConfig), y si ninguna
@@ -28,7 +42,9 @@ public class PetMoodController : MonoBehaviour
     [SerializeField] private AudioClip sonidoFeliz;
     [SerializeField] private AudioClip sonidoTriste;
     [SerializeField] private AudioClip sonidoEnojado;
+    // [AJUSTE] Volumen de los sonidos de emocion.
     [SerializeField] private float volumenEmocion = 0.8f;
+    // [AJUSTE] Segundos minimos entre dos sonidos de emocion.
     // Si una necesidad oscila justo en el umbral, la emocion cambiaria seguido y sonaria en loop.
     [SerializeField] private float esperaEntreSonidos = 3f;
 
@@ -39,6 +55,7 @@ public class PetMoodController : MonoBehaviour
     private Emocion emocion;
     private bool arrancado;
     private float silencioHasta;
+    // true mientras dura la cara contenta de Alegrar().
     private bool reaccionando;
     private float contentoHasta;
     private bool acariciando;
@@ -48,6 +65,7 @@ public class PetMoodController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    // Escucha los cambios de necesidades y de sueno para actualizar la cara.
     private void OnEnable()
     {
         necesidades.NeedChanged += AlCambiar;
@@ -95,11 +113,13 @@ public class PetMoodController : MonoBehaviour
         Actualizar();
     }
 
+    // La evolucion actual (de donde salen las caras).
     public PetAppearance Apariencia => apariencia;
 
     // PetAccessories la escucha para acomodar la ropa a la etapa nueva.
     public event System.Action AparienciaCambiada;
 
+    // La llama PetEvolution al evolucionar: cambia el set de caras.
     public void CambiarApariencia(PetAppearance nueva)
     {
         if (nueva == null || nueva == apariencia) return;
@@ -118,6 +138,7 @@ public class PetMoodController : MonoBehaviour
         Actualizar();
     }
 
+    // Elige la cara y, si cambio la emocion, la expresa (animacion + sonido).
     private void Actualizar()
     {
         Sprite cara = Elegir(out Emocion nueva);
@@ -129,6 +150,7 @@ public class PetMoodController : MonoBehaviour
         if (arrancado) Expresar(nueva);
     }
 
+    // Animacion y sonido de una emocion nueva.
     private void Expresar(Emocion nueva)
     {
         if (nueva == Emocion.Ninguna) return;
@@ -152,6 +174,7 @@ public class PetMoodController : MonoBehaviour
         }
     }
 
+    // Decide la cara por prioridad: dormido > acariciado > contento > peor necesidad > normal.
     private Sprite Elegir(out Emocion nueva)
     {
         nueva = Emocion.Ninguna;
@@ -172,6 +195,7 @@ public class PetMoodController : MonoBehaviour
             return apariencia.Contento;
         }
 
+        // Busca la necesidad mas baja.
         NeedType peor = necesidadesBase[0];
         foreach (NeedType tipo in necesidadesBase)
         {
@@ -182,6 +206,7 @@ public class PetMoodController : MonoBehaviour
         // seguir con la cara normal.
         if (necesidades.Obtener(peor) < necesidades.UmbralBajo)
         {
+            // Cara y emocion segun cual es la peor.
             switch (peor)
             {
                 case NeedType.Hambre:

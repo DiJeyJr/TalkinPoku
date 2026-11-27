@@ -1,5 +1,13 @@
 using UnityEngine;
 
+// ============================================================================
+// Bed.cs
+// QUE HACE: la cama del dormitorio. Un tap acuesta a Poku o lo despierta.
+// DONDE ESTA: en "Habitaciones/Dormitorio/Cama" de SampleScene (usa TouchTarget).
+// PARA CAMBIAR: cuanta energia recupera durmiendo -> NeedsConfig.asset
+//               ("Energia Durmiendo Por Hora"). El sonido -> sonidoDormir.
+// ============================================================================
+
 // Cama del dormitorio: un tap acuesta o despierta a la mascota. Mientras duerme, NeedsSystem
 // recupera energia en vez de gastarla, y la despierta solo al llegar a 100.
 [RequireComponent(typeof(TouchTarget))]
@@ -28,6 +36,7 @@ public class Bed : MonoBehaviour
         toque.Tocado -= AlTocar;
     }
 
+    // Tap en la cama: invierte el estado (dormido <-> despierto).
     private void AlTocar()
     {
         if (necesidades == null) return;

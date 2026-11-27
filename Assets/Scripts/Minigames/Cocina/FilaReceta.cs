@@ -2,6 +2,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// ============================================================================
+// FilaReceta.cs  (minijuego "Cocina")
+// QUE HACE: una fila del libro de recetas: plato, nombre e ingredientes. Si la
+//           receta no se descubrio, muestra la silueta y "???".
+// DONDE ESTA: es el prefab FilaReceta; LibroDeRecetas crea una por receta.
+// PARA CAMBIAR: color de lo oculto -> colorOculto. Texto oculto -> "???" en Mostrar().
+// ============================================================================
+
 // Una fila del libro de recetas: el plato, el nombre y los ingredientes.
 public class FilaReceta : MonoBehaviour
 {
@@ -14,6 +22,7 @@ public class FilaReceta : MonoBehaviour
     [Header("Colores")]
     [SerializeField] private Color colorOculto = new Color(0.25f, 0.2f, 0.3f, 0.6f);
 
+    // Llena la fila con una receta, descubierta o no.
     public void Mostrar(RecipeDefinition receta, bool descubierta)
     {
         plato.sprite = receta.Sprite;

@@ -1,6 +1,16 @@
 using System;
 using UnityEngine;
 
+// ============================================================================
+// GrillaCamino.cs  (minijuego "Camino a casa")
+// QUE HACE: arma la grilla de celdas por codigo con el tamano que entra en la
+//           pantalla, y sabe ubicar objetos (las casas) en una celda.
+// DONDE ESTA: en el objeto "Grilla" de la escena Camino.
+// PARA CAMBIAR: cantidad de columnas y filas -> columnas / filas.
+//               cuanto alto de pantalla ocupa -> altoMaximo.
+//               separacion entre celdas -> relleno (1 = pegadas).
+// ============================================================================
+
 // Arma la grilla de celdas por codigo a partir de un prefab, con el tamano que entra en el ancho
 // de la camara. Asi no hay que acomodar veinte objetos a mano y anda en cualquier celular.
 public class GrillaCamino : MonoBehaviour
@@ -10,6 +20,7 @@ public class GrillaCamino : MonoBehaviour
     [SerializeField] private CeldaCamino prefabCelda;
 
     [Header("Tamano")]
+    // [AJUSTE] Tamano de la grilla.
     [SerializeField] private int columnas = 4;
     [SerializeField] private int filas = 5;
     // En unidades de mundo, a cada lado de la pantalla.
@@ -26,8 +37,10 @@ public class GrillaCamino : MonoBehaviour
 
     private CeldaCamino[,] celdas;
     private float tamanoCelda;
+    // Posicion de la celda (0, 0).
     private Vector3 origen;
 
+    // Calcula el tamano de celda y crea todas las celdas (solo la primera vez).
     public void Construir()
     {
         if (celdas != null) return;
@@ -72,6 +85,7 @@ public class GrillaCamino : MonoBehaviour
 
     public CeldaCamino Celda(Vector2Int posicion) => celdas[posicion.x, posicion.y];
 
+    // true si la posicion esta dentro de la grilla.
     public bool EstaAdentro(Vector2Int posicion)
     {
         return posicion.x >= 0 && posicion.x < columnas && posicion.y >= 0 && posicion.y < filas;

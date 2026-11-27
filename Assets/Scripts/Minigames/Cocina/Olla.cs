@@ -2,12 +2,23 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+// ============================================================================
+// Olla.cs  (minijuego "Cocina")
+// QUE HACE: la olla. Recibe los ingredientes que se sueltan encima (uno de cada
+//           tipo), los muestra, y se vacia al tocarla. No sabe de recetas.
+// DONDE ESTA: en "Cocina/Olla" de la escena Cocina.
+// PARA CAMBIAR: cuantos ingredientes entran -> cantidad de elementos de la
+//               lista "Lugares" (un SpriteRenderer por lugar).
+// AVISA: ContenidoCambiado cuando entra o sale algo.
+// ============================================================================
+
 // La olla: recibe los ingredientes que se sueltan encima, muestra cuales tiene y se vacia al
 // tocarla. No sabe de recetas; que sale lo decide CocinaGame.
 [RequireComponent(typeof(Collider2D))]
 public class Olla : MonoBehaviour
 {
     [Header("Referencias")]
+    // [AJUSTE] Capacidad de la olla.
     // Uno por ingrediente que entra: la cantidad de lugares es la capacidad de la olla.
     [SerializeField] private SpriteRenderer[] lugares;
     [SerializeField] private TouchTarget toque;
@@ -25,6 +36,7 @@ public class Olla : MonoBehaviour
         Mostrar();
     }
 
+    // Un tap en la olla la vacia.
     private void OnEnable()
     {
         if (toque != null) toque.Tocado += Vaciar;
@@ -35,6 +47,7 @@ public class Olla : MonoBehaviour
         if (toque != null) toque.Tocado -= Vaciar;
     }
 
+    // true si un punto cae sobre la olla.
     public bool Contiene(Vector2 puntoMundo)
     {
         return miCollider.OverlapPoint(puntoMundo);
@@ -56,6 +69,7 @@ public class Olla : MonoBehaviour
         return true;
     }
 
+    // Saca todo de la olla.
     public void Vaciar()
     {
         if (contenido.Count == 0) return;
@@ -65,6 +79,7 @@ public class Olla : MonoBehaviour
         ContenidoCambiado?.Invoke();
     }
 
+    // Prende un lugar por cada ingrediente que hay adentro.
     private void Mostrar()
     {
         for (int i = 0; i < lugares.Length; i++)

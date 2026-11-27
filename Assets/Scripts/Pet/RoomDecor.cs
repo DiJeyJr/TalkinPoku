@@ -2,6 +2,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// ============================================================================
+// RoomDecor.cs
+// QUE HACE: dibuja en la Sala principal los muebles que el jugador coloco. Cada
+//           mueble va en su lugar fijo (no se arrastran).
+// DONDE ESTA: en "Habitaciones/Sala principal" de SampleScene.
+// PARA CAMBIAR: donde van los dos cuadros -> lugaresCuadro (Inspector).
+//               donde va la lampara de mesa si no hay mesita -> lamparaSinMesita.
+//               donde va cualquier otro mueble -> "Posicion Inicial" de su asset.
+//               tamano de un mueble -> "Escala Mundo" de su asset.
+// ============================================================================
+
 // Va en la sala. Dibuja los muebles que el jugador coloco, cada uno en su lugar fijo: no se arrastran,
 // asi la sala siempre queda armada y nada tapa a Poku ni a los botones.
 public class RoomDecor : MonoBehaviour
@@ -12,11 +23,14 @@ public class RoomDecor : MonoBehaviour
     [SerializeField] private SpriteRenderer fondo;
 
     [Header("Lugares")]
+    // [AJUSTE] Posiciones de los cuadros en la pared (izquierda y derecha).
     // Los dos lugares de cuadro en la pared: el primero que se cuelga va al primero.
     [SerializeField] private Vector2[] lugaresCuadro = { new Vector2(-3.45f, 4.15f), new Vector2(3.45f, 4.15f) };
+    // [AJUSTE] Posicion de la lampara de mesa cuando no hay mesita.
     // Sin la mesita abajo, la lampara de mesa va al piso en el mismo lugar.
     [SerializeField] private Vector2 lamparaSinMesita = new Vector2(3.2f, -0.5f);
 
+    // Los objetos de mueble creados en la escena.
     private readonly List<GameObject> muebles = new List<GameObject>();
     // Los ids con los que se armo la sala la ultima vez.
     private readonly List<string> armados = new List<string>();
@@ -32,6 +46,7 @@ public class RoomDecor : MonoBehaviour
         inventario.Cambiado -= Refrescar;
     }
 
+    // Borra los muebles dibujados y los vuelve a crear segun lo que esta colocado.
     private void Refrescar()
     {
         // El inventario avisa por cualquier cambio (comer, comprar ropa): solo se rearma si cambio lo
@@ -45,12 +60,14 @@ public class RoomDecor : MonoBehaviour
         foreach (GameObject mueble in muebles) Destroy(mueble);
         muebles.Clear();
 
+        // Primero mira si hay mesita (cambia donde va la lampara de mesa).
         bool hayMesita = false;
         foreach (ItemDefinition item in ColocadosEnOrden())
         {
             if (item.Lugar == FurnitureSpot.Mesita) hayMesita = true;
         }
 
+        // Despues crea cada mueble en su posicion.
         int cuadros = 0;
         foreach (ItemDefinition item in ColocadosEnOrden())
         {
@@ -68,6 +85,7 @@ public class RoomDecor : MonoBehaviour
         }
     }
 
+    // Recorre los ids colocados y devuelve sus assets (solo muebles).
     private IEnumerable<ItemDefinition> ColocadosEnOrden()
     {
         foreach (string id in inventario.Colocados)
@@ -77,6 +95,7 @@ public class RoomDecor : MonoBehaviour
         }
     }
 
+    // Crea el GameObject del mueble con su sprite, escala, espejado y orden de dibujo.
     private GameObject Crear(ItemDefinition item, Vector2 posicion)
     {
         GameObject objeto = new GameObject(item.Id);

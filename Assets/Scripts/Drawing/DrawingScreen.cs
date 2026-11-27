@@ -1,6 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// ============================================================================
+// DrawingScreen.cs
+// QUE HACE: la pantalla del atril de dibujo: botones de herramienta (pincel,
+//           borrador), limpiar, guardar, cerrar, grosores y paleta de colores.
+//           Al abrirse carga el dibujo guardado; Guardar lo cuelga en el cuadro.
+// DONDE ESTA: en "Canvas/Pantallas/Dibujo" de SampleScene.
+// PARA CAMBIAR (Inspector de "Dibujo"):
+//   - los grosores del pincel -> radios (en pixeles, de finito a grueso)
+//   - los colores de la paleta -> colores
+//   - cuanto se agranda el boton elegido -> escalaElegido
+//   - con que grosor/color arranca -> ElegirGrosor(1) y ElegirColor(0) en OnEnable
+// ============================================================================
+
 // La pantalla del atril: herramientas, colores y grosores alrededor de la hoja. Al abrirse carga
 // lo que ya estaba dibujado; Guardar lo cuelga en el cuadro de la casa y cierra.
 public class DrawingScreen : MonoBehaviour
@@ -20,13 +33,16 @@ public class DrawingScreen : MonoBehaviour
     [SerializeField] private Transform paleta;
 
     [Header("Opciones")]
+    // [AJUSTE] Radios del pincel en pixeles (uno por boton de grosor).
     [SerializeField] private int[] radios = { 4, 8, 14 };
+    // [AJUSTE] Colores de la paleta (se crea un boton por color).
     [SerializeField] private Color[] colores =
     {
         new Color(0.13f, 0.1f, 0.15f), new Color(0.93f, 0.26f, 0.26f), new Color(1f, 0.6f, 0.15f),
         new Color(1f, 0.85f, 0.2f), new Color(0.35f, 0.75f, 0.3f), new Color(0.25f, 0.55f, 0.95f),
         new Color(0.62f, 0.38f, 0.85f), new Color(1f, 0.55f, 0.75f), new Color(0.55f, 0.35f, 0.2f),
     };
+    // [AJUSTE] Escala del boton elegido.
     [SerializeField] private float escalaElegido = 1.2f;
     // Los botones de grosor son invisibles encima del dibujo: agrandarlos no se ve. Se oscurecen los
     // que no estan elegidos.
@@ -36,8 +52,10 @@ public class DrawingScreen : MonoBehaviour
     [SerializeField] private AudioClip sonidoGuardar;
     [SerializeField] private AudioClip sonidoTocar;
 
+    // Los botones de color creados.
     private Button[] muestras;
 
+    // Conecta cada boton con su accion y crea un boton por color.
     private void Awake()
     {
         pincel.onClick.AddListener(() => ElegirHerramienta(DrawingTool.Pincel));
@@ -69,6 +87,7 @@ public class DrawingScreen : MonoBehaviour
         }
     }
 
+    // Al abrir la pantalla: carga el dibujo guardado y deja pincel, grosor medio y primer color.
     private void OnEnable()
     {
         Texture2D guardado = DrawingStorage.Cargar();
@@ -86,6 +105,7 @@ public class DrawingScreen : MonoBehaviour
         Resaltar(borrador, herramienta == DrawingTool.Borrador);
     }
 
+    // Pone el radio elegido y oscurece los botones de grosor que no estan elegidos.
     private void ElegirGrosor(int cual)
     {
         hoja.Grosor = radios[Mathf.Clamp(cual, 0, radios.Length - 1)];
@@ -100,11 +120,13 @@ public class DrawingScreen : MonoBehaviour
         if (hoja.Herramienta == DrawingTool.Borrador) ElegirHerramienta(DrawingTool.Pincel);
     }
 
+    // Agranda el boton elegido.
     private void Resaltar(Button boton, bool elegido)
     {
         boton.transform.localScale = Vector3.one * (elegido ? escalaElegido : 1f);
     }
 
+    // Guarda el dibujo (lo muestra el cuadro de la Sala de arte) y cierra la pantalla.
     private void Guardar()
     {
         DrawingStorage.Guardar(hoja.Textura);

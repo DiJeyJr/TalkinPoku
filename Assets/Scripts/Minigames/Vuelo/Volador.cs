@@ -4,17 +4,31 @@ using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
+// ============================================================================
+// Volador.cs  (minijuego "Vuelo")
+// QUE HACE: la mascota que vuela. Cada tap la hace aletear (sube). Se inclina
+//           segun si sube o baja. Avisa cuando despega, cuando pasa un obstaculo
+//           y cuando choca. Usa el dibujo de avion de la evolucion actual.
+// DONDE ESTA: en el objeto "Volador" de la escena Vuelo.
+// PARA CAMBIAR: fuerza del aleteo -> velocidadAleteo.
+//               cuanto se inclina -> gradosPorVelocidad, inclinacionMaxima/Minima.
+//               gravedad (que tan rapido cae) -> "Gravity Scale" del Rigidbody2D.
+// AVISA: Despego, PasoObstaculo y Choco.
+// ============================================================================
+
 // La mascota en el minijuego de vuelo: cada tap la hace aletear. Avisa cuando despega, cuando
 // pasa un obstaculo y cuando choca, pero no lleva el puntaje: eso es de VueloGame.
 [RequireComponent(typeof(Rigidbody2D))]
 public class Volador : MonoBehaviour
 {
     [Header("Vuelo")]
+    // [AJUSTE] Velocidad hacia arriba de cada aleteo.
     [SerializeField] private float velocidadAleteo = 8f;
 
     [Header("Inclinacion")]
     // Solo el dibujo: el Rigidbody2D tiene la rotacion congelada para que los choques no lo hagan girar.
     [SerializeField] private Transform dibujo;
+    // [AJUSTE] Inclinacion del dibujo.
     // Grados por cada unidad por segundo de velocidad vertical, con tope para arriba y para abajo.
     [SerializeField] private float gradosPorVelocidad = 4f;
     [SerializeField] private float inclinacionMaxima = 30f;
@@ -36,6 +50,7 @@ public class Volador : MonoBehaviour
     public event Action Choco;
 
     private Rigidbody2D body;
+    // Se pone en true con el tap (Update) y se usa en FixedUpdate.
     private bool quiereAletear;
     private bool choco;
 
@@ -47,6 +62,7 @@ public class Volador : MonoBehaviour
         PonerAvionDeLaEtapa();
     }
 
+    // Pone el sprite de avion de la evolucion actual (Poku, Pokucha, Pokuchan o Mega).
     private void PonerAvionDeLaEtapa()
     {
         // Sin config o sin dibujo para esa etapa queda el sprite que tiene la escena (el de Poku).
@@ -60,6 +76,7 @@ public class Volador : MonoBehaviour
 
     private void OnDisable() => EnhancedTouchSupport.Disable();
 
+    // Lee los taps y, en el primero, prende la fisica (despega).
     private void Update()
     {
         // Antes del return: despues del choque sigue cayendo, y se ve mejor si cae de nariz.
@@ -94,6 +111,7 @@ public class Volador : MonoBehaviour
         dibujo.localRotation = Quaternion.Euler(0f, 0f, angulo);
     }
 
+    // Aplica el aleteo en el paso de fisica.
     private void FixedUpdate()
     {
         if (!quiereAletear) return;
@@ -105,12 +123,14 @@ public class Volador : MonoBehaviour
         SoundPlayer.Reproducir(sonidoAleteo);
     }
 
+    // Paso por el hueco entre los tubos (trigger): +1 punto.
     private void OnTriggerEnter2D(Collider2D other)
     {
         // El unico trigger de la escena es el hueco entre los tubos.
         if (!choco) PasoObstaculo?.Invoke();
     }
 
+    // Choco contra un tubo o el piso: fin.
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Despues del primer choque sigue cayendo y rebota contra el suelo: eso no es otra derrota.

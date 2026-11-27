@@ -1,10 +1,24 @@
 using UnityEngine;
 
+// ============================================================================
+// PetJuice.cs
+// QUE HACE: las animaciones de Poku hechas por codigo (sin Animator): se aplasta
+//           al tocarlo, rebota al comer, se sacude si esta enojado, salta si
+//           esta feliz, se desinfla si esta triste y respira en reposo.
+// DONDE ESTA: en el objeto "Poku" de SampleScene.
+// PARA CAMBIAR: la fuerza y duracion de cada animacion -> los campos de cada
+//               seccion en el Inspector de Poku (Aplastar, Rebote, Sacudida,
+//               Salto, Desinflarse, Respirar).
+// USO DESDE OTRO SCRIPT: juice.Aplastar(); juice.Rebotar(); juice.Sacudir();
+//                        juice.Saltar(); juice.Desinflar();
+// ============================================================================
+
 // Movimiento de Poku por codigo, sin Animator: se aplasta al tocarlo, rebota al comer, se sacude
 // cuando esta enojado o sucio y respira en reposo. Va en el mismo objeto que PetEvolution, que
 // tambien escribe la escala; los otros scripts solo llaman a Aplastar, Rebotar y Sacudir.
 public class PetJuice : MonoBehaviour
 {
+    // [AJUSTE] Todos los numeros de abajo: amplitud = cuanto se deforma, duracion = cuanto dura.
     [Header("Aplastar (tap y caricia)")]
     [SerializeField] private float aplastarAmplitud = 0.2f;
     [SerializeField] private float aplastarDuracion = 0.4f;
@@ -76,6 +90,8 @@ public class PetJuice : MonoBehaviour
         tAplastar = tRebote = tSacudida = tSalto = tDesinflar = float.PositiveInfinity;
     }
 
+    // ---------- Metodos para disparar cada animacion (ponen su reloj en 0) ----------
+
     // Se aplasta en vertical y se ensancha; vuelve con un pequeno rebote. La intensidad deja usar
     // la misma reaccion mas suave (la caricia) sin otra perilla.
     public void Aplastar(float intensidad = 1f)
@@ -90,6 +106,7 @@ public class PetJuice : MonoBehaviour
         tRebote = 0f;
     }
 
+    // Se tambalea de costado (rotacion).
     public void Sacudir()
     {
         tSacudida = 0f;
@@ -108,6 +125,7 @@ public class PetJuice : MonoBehaviour
         tDesinflar = 0f;
     }
 
+    // Cada frame combina todas las animaciones activas en una sola escala, posicion y rotacion.
     // LateUpdate y no Update: asi corre despues del pop de PetEvolution y se compone sobre el.
     private void LateUpdate()
     {
@@ -122,6 +140,7 @@ public class PetJuice : MonoBehaviour
         tDesinflar += dt;
         tRespirar = Mathf.Repeat(tRespirar + dt, respirarPeriodo);
 
+        // "y" es el factor de alto: 1 = normal, menos de 1 = aplastado, mas de 1 = estirado.
         float y = 1f;
         y *= 1f - aplastarAmplitud * fuerzaAplastar *
             Oscilar(tAplastar, aplastarDuracion, aplastarOscilaciones, aplastarAmortiguacion);
@@ -156,9 +175,11 @@ public class PetJuice : MonoBehaviour
         altura = 0f;
         float t = tSalto;
 
+        // 1) Anticipacion: se agacha.
         if (t < saltoAnticipacion)
             return 1f - saltoAplaste * Mathf.Sin(Mathf.PI * t / saltoAnticipacion);
 
+        // 2) Vuelo: sube y baja.
         t -= saltoAnticipacion;
         if (t < saltoVuelo)
         {
@@ -169,6 +190,7 @@ public class PetJuice : MonoBehaviour
             return 1f + saltoEstiramiento * Mathf.Abs(2f * u - 1f);
         }
 
+        // 3) Aterrizaje: se aplasta al caer.
         t -= saltoVuelo;
         if (t < saltoAterrizaje)
             return 1f - saltoAplaste * Mathf.Sin(Mathf.PI * t / saltoAterrizaje);
@@ -184,6 +206,7 @@ public class PetJuice : MonoBehaviour
         return u < 0.25f ? Mathf.SmoothStep(0f, 1f, u / 0.25f) : Mathf.SmoothStep(1f, 0f, (u - 0.25f) / 0.75f);
     }
 
+    // Angulo de la sacudida: oscila rapido y se va apagando.
     private float Sacudida()
     {
         if (tSacudida >= sacudidaDuracion) return 0f;

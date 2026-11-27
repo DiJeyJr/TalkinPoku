@@ -3,6 +3,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// ============================================================================
+// RoomIndicator.cs
+// QUE HACE: muestra en que habitacion esta el jugador: el nombre arriba y una
+//           fila de iconos abajo (uno por habitacion). Tocar un icono lleva a
+//           esa habitacion.
+// DONDE ESTA: en "Canvas/SafeArea/HUD/IndicadorHabitacion" de SampleScene.
+// PARA CAMBIAR: los iconos -> lista "Iconos" (mismo orden que las habitaciones
+//               de RoomNavigator). Tamano -> ladoIcono. Cuanto se agranda el
+//               actual -> escalaActiva. Colores -> seccion Colores.
+// ============================================================================
+
 // Muestra en que habitacion esta el jugador: el nombre arriba y abajo un icono por habitacion
 // (un puntito si todavia no tiene icono). Tocar uno lleva a esa habitacion.
 // Se entera por el evento del RoomNavigator, asi no revisa nada en Update.
@@ -15,8 +26,10 @@ public class RoomIndicator : MonoBehaviour
     [SerializeField] private Image puntoPrefab;
 
     [Header("Iconos")]
+    // [AJUSTE] Un icono por habitacion.
     // En el mismo orden que las habitaciones del navegador. Un lugar vacio deja el puntito.
     [SerializeField] private Sprite[] iconos;
+    // [AJUSTE] Tamano de los iconos y escala del activo.
     [SerializeField] private float ladoIcono = 90f;
     [SerializeField] private float escalaActiva = 1.25f;
 
@@ -37,6 +50,7 @@ public class RoomIndicator : MonoBehaviour
         if (navegador != null) navegador.HabitacionCambiada -= Actualizar;
     }
 
+    // Crea un icono-boton por habitacion.
     private void Start()
     {
         if (navegador == null) return;
@@ -77,6 +91,7 @@ public class RoomIndicator : MonoBehaviour
         return iconos != null && i < iconos.Length && iconos[i] != null;
     }
 
+    // Pone el nombre de la habitacion y resalta su icono.
     private void Actualizar(int indice)
     {
         if (nombre != null) nombre.SetText(navegador.NombreActual);

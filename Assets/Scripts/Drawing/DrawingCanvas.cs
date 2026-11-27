@@ -2,6 +2,19 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+// ============================================================================
+// DrawingCanvas.cs
+// QUE HACE: la hoja donde se dibuja con el dedo. Pinta circulos de color sobre
+//           una textura siguiendo el dedo (pincel) o con el color del fondo
+//           (borrador).
+// DONDE ESTA: en "Canvas/Pantallas/Dibujo/Fondo/Hoja" de SampleScene (RawImage).
+// PARA CAMBIAR: color del fondo de la hoja -> "Fondo" (Inspector).
+//               cuanto mas grande es el borrador que el pincel -> el 1.5f en Radio().
+//               tamano de la hoja en pixeles -> DrawingStorage.Ancho / Alto.
+//               colores y grosores disponibles -> DrawingScreen.
+// ============================================================================
+
+// Herramientas de dibujo.
 public enum DrawingTool { Pincel, Borrador }
 
 // La hoja del atril: pinta sobre una textura siguiendo el dedo. Entre dos eventos de arrastre el
@@ -11,8 +24,10 @@ public enum DrawingTool { Pincel, Borrador }
 public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
 {
     [Header("Pincel")]
+    // [AJUSTE] Color de la hoja vacia (y del borrador).
     [SerializeField] private Color fondo = Color.white;
 
+    // Estado actual del pincel (lo cambia DrawingScreen con los botones).
     public DrawingTool Herramienta { get; set; } = DrawingTool.Pincel;
     public Color ColorActual { get; set; } = Color.black;
     public int Grosor { get; set; } = 8;
@@ -20,7 +35,9 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
 
     private RawImage imagen;
     private Texture2D textura;
+    // Copia de los pixeles en memoria: se pinta aca y despues se sube a la textura.
     private Color32[] pixeles;
+    // Ultimo punto pintado (para unir con el siguiente).
     private Vector2 anterior;
     // Subir la textura entera a la placa es caro, y OnDrag puede llegar varias veces por frame: los
     // trazos se juntan y se aplican una sola vez en LateUpdate.
@@ -49,6 +66,7 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
         if (textura != null) Destroy(textura);
     }
 
+    // Pinta toda la hoja con el color de fondo (boton Limpiar).
     public void Limpiar()
     {
         Preparar();
@@ -70,12 +88,14 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
         Aplicar();
     }
 
+    // Unity lo llama al apoyar el dedo sobre la hoja: pinta un punto.
     public void OnPointerDown(PointerEventData evento)
     {
         if (!APixel(evento, out anterior)) return;
         Estampar(anterior);
     }
 
+    // Unity lo llama al arrastrar: pinta circulos en linea desde el punto anterior al actual.
     public void OnDrag(PointerEventData evento)
     {
         if (!APixel(evento, out Vector2 actual)) return;
@@ -85,6 +105,7 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
         anterior = actual;
     }
 
+    // Una vez por frame, si hubo trazos, los sube a la textura.
     private void LateUpdate()
     {
         if (!sucia) return;
@@ -92,12 +113,14 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
         Aplicar();
     }
 
+    // Radio del circulo en pixeles. El borrador es mas grande que el pincel.
     private int Radio()
     {
         if (Herramienta == DrawingTool.Borrador) return Mathf.RoundToInt(Grosor * 1.5f);
         return Grosor;
     }
 
+    // Convierte la posicion del dedo en pantalla a un pixel de la textura.
     private bool APixel(PointerEventData evento, out Vector2 pixel)
     {
         pixel = Vector2.zero;
@@ -108,6 +131,7 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
         return true;
     }
 
+    // Pinta un circulo lleno en "centro" con el color actual (o el fondo si es borrador).
     private void Estampar(Vector2 centro)
     {
         Color32 c = Herramienta == DrawingTool.Borrador ? (Color32)fondo : (Color32)ColorActual;
@@ -127,6 +151,7 @@ public class DrawingCanvas : MonoBehaviour, IPointerDownHandler, IDragHandler
         }
     }
 
+    // Copia los pixeles a la textura y la sube a la placa de video.
     private void Aplicar()
     {
         textura.SetPixels32(pixeles);

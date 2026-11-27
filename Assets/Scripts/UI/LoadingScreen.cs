@@ -1,12 +1,22 @@
 using System.Collections;
 using UnityEngine;
 
+// ============================================================================
+// LoadingScreen.cs
+// QUE HACE: la pantalla de carga al abrir el juego. Se queda un momento y
+//           despues se desvanece.
+// DONDE ESTA: en "Canvas/PantallaCarga" de SampleScene.
+// PARA CAMBIAR: cuanto se ve -> segundosVisible. Cuanto tarda en desvanecerse
+//               -> segundosFundido.
+// ============================================================================
+
 // La pantalla de carga de Martina al abrir el juego: queda un momento y se desvanece. Tapa todo
 // mientras se restaura el guardado y se arma la casa, que es lo que tarda en el primer cuadro.
 [RequireComponent(typeof(CanvasGroup))]
 public class LoadingScreen : MonoBehaviour
 {
     [Header("Tiempos")]
+    // [AJUSTE] Segundos visible y segundos de desvanecido.
     [SerializeField] private float segundosVisible = 1.5f;
     [SerializeField] private float segundosFundido = 0.4f;
 
@@ -18,6 +28,7 @@ public class LoadingScreen : MonoBehaviour
 
     private void OnDestroy() => Tapando = false;
 
+    // Corrutina: espera, baja la transparencia de a poco y se apaga.
     private IEnumerator Start()
     {
         CanvasGroup grupo = GetComponent<CanvasGroup>();

@@ -4,6 +4,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+// ============================================================================
+// InventorySlot.cs
+// QUE HACE: un casillero de las bandejas de inventario (comida, armario,
+//           decorar). Muestra icono, nombre y cantidad. Avisa cuando se lo toca
+//           o se lo arrastra; la bandeja (InventoryTray) decide que hacer.
+// DONDE ESTA: es la plantilla "Objeto" dentro de cada bandeja
+//             (BandejaComida, BandejaArmario, BandejaDecorar).
+// ============================================================================
+
 // Un objeto en la bandeja de inventario. La ropa y los muebles se tocan para ponerlos o sacarlos;
 // la comida se arrastra hasta Poku. El arrastre lo maneja la bandeja: aca solo se avisa.
 public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -34,6 +43,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         lista = GetComponentInParent<ScrollRect>();
     }
 
+    // Llena el casillero con un item. "activo" = puesto o colocado (marco de equipado).
     public void Mostrar(ItemDefinition item, int cuantos, bool activo)
     {
         Item = item;
@@ -45,12 +55,14 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         marco.sprite = activo ? marcoEquipado : marcoNormal;
     }
 
+    // Tap (sin arrastre).
     public void OnPointerClick(PointerEventData evento)
     {
         if (evento.dragging) return;
         Tocado?.Invoke(this);
     }
 
+    // Empieza un arrastre: si es de costado (o no es comida), mueve la lista; si es hacia arriba, agarra la comida.
     public void OnBeginDrag(PointerEventData evento)
     {
         Vector2 d = evento.delta;

@@ -4,6 +4,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// ============================================================================
+// PantallaResultado.cs
+// QUE HACE: el panel que aparece al terminar un minijuego: "¡Ganaste!" o
+//           "¡Perdiste!", puntos, monedas (contando) y XP, con botones
+//           Reintentar y Volver. No paga nada: solo muestra.
+// DONDE ESTA: en "Canvas/SafeArea/PanelResultado" de cada escena de minijuego.
+// PARA CAMBIAR: los titulos y colores -> tituloVictoria/Derrota, colorVictoria/Derrota.
+//               los textos de puntos/monedas/XP -> Mostrar().
+//               velocidad de la animacion -> segundosPop / segundosContador.
+// ============================================================================
+
 // Panel que aparece al terminar cualquier minijuego: si se gano o se perdio, el puntaje y lo que
 // se cobra. No paga ni cambia de escena: lee los numeros de MinigameReward y avisa con eventos
 // que boton se apreto, y MinigameFlow decide a donde ir.
@@ -21,12 +32,14 @@ public class PantallaResultado : MonoBehaviour
     [SerializeField] private ProgressionConfig progresion;
 
     [Header("Titulo")]
+    // [AJUSTE] Textos y colores del titulo.
     [SerializeField] private string tituloVictoria = "¡Ganaste!";
     [SerializeField] private string tituloDerrota = "¡Perdiste!";
     [SerializeField] private Color colorVictoria = new Color(1f, 0.85f, 0.2f);
     [SerializeField] private Color colorDerrota = new Color(0.8f, 0.8f, 0.85f);
 
     [Header("Animacion")]
+    // [AJUSTE] Duracion del "pop" de la tarjeta y del conteo de monedas.
     [SerializeField] private float segundosPop = 0.25f;
     [SerializeField] private float segundosContador = 1f;
 
@@ -34,6 +47,7 @@ public class PantallaResultado : MonoBehaviour
     [SerializeField] private AudioClip sonidoVictoria;
     [SerializeField] private AudioClip sonidoDerrota;
 
+    // Los escucha MinigameFlow.
     public event Action PidioReintentar;
     public event Action PidioVolver;
 
@@ -49,6 +63,7 @@ public class PantallaResultado : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    // Muestra el panel con los datos de la partida y arranca la animacion.
     public void Mostrar(MinigameResult resultado)
     {
         gameObject.SetActive(true);
@@ -70,6 +85,7 @@ public class PantallaResultado : MonoBehaviour
         StartCoroutine(Animar(monedas));
     }
 
+    // Corrutina: la tarjeta aparece con rebote y despues cuenta las monedas de 0 al total.
     private IEnumerator Animar(int monedas)
     {
         // Tiempo sin escala: si algun dia se pausa con timeScale 0, el panel igual aparece.

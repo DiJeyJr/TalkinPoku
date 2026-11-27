@@ -1,6 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// ============================================================================
+// MonedasVoladoras.cs
+// QUE HACE: el efecto de las monedas ganadas: aparecen en el centro de la
+//           pantalla y vuelan en curva hasta el contador. El contador suma cada
+//           moneda recien cuando llega.
+// DONDE ESTA: en "Canvas/MonedasVoladoras" de SampleScene. Lo dispara
+//             MinigameReward al volver de un minijuego.
+// PARA CAMBIAR: cuantas monedas vuelan como maximo -> maximoMonedas.
+//               tamano -> tamanoMoneda. Velocidad y forma del vuelo -> seccion
+//               Movimiento (duracionVuelo, curva, separacion...).
+// USO: monedasVoladoras.Lanzar(cantidad) ANTES de sumar las monedas a Wallet.
+// ============================================================================
+
 // Las monedas ganadas aparecen en el centro de la pantalla y vuelan en curva hasta el contador,
 // cada vez mas rapido. El saldo ya esta acreditado; el contador las va sumando recien cuando llegan.
 // Va en un RectTransform que cubre la pantalla, ultimo en el Canvas para dibujarse arriba de todo.
@@ -13,11 +26,13 @@ public class MonedasVoladoras : MonoBehaviour
     [SerializeField] private Sprite spriteMoneda;
 
     [Header("Monedas")]
+    // [AJUSTE] Monedas maximas que vuelan.
     // Se ganen 5 o 50, vuelan como mucho estas: cada una lleva una parte del premio.
     [SerializeField] private int maximoMonedas = 10;
     [SerializeField] private Vector2 tamanoMoneda = new Vector2(90f, 90f);
 
     [Header("Movimiento")]
+    // [AJUSTE] Tiempos (segundos) y distancias (unidades del Canvas) de la animacion.
     [SerializeField] private float radioAparicion = 160f;
     [SerializeField] private float duracionAparicion = 0.25f;
     [SerializeField] private float pausa = 0.2f;
@@ -31,12 +46,14 @@ public class MonedasVoladoras : MonoBehaviour
 
     private RectTransform contenedor;
     private RectTransform[] monedas;
+    // Por moneda: donde aparece, cuanto se curva y cuanto vale.
     private Vector2[] aparicion;
     private float[] desvio;
     private int[] valor;
     private float inicio;
     private int enVuelo;
 
+    // Crea todas las monedas una sola vez (pool) y las deja apagadas.
     private void Awake()
     {
         contenedor = (RectTransform)transform;
@@ -86,6 +103,7 @@ public class MonedasVoladoras : MonoBehaviour
         }
     }
 
+    // Cada frame mueve las monedas segun la fase: aparecer -> esperar -> volar -> llegar.
     private void Update()
     {
         if (enVuelo == 0) return;
@@ -138,6 +156,7 @@ public class MonedasVoladoras : MonoBehaviour
         if (!quedan) enVuelo = 0;
     }
 
+    // La moneda llego: se apaga y el contador suma su valor.
     private void Llegar(int i, bool conSonido)
     {
         if (!monedas[i].gameObject.activeSelf) return;

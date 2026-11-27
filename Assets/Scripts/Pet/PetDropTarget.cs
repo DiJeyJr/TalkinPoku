@@ -1,5 +1,15 @@
 using UnityEngine;
 
+// ============================================================================
+// PetDropTarget.cs
+// QUE HACE: es la "puerta de entrada" para afectar a Poku desde afuera. La
+//           comida, la pelota y los platos llaman a Comer() o Aplicar() de aca,
+//           y este script le pasa el efecto a NeedsSystem.
+// DONDE ESTA: en el objeto "Poku" de SampleScene.
+// PARA CAMBIAR: que pasa cuando Poku come (sonido, cara, XP, rebote, vibracion)
+//               -> el metodo Comer(). Cuanto tiempo queda contento -> segundosContento.
+// ============================================================================
+
 // Va en la mascota. Las actividades le aplican efectos por aca, asi ninguna necesita conocer al
 // NeedsSystem, y lo que pasa cuando come esta escrito una sola vez.
 [RequireComponent(typeof(Collider2D))]
@@ -11,6 +21,7 @@ public class PetDropTarget : MonoBehaviour
     [SerializeField] private Progression progreso;
 
     [Header("Feedback")]
+    // [AJUSTE] Segundos de cara contenta despues de comer.
     [SerializeField] private float segundosContento = 1.5f;
 
     [Header("Sonidos")]
@@ -28,11 +39,13 @@ public class PetDropTarget : MonoBehaviour
         juice = GetComponent<PetJuice>();
     }
 
+    // true si un punto del mundo cae sobre Poku (para saber si se le solto algo encima).
     public bool Contiene(Vector2 puntoMundo)
     {
         return miCollider.OverlapPoint(puntoMundo);
     }
 
+    // Suma una necesidad sin efectos extra.
     public void Aplicar(NeedType necesidad, float cantidad)
     {
         necesidades.Sumar(necesidad, cantidad);

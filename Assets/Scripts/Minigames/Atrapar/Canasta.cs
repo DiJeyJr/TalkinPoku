@@ -5,6 +5,17 @@ using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
+// ============================================================================
+// Canasta.cs  (minijuego "Atrapar ingredientes")
+// QUE HACE: la canasta de abajo. Se mueve inclinando el celular (acelerometro)
+//           o arrastrando el dedo. Avisa cuando atrapa algo; no cuenta puntos.
+// DONDE ESTA: en el objeto "Canasta" de la escena Atrapar.
+// PARA CAMBIAR: sensibilidad de la inclinacion -> tiltSensitivity.
+//               suavizado / velocidad con que sigue -> smoothing / followSpeed.
+//               jugar solo con el dedo -> destildar usarInclinacion.
+// AVISA: Atrapo(objeto).
+// ============================================================================
+
 // La canasta de abajo. Se mueve inclinando el celular o arrastrando el dedo, y avisa que atrapo,
 // pero no lleva puntos ni vidas: eso es de AtraparGame.
 [RequireComponent(typeof(Rigidbody2D))]
@@ -16,10 +27,12 @@ public class Canasta : MonoBehaviour
     [Header("Inclinacion")]
     // Si se apaga, solo se juega con el dedo (para probar o si el sensor anda mal).
     [SerializeField] private bool usarInclinacion = true;
+    // [AJUSTE] Sensibilidad de la inclinacion.
     // Unidades de mundo por cada g de inclinacion hacia el costado.
     [SerializeField] private float tiltSensitivity = 8f;
 
     [Header("Suavizado")]
+    // [AJUSTE] Suavizado del sensor y velocidad de seguimiento.
     // El de la clase 5: mas alto responde mas rapido pero tiembla mas.
     [SerializeField] private float smoothing = 5f;
     [SerializeField] private float followSpeed = 12f;
@@ -32,12 +45,14 @@ public class Canasta : MonoBehaviour
 
     private Rigidbody2D body;
     private float xMaxima;
+    // X a la que se quiere mover la canasta.
     private float xObjetivo;
     private int dedoActivo = -1;
     private float offsetDedo;
 
     private Vector3 rawAcceleration;
     private Vector3 smoothedAcceleration;
+    // Posicion de "reposo" del celular (la toma al calibrar).
     private Vector3 baselineAcceleration;
     private bool calibrarEnLaProximaLectura = true;
 
@@ -78,6 +93,7 @@ public class Canasta : MonoBehaviour
         calibrarEnLaProximaLectura = true;
     }
 
+    // Lee el dedo y, si no hay dedo, la inclinacion.
     private void Update()
     {
         LeerDedo();
@@ -86,6 +102,7 @@ public class Canasta : MonoBehaviour
         if (dedoActivo == -1 && InclinacionDisponible) LeerInclinacion();
     }
 
+    // Mueve el objetivo segun el dedo (en cualquier lugar de la pantalla).
     private void LeerDedo()
     {
         foreach (Touch touch in Touch.activeTouches)
@@ -113,6 +130,7 @@ public class Canasta : MonoBehaviour
         }
     }
 
+    // Mueve el objetivo segun cuanto se inclina el celular respecto del reposo.
     private void LeerInclinacion()
     {
         rawAcceleration = Accelerometer.current.acceleration.ReadValue();
@@ -135,6 +153,7 @@ public class Canasta : MonoBehaviour
         xObjetivo = Mathf.Lerp(xObjetivo, destino, followSpeed * Time.deltaTime);
     }
 
+    // Mueve la canasta con la fisica.
     private void FixedUpdate()
     {
         // MovePosition en vez de mover el transform: el Rigidbody2D Kinematic llega con la fisica y
@@ -142,6 +161,7 @@ public class Canasta : MonoBehaviour
         body.MovePosition(new Vector2(xObjetivo, body.position.y));
     }
 
+    // Algo entro a la canasta: lo apaga y avisa.
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Lo unico que entra en la canasta son objetos que caen; igual se chequea por si acaso.

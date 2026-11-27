@@ -1,6 +1,19 @@
 using System.Collections;
 using UnityEngine;
 
+// ============================================================================
+// MinigameReward.cs
+// QUE HACE: paga el premio del minijuego al volver a la casa: monedas (con el
+//           bonus de la Mega si esta activa), diversion para Poku, cara contenta
+//           y XP. Es el UNICO lugar que paga los minijuegos.
+// DONDE ESTA: en el objeto "Sistemas" de SampleScene.
+// PARA CAMBIAR: diversion por partida -> diversionPorPartida (Inspector de Sistemas).
+//               tiempo contento -> segundosContento.
+//               bonus de monedas de la Mega -> ProgressionConfig.asset
+//               ("Multiplicador Monedas Mega"). XP -> ProgressionConfig (fuente "Minijuego").
+//               cuantas monedas da cada minijuego -> el script de ese minijuego (XxxGame).
+// ============================================================================
+
 // Cobra la ultima partida al volver a la casa: acredita las monedas, le da a Poku la diversion y
 // lo pone contento unos segundos. Va en la casa y no en el minijuego porque aca viven la billetera
 // y las necesidades, y es el unico lugar que paga: un solo lugar para balancear.
@@ -14,7 +27,9 @@ public class MinigameReward : MonoBehaviour
     [SerializeField] private Progression progreso;
 
     [Header("Premio")]
+    // [AJUSTE] Diversion que suma cada partida completa.
     [SerializeField] private float diversionPorPartida = 25f;
+    // [AJUSTE] Segundos que Poku queda contento al volver.
     [SerializeField] private float segundosContento = 3f;
 
     // Cuanto va a cobrar esta partida. Lo usa tambien la pantalla de resultado, que no puede tener
@@ -32,12 +47,14 @@ public class MinigameReward : MonoBehaviour
         return monedas;
     }
 
+    // XP que da la partida (la de la fuente Minijuego en ProgressionConfig).
     public static int XpCobrada(MinigameResult resultado, ProgressionConfig config)
     {
         if (!resultado.Completed || config == null) return 0;
         return config.BuscarPremio(XpSource.Minijuego, out ProgressionConfig.Premio premio) ? premio.xp : 0;
     }
 
+    // Corrutina al arrancar la casa: si hay una partida pendiente, la paga.
     private IEnumerator Start()
     {
         if (!MinigameFlow.TomarResultado(out MinigameResult resultado)) yield break;

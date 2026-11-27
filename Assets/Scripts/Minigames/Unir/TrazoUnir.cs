@@ -6,6 +6,18 @@ using UnityEngine.UI;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
+// ============================================================================
+// TrazoUnir.cs  (minijuego "Unir personajes")
+// QUE HACE: la linea que se dibuja con el dedo (LineRenderer). Tiene que
+//           empezar sobre un personaje, gasta tinta segun lo largo, y avisa si
+//           llego al otro personaje o si fallo (choco o se quedo sin tinta).
+// DONDE ESTA: en el objeto "Trazo" de la escena Unir.
+// PARA CAMBIAR: colores de la linea -> colorNormal / colorFallo.
+//               que cuenta como obstaculo -> capaObstaculos.
+//               cuanta tinta hay -> el asset de cada nivel ("Tinta").
+// AVISA: Unio(desde, hasta) y Fallo.
+// ============================================================================
+
 // El trazo con el dedo: arranca sobre un personaje, gasta tinta y avisa si llego al otro o si
 // fallo. No sabe de vidas ni de monedas, eso lo decide UnirGame.
 [RequireComponent(typeof(LineRenderer))]
@@ -19,6 +31,7 @@ public class TrazoUnir : MonoBehaviour
     [Header("Umbrales")]
     // Un dedo quieto tiembla y generaria cientos de puntos. En mm para que pida lo mismo en cualquier pantalla.
     [SerializeField] private float distanciaMinimaMm = 1f;
+    // [AJUSTE] Capas que cuentan como obstaculo.
     [SerializeField] private LayerMask capaObstaculos;
 
     [Header("Colores")]
@@ -30,12 +43,14 @@ public class TrazoUnir : MonoBehaviour
     public event Action Fallo;
 
     public List<Vector3> Puntos => puntos;
+    // Fraccion de tinta que queda (1 = llena, 0 = vacia).
     public float TintaRestante => tintaTotal > 0f ? 1f - tintaUsada / tintaTotal : 0f;
 
     private LineRenderer linea;
     private readonly List<Vector3> puntos = new List<Vector3>();
     private Collider2D personajeA;
     private Collider2D personajeB;
+    // Personaje desde el que empezo el trazo.
     private Collider2D inicio;
     private float distanciaMinimaPx;
     private float tintaTotal;
@@ -80,6 +95,7 @@ public class TrazoUnir : MonoBehaviour
         dedoActivo = -1;
     }
 
+    // Borra la linea y recarga la tinta.
     private void Limpiar()
     {
         puntos.Clear();
@@ -92,6 +108,7 @@ public class TrazoUnir : MonoBehaviour
         ActualizarBarra();
     }
 
+    // Sigue al dedo: empezar, seguir o cortar el trazo.
     private void Update()
     {
         if (!habilitado) return;
@@ -114,6 +131,7 @@ public class TrazoUnir : MonoBehaviour
         }
     }
 
+    // El trazo solo empieza si el dedo cae sobre uno de los dos personajes.
     private void Empezar(Touch touch)
     {
         Vector3 punto = AMundo(touch.screenPosition);
@@ -126,6 +144,7 @@ public class TrazoUnir : MonoBehaviour
         AgregarPunto(punto);
     }
 
+    // Agrega un punto: gasta tinta, revisa choque con obstaculos y si llego al destino.
     private void Seguir(Touch touch)
     {
         // La distancia minima se mide en pantalla porque es la que recorre el dedo.
@@ -161,6 +180,7 @@ public class TrazoUnir : MonoBehaviour
         }
     }
 
+    // Pone la linea en rojo y avisa el fallo.
     private void Fallar()
     {
         // Queda en rojo hasta que UnirGame vuelva a habilitar, para que se vea donde fallo.

@@ -2,6 +2,22 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
+// ============================================================================
+// AtraparGame.cs  (minijuego "Atrapar ingredientes")
+// QUE HACE: las reglas del minijuego: un punto por cada ingrediente bueno
+//           atrapado y tres vidas. Se pierde una vida al atrapar algo malo o al
+//           dejar caer un ingrediente bueno. Sin vidas, termina la partida.
+// DONDE ESTA: en el objeto "Minijuego" de la escena Atrapar.
+// PARA CAMBIAR (Inspector de "Minijuego"):
+//   - vidas al empezar -> vidasIniciales
+//   - monedas por punto y tope de monedas -> monedasPorPunto / maximoMonedas
+//   - puntos para ganar -> puntosVictoria
+//   - velocidad/frecuencia de caida y dificultad -> CaidaSpawner (objeto "Spawner")
+// EJEMPLO DE CAMBIO TIPICO: "cada N puntos sumar una vida, sin pasar el maximo"
+//   -> en AlAtrapar(), despues de puntos++, agregar algo como:
+//      if (puntos % N == 0 && vidas < vidasIniciales) { vidas++; MostrarVidas(); }
+// ============================================================================
+
 // Reglas del minijuego de atrapar: un punto por ingrediente atrapado y tres vidas. Se pierde una
 // al atrapar algo malo o al dejar caer un ingrediente; sin vidas, termina la partida.
 public class AtraparGame : Minijuego
@@ -16,13 +32,16 @@ public class AtraparGame : Minijuego
     [SerializeField] private GameObject indicacionInicio;
 
     [Header("Vidas")]
+    // [AJUSTE] Vidas al empezar.
     [SerializeField] private int vidasIniciales = 3;
 
     [Header("Recompensa")]
+    // [AJUSTE] Monedas por punto y maximo de monedas por partida.
     [SerializeField] private int monedasPorPunto = 1;
     [SerializeField] private int maximoMonedas = 50;
 
     [Header("Victoria")]
+    // [AJUSTE] Puntos necesarios para que cuente como victoria.
     // Siempre termina sin vidas: se gana si antes se llego a este puntaje.
     [SerializeField] private int puntosVictoria = 25;
     // Tiempo con la indicacion en pantalla antes de que caiga lo primero, para acomodar el celular.
@@ -38,6 +57,7 @@ public class AtraparGame : Minijuego
     private int vidas;
     private bool terminado;
 
+    // Arranca la partida: reinicia puntos y vidas, escucha la canasta y el spawner.
     public override void StartGame()
     {
         puntos = 0;
@@ -54,6 +74,7 @@ public class AtraparGame : Minijuego
         StartCoroutine(EmpezarConDemora());
     }
 
+    // Muestra la indicacion un momento y despues empieza a caer cosas.
     private IEnumerator EmpezarConDemora()
     {
         if (indicacionInicio != null) indicacionInicio.SetActive(true);
@@ -62,6 +83,7 @@ public class AtraparGame : Minijuego
         spawner.Arrancar();
     }
 
+    // La canasta atrapo algo: bueno = +1 punto; malo = -1 vida.
     private void AlAtrapar(ObjetoQueCae objeto)
     {
         if (terminado) return;
@@ -81,6 +103,7 @@ public class AtraparGame : Minijuego
         }
     }
 
+    // Un ingrediente bueno llego al piso sin atraparlo.
     private void AlCaerseBueno()
     {
         if (terminado) return;
@@ -91,6 +114,7 @@ public class AtraparGame : Minijuego
         PerderVida();
     }
 
+    // Resta una vida y, si no quedan, termina.
     private void PerderVida()
     {
         vidas--;
@@ -100,6 +124,7 @@ public class AtraparGame : Minijuego
         if (vidas <= 0) Perder();
     }
 
+    // Actualiza el texto de vidas y prende/apaga los corazones.
     private void MostrarVidas()
     {
         if (textoVidas != null) textoVidas.SetText("{0}", vidas);
@@ -109,6 +134,7 @@ public class AtraparGame : Minijuego
         }
     }
 
+    // Fin de la partida: frena todo, calcula las monedas y avisa el resultado.
     private void Perder()
     {
         terminado = true;

@@ -1,11 +1,21 @@
 using UnityEngine;
 
+// ============================================================================
+// SafeArea.cs
+// QUE HACE: ajusta este objeto de UI a la "zona segura" del celular (sin el
+//           notch, la camara ni los bordes redondeados), para que ningun boton
+//           quede tapado.
+// DONDE ESTA: en "Canvas/SafeArea" de cada escena y en algunos paneles.
+// PARA CAMBIAR: nada. Todo lo que tiene que quedar visible va como hijo de SafeArea.
+// ============================================================================
+
 // Ajusta este RectTransform a la zona segura de la pantalla (sin notch ni bordes redondeados).
 // Todo el HUD va adentro; el fondo del juego sigue usando la pantalla entera.
 [RequireComponent(typeof(RectTransform))]
 public class SafeArea : MonoBehaviour
 {
     private RectTransform rectTransform;
+    // Lo ultimo aplicado, para no recalcular si no cambio nada.
     private Rect ultimaSafeArea;
     private int ultimoAncho;
     private int ultimoAlto;
@@ -26,6 +36,7 @@ public class SafeArea : MonoBehaviour
         }
     }
 
+    // Pone los anchors del RectTransform en los bordes de la zona segura.
     private void Aplicar()
     {
         Rect safeArea = Screen.safeArea;

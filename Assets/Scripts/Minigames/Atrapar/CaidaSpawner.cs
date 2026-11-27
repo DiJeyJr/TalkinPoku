@@ -1,6 +1,20 @@
 using System;
 using UnityEngine;
 
+// ============================================================================
+// CaidaSpawner.cs  (minijuego "Atrapar ingredientes")
+// QUE HACE: tira ingredientes buenos y objetos malos desde arriba. Crea todos
+//           los objetos al arrancar y los recicla (pool). La dificultad sube con
+//           el puntaje: caen mas rapido, mas seguido y con mas malos.
+// DONDE ESTA: en el objeto "Spawner" de la escena Atrapar.
+// PARA CAMBIAR (Inspector de "Spawner"):
+//   - velocidad de caida al inicio y maxima -> velocidad / velocidadMaxima
+//   - cada cuanto cae algo (inicio y minimo) -> intervalo / intervaloMinimo
+//   - proporcion de malos (inicio y maxima) -> proporcionMalos / proporcionMalosMaxima
+//   - con cuantos puntos llega a la dificultad maxima -> puntosParaMaximo
+//   - que ingredientes/objetos caen -> spritesBuenos / spritesMalos
+// ============================================================================
+
 // Tira ingredientes y objetos malos desde arriba. Los crea todos al arrancar y los recicla, igual
 // que ObstaculoSpawner en el vuelo, para no generar basura con un Instantiate por caida.
 public class CaidaSpawner : MonoBehaviour
@@ -9,11 +23,13 @@ public class CaidaSpawner : MonoBehaviour
     [SerializeField] private Camera camara;
     // Objeto apagado en la escena, con Rigidbody2D Dynamic sin gravedad y collider trigger.
     [SerializeField] private ObjetoQueCae modelo;
+    // [AJUSTE] Cuantos objetos hay en el pool (maximo en pantalla a la vez).
     [SerializeField] private int cantidad = 10;
     [SerializeField] private Sprite[] spritesBuenos;
     [SerializeField] private Sprite[] spritesMalos;
 
     [Header("Caida")]
+    // Altura donde aparecen y altura donde se reciclan.
     [SerializeField] private float yAparicion = 6f;
     [SerializeField] private float yReciclado = -6f;
     // Distancia al borde de la pantalla, para que no aparezcan cortados por la mitad.
@@ -22,6 +38,7 @@ public class CaidaSpawner : MonoBehaviour
     [SerializeField] private float giroMaximo = 90f;
 
     [Header("Dificultad")]
+    // [AJUSTE] Valores de inicio y de maxima dificultad.
     // Los primeros valores son los del arranque; con el puntaje se acercan a los maximos.
     [SerializeField] private float velocidad = 3f;
     [SerializeField] private float velocidadMaxima = 7f;
@@ -41,10 +58,12 @@ public class CaidaSpawner : MonoBehaviour
     private float xMaxima;
     private float proximoLanzamiento;
     private bool corriendo;
+    // Valores de dificultad actuales (entre el inicio y el maximo).
     private float velocidadActual;
     private float intervaloActual;
     private float proporcionMalosActual;
 
+    // Crea el pool de objetos apagados.
     private void Awake()
     {
         if (camara == null) camara = Camera.main;
@@ -63,12 +82,14 @@ public class CaidaSpawner : MonoBehaviour
         xMaxima = camara.ViewportToWorldPoint(Vector3.one).x - margenLateral;
     }
 
+    // Empieza a tirar objetos.
     public void Arrancar()
     {
         corriendo = true;
         proximoLanzamiento = Time.time;
     }
 
+    // Recalcula velocidad, intervalo y proporcion de malos segun los puntos.
     // Solo cambia los que se tiren de ahi en adelante: los que ya estan cayendo siguen igual.
     public void ActualizarDificultad(int puntos)
     {
@@ -78,6 +99,7 @@ public class CaidaSpawner : MonoBehaviour
         proporcionMalosActual = Mathf.Lerp(proporcionMalos, proporcionMalosMaxima, k);
     }
 
+    // Deja de tirar y frena los que estan cayendo.
     public void Frenar()
     {
         corriendo = false;
@@ -87,6 +109,7 @@ public class CaidaSpawner : MonoBehaviour
         }
     }
 
+    // Cada frame: tira uno nuevo cuando toca y recicla los que pasaron el piso.
     private void Update()
     {
         if (!corriendo) return;
@@ -107,6 +130,7 @@ public class CaidaSpawner : MonoBehaviour
         }
     }
 
+    // Toma un objeto libre del pool y lo tira desde arriba (bueno o malo al azar).
     private void Lanzar()
     {
         // El primero libre y no en ronda: en el tope sale uno cada 0,5 s y tarda casi 2 s en caer,

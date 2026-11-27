@@ -2,11 +2,25 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// ============================================================================
+// MinigameFlow.cs
+// QUE HACE: el flujo comun de todos los minijuegos: arranca el minijuego de la
+//           escena, cuando termina muestra la pantalla de resultado y despues
+//           reintenta o vuelve a la casa. Guarda el resultado para que la casa
+//           lo cobre (MinigameReward).
+// DONDE ESTA: en el objeto "Minijuego" de cada escena de minijuego.
+// PARA CAMBIAR: a que escena vuelve -> escenaCasa.
+// FLUJO: Start -> minijuego.StartGame() -> evento Finished -> MostrarResultado
+//        -> Reintentar (recarga la escena) o VolverACasa (carga SampleScene)
+//        -> en la casa, MinigameReward llama TomarResultado y paga.
+// ============================================================================
+
 // Arranca el minijuego de la escena, muestra el resultado y vuelve a la casa. Es el mismo para
 // todos los minijuegos: busca el Minijuego que tiene al lado y no sabe cual es.
 public class MinigameFlow : MonoBehaviour
 {
     [Header("Escenas")]
+    // [AJUSTE] Nombre de la escena de la casa.
     [SerializeField] private string escenaCasa = "SampleScene";
 
     [Header("Resultado")]
@@ -30,6 +44,7 @@ public class MinigameFlow : MonoBehaviour
         return habia;
     }
 
+    // Busca el minijuego y conecta los botones.
     private void Awake()
     {
         // Pidiendo la clase base, GetComponent encuentra cualquiera de los seis.
@@ -47,6 +62,7 @@ public class MinigameFlow : MonoBehaviour
         minijuego.StartGame();
     }
 
+    // Termino la partida: guarda el resultado (sumando si se reintento) y muestra la pantalla.
     private void MostrarResultado(MinigameResult resultado)
     {
         // El premio no se aplica aca sino en la casa (MinigameReward), que es donde viven las necesidades.
@@ -67,6 +83,7 @@ public class MinigameFlow : MonoBehaviour
         pantalla.Mostrar(resultadoPendiente.Value);
     }
 
+    // Vuelve a cargar la misma escena.
     private void Reintentar()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

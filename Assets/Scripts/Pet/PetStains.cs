@@ -1,11 +1,23 @@
 using UnityEngine;
 
+// ============================================================================
+// PetStains.cs
+// QUE HACE: maneja las manchas de suciedad sobre Poku. NeedsSystem dice cuantas
+//           tiene que haber (segun la higiene) y este script prende esas. Cuando
+//           la esponja borra una, le avisa a NeedsSystem para subir la higiene.
+// DONDE ESTA: en "Poku/Manchas" de SampleScene. Cada mancha es un hijo con Stain.
+// PARA CAMBIAR: el orden en que aparecen -> lista "Manchas" del Inspector.
+//               cuantas manchas como maximo / desde que higiene -> NeedsConfig.asset.
+//               XP por limpiar -> ProgressionConfig.asset (fuente "Limpiar").
+// ============================================================================
+
 // Las manchas de Poku. Cuantas hay lo decide NeedsSystem (la higiene se mide en manchas); este
 // script prende las que tocan y, cuando la esponja borra una, le avisa para que la descuente.
 public class PetStains : MonoBehaviour
 {
     [Header("Referencias")]
     [SerializeField] private NeedsSystem necesidades;
+    // [AJUSTE] Las manchas posibles.
     // En el orden en que aparecen: la primera es la que se ve apenas empieza a ensuciarse.
     [SerializeField] private Stain[] manchas;
     [SerializeField] private Progression progreso;
@@ -30,6 +42,7 @@ public class PetStains : MonoBehaviour
         Sincronizar();
     }
 
+    // La llama la esponja (Sponge) mientras se mueve.
     // Frota todas las que la esponja tiene abajo, no solo una: si cubre dos, limpia las dos. Devuelve
     // si toco alguna, mirado antes de frotar: la pasada que borra la ultima tambien hace espuma.
     public bool Frotar(Vector2 centro, float alcance, float distancia)
@@ -50,6 +63,7 @@ public class PetStains : MonoBehaviour
         if (tipo == NeedType.Higiene) Sincronizar();
     }
 
+    // Se borro una mancha: sube la higiene, suena y da XP.
     private void AlLimpiar()
     {
         // La mancha ya se apago antes de avisar: al descontarla, la cuenta de NeedsSystem da una
@@ -59,6 +73,7 @@ public class PetStains : MonoBehaviour
         if (progreso != null) progreso.Ganar(XpSource.Limpiar);
     }
 
+    // Prende o apaga manchas hasta que queden tantas como dice NeedsSystem.
     private void Sincronizar()
     {
         int objetivo = Mathf.Min(necesidades.Manchas, manchas.Length);

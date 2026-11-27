@@ -4,6 +4,21 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+// ============================================================================
+// CaminoGame.cs  (minijuego "Camino a casa")
+// QUE HACE: un "Simon dice" en grilla. Se muestra un camino desde la casa de
+//           Poku hasta la del amigo y hay que repetirlo tocando las celdas en
+//           orden. Cada camino completo sube un nivel (y el camino se alarga).
+//           Un error termina la partida.
+// DONDE ESTA: en el objeto "Minijuego" de la escena Camino.
+// PARA CAMBIAR (Inspector de "Minijuego"):
+//   - largo del primer camino -> largoBase (cada nivel suma 1)
+//   - velocidad con que se muestra -> segundosPorPasoMaximo / Minimo, nivelesHastaMinimo
+//   - monedas por nivel -> monedasPorNivel
+//   - niveles para ganar -> nivelesVictoria
+//   - tamano de la grilla -> GrillaCamino (objeto "Grilla")
+// ============================================================================
+
 // Reglas de Camino a casa, un Simon espacial: se muestra un camino desde la casa de Poku hasta la
 // del amigo y hay que repetirlo tocando las celdas en orden. Cada camino completo sube un nivel.
 public class CaminoGame : Minijuego
@@ -16,8 +31,10 @@ public class CaminoGame : Minijuego
     [SerializeField] private TMP_Text textoMonedas;
 
     [Header("Dificultad")]
+    // [AJUSTE] Pasos del primer nivel.
     // Pasos a tocar en el primer nivel; cada nivel suma uno.
     [SerializeField] private int largoBase = 3;
+    // [AJUSTE] Segundos que se muestra cada paso (baja con el nivel).
     // El tiempo por paso baja con el nivel, pero el camino crece: el total para memorizar sigue
     // subiendo. Con un tiempo fijo los niveles altos serian imposibles.
     [SerializeField] private float segundosPorPasoMaximo = 0.6f;
@@ -33,9 +50,11 @@ public class CaminoGame : Minijuego
     [SerializeField] private float segundosAntesDelResultado = 1f;
 
     [Header("Recompensa")]
+    // [AJUSTE] Monedas por cada camino completado.
     [SerializeField] private int monedasPorNivel = 3;
 
     [Header("Victoria")]
+    // [AJUSTE] Caminos a completar para ganar.
     // Se gana al completar esta cantidad de caminos. Ademas pone un techo: en una grilla de 4x5 los
     // caminos muy largos ya casi no entran.
     [SerializeField] private int nivelesVictoria = 10;
@@ -45,6 +64,7 @@ public class CaminoGame : Minijuego
     [SerializeField] private AudioClip sonidoNivel;
     [SerializeField] private AudioClip sonidoError;
 
+    // Las 4 direcciones posibles (sin diagonales).
     private static readonly Vector2Int[] Direcciones =
     {
         Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right
@@ -59,10 +79,12 @@ public class CaminoGame : Minijuego
     // Caminos completos en esta partida. Es tambien el puntaje.
     private int nivel;
     private int monedas;
+    // Indice del proximo paso que tiene que tocar el jugador.
     private int siguientePaso;
     // Apagado mientras se muestra el camino: un toque sin querer haria perder antes de empezar.
     private bool inputHabilitado;
 
+    // Arranca la partida: arma la grilla y juega el primer nivel.
     public override void StartGame()
     {
         nivel = 0;
@@ -77,6 +99,7 @@ public class CaminoGame : Minijuego
         StartCoroutine(JugarNivel(pausaAntesDeMostrar));
     }
 
+    // Corrutina de un nivel: genera el camino, pone las casas, lo muestra paso a paso y habilita tocar.
     private IEnumerator JugarNivel(float pausaInicial)
     {
         inputHabilitado = false;
@@ -106,6 +129,7 @@ public class CaminoGame : Minijuego
         inputHabilitado = true;
     }
 
+    // Busca un camino del largo pedido (si no sale, prueba con uno mas corto).
     private void GenerarCamino(int pasos)
     {
         // Si con ningun intento sale un camino de ese largo, se acepta uno mas corto antes que trabar el juego.
@@ -148,6 +172,7 @@ public class CaminoGame : Minijuego
         return true;
     }
 
+    // El jugador toco una celda: si es la correcta avanza; si no, pierde.
     private void AlTocarCelda(CeldaCamino celda)
     {
         if (!inputHabilitado) return;
@@ -165,6 +190,7 @@ public class CaminoGame : Minijuego
         if (siguientePaso == camino.Count) CompletarNivel();
     }
 
+    // Completo el camino: suma nivel y monedas; si llego a la meta, gana; si no, siguiente nivel.
     private void CompletarNivel()
     {
         inputHabilitado = false;
@@ -183,6 +209,7 @@ public class CaminoGame : Minijuego
         StartCoroutine(JugarNivel(pausaEntreNiveles));
     }
 
+    // Toco mal: muestra el error y la correcta, y termina.
     private void Perder(CeldaCamino celdaTocada)
     {
         inputHabilitado = false;

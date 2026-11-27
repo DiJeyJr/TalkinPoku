@@ -2,6 +2,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+// ============================================================================
+// BotonFeedback.cs
+// QUE HACE: hace que un boton se achique mientras se lo aprieta y suene al
+//           tocarlo.
+// DONDE ESTA: en casi todos los botones de la UI (salir, reintentar, etc).
+// PARA CAMBIAR: cuanto se achica -> escalaApretado. El sonido -> "Sonido".
+// ============================================================================
+
 // Feedback de un boton: se achica mientras se lo aprieta y hace "pop" cuando se lo toca.
 [RequireComponent(typeof(Button))]
 public class BotonFeedback : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
@@ -10,6 +18,7 @@ public class BotonFeedback : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     [SerializeField] private AudioClip sonido;
 
     [Header("Feedback")]
+    // [AJUSTE] Escala mientras esta apretado (0.92 = 8% mas chico).
     [SerializeField] private float escalaApretado = 0.92f;
 
     private Button boton;
@@ -29,6 +38,7 @@ public class BotonFeedback : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         Soltar();
     }
 
+    // Unity lo llama al apoyar el dedo: achica el boton.
     public void OnPointerDown(PointerEventData evento)
     {
         if (!boton.IsInteractable()) return;
@@ -38,6 +48,7 @@ public class BotonFeedback : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         apretado = true;
     }
 
+    // Unity lo llama al levantar el dedo: vuelve al tamano normal.
     public void OnPointerUp(PointerEventData evento)
     {
         Soltar();

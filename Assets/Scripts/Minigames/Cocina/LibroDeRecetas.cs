@@ -3,6 +3,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// ============================================================================
+// LibroDeRecetas.cs  (minijuego "Cocina")
+// QUE HACE: el libro de recetas: una fila por receta (descubierta o no) y el
+//           progreso "N de M". Mientras esta abierto, apaga la cocina de atras.
+// DONDE ESTA: en "Canvas/SafeArea/Libro" de la escena Cocina.
+// PARA CAMBIAR: el texto del progreso -> "{0} de {1}" en Mostrar().
+// ============================================================================
+
 // El libro de recetas: una fila por receta, con el plato y sus ingredientes si ya se descubrio, o
 // la silueta y signos de pregunta si no. Mientras esta abierto se apaga la cocina de atras, porque
 // el arrastre de los ingredientes lee el touch directo y no se entera de que hay UI encima.
@@ -15,6 +23,7 @@ public class LibroDeRecetas : MonoBehaviour
     [SerializeField] private TMP_Text textoProgreso;
     [SerializeField] private Button botonAbrir;
     [SerializeField] private Button botonCerrar;
+    // La cocina de atras (se apaga con el libro abierto).
     [SerializeField] private GameObject cocina;
 
     private readonly List<FilaReceta> filas = new List<FilaReceta>();
@@ -26,6 +35,7 @@ public class LibroDeRecetas : MonoBehaviour
         panel.SetActive(false);
     }
 
+    // Llena (o repinta) las filas y el contador de descubiertas.
     public void Mostrar(IReadOnlyList<RecipeDefinition> recetas)
     {
         // Las filas se crean la primera vez; despues solo se repintan.

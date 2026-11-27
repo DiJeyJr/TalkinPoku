@@ -5,6 +5,22 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+// ============================================================================
+// CocinaGame.cs  (minijuego "Cocina")
+// QUE HACE: las reglas de la cocina. Con 2 o 3 ingredientes en la olla, mezclar
+//           (sacudiendo el celular o con el boton Mezclar) busca si esa
+//           combinacion es una receta. Receta nueva paga mas que una repetida;
+//           una combinacion que no existe no gasta nada. El plato cocinado va a
+//           la despensa y aparece en la mesada de la casa.
+// DONDE ESTA: en el objeto "Minijuego" de la escena Cocina.
+// PARA CAMBIAR (Inspector de "Minijuego"):
+//   - recetas disponibles -> lista "Recetas" (assets Data/Cocina/Receta_*)
+//   - monedas por receta nueva / repetida / maximo -> monedasRecetaNueva,
+//     monedasRecetaRepetida, maximoMonedas
+//   - ingredientes minimos -> minimoIngredientes
+//   - cuantas mezclas hacen falta -> mezclasIniciales / mezclasMaximas
+// ============================================================================
+
 // Reglas de la cocina: con dos o tres ingredientes en la olla, mezclar (sacudiendo el celular o con
 // el boton Mezclar) busca la receta. Una nueva paga mas que una repetida y una que no existe no
 // cobra nada: es un juego de descubrir, y equivocarse tiene que ser gratis.
@@ -20,18 +36,23 @@ public class CocinaGame : Minijuego
     [SerializeField] private Button botonListo;
 
     [Header("Recetas")]
+    // [AJUSTE] Recetas que existen.
     [SerializeField] private RecipeDefinition[] recetas;
 
     [Header("Recompensa")]
+    // [AJUSTE] Monedas por receta nueva, por repetida y maximo por partida.
     [SerializeField] private int monedasRecetaNueva = 20;
     [SerializeField] private int monedasRecetaRepetida = 5;
     [SerializeField] private int maximoMonedas = 100;
 
     [Header("Feedback")]
+    // [AJUSTE] Ingredientes minimos para poder cocinar.
     [SerializeField] private int minimoIngredientes = 2;
+    // Segundos que se ve el plato cocinado.
     [SerializeField] private float segundosPlato = 1.5f;
 
     [Header("Dificultad")]
+    // [AJUSTE] Mezclas necesarias al inicio y como maximo.
     // Cuantas veces hay que mezclar (sacudir o apretar Mezclar) para que la olla cocine. Arranca en
     // las iniciales y con las recetas cocinadas se acerca al tope: no castiga equivocarse, pide mas trabajo.
     [SerializeField] private int mezclasIniciales = 1;
@@ -47,15 +68,18 @@ public class CocinaGame : Minijuego
     [SerializeField] private AudioClip sonidoRecetaRepetida;
     [SerializeField] private AudioClip sonidoPuaj;
 
+    // Clave de ingredientes (ej "harina+huevo") -> receta.
     private readonly Dictionary<string, RecipeDefinition> porClave = new Dictionary<string, RecipeDefinition>();
     private InputAction mezclar;
     private int monedas;
+    // Recetas cocinadas en esta partida (tambien es el puntaje).
     private int cocinadas;
     private float ocultarPlatoEn;
     private int mezclasNecesarias;
     private int mezclasHechas;
     private bool terminado;
 
+    // Arranca: arma el diccionario de recetas, se engancha al shake y al boton, y muestra el libro.
     public override void StartGame()
     {
         // Se arma una vez: despues, probar una combinacion es una sola consulta al diccionario.
@@ -88,6 +112,7 @@ public class CocinaGame : Minijuego
         if (olla != null) olla.ContenidoCambiado -= ReiniciarMezcla;
     }
 
+    // Mira si se apreto el boton Mezclar y esconde el plato cuando pasa el tiempo.
     private void Update()
     {
         if (terminado) return;
@@ -97,6 +122,7 @@ public class CocinaGame : Minijuego
         if (plato.enabled && Time.time >= ocultarPlatoEn) plato.enabled = false;
     }
 
+    // Una mezcla: cuando se juntan las necesarias, busca la receta y cocina (o "puaj").
     private void Cocinar()
     {
         // Con el libro abierto la olla esta apagada: sacudir ahi no cocina.
@@ -152,17 +178,20 @@ public class CocinaGame : Minijuego
         if (nueva) libro.Mostrar(recetas);
     }
 
+    // Si cambian los ingredientes de la olla, se vuelve a contar desde cero.
     private void ReiniciarMezcla()
     {
         mezclasHechas = 0;
     }
 
+    // Mezclas necesarias segun cuantas recetas se cocinaron.
     private void ActualizarDificultad()
     {
         float k = Avance(cocinadas, recetasParaMaximo, curvaDificultad);
         mezclasNecesarias = Mathf.RoundToInt(Mathf.Lerp(mezclasIniciales, mezclasMaximas, k));
     }
 
+    // Boton "Listo": termina la partida.
     private void Terminar()
     {
         if (terminado) return;

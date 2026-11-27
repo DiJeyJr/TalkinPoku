@@ -2,22 +2,45 @@ using System;
 using System.Globalization;
 using UnityEngine;
 
+// ============================================================================
+// NeedsSystem.cs
+// QUE HACE: el corazon de la mascota. Guarda las necesidades de Poku (hambre,
+//           higiene, diversion y energia, de 0 a 100), las hace bajar con el
+//           tiempo, las sube cuando se lo cuida y calcula la felicidad.
+//           Tambien maneja si esta dormido.
+// DONDE ESTA: en el objeto "Sistemas" de SampleScene.
+// PARA CAMBIAR: casi todos los numeros (cuanto baja por hora, valor inicial,
+//               umbrales, recuperacion durmiendo, bonus de la Mega) estan en el
+//               asset Data/NeedsConfig.asset, NO aca.
+//               Que tan rapido pasa el tiempo para probar -> multiplicadorTiempo
+//               (Inspector de Sistemas, o el panel de admin).
+// USO DESDE OTRO SCRIPT: necesidades.Sumar(NeedType.Hambre, 20);
+//                        necesidades.Obtener(NeedType.Energia);
+//                        necesidades.Dormir(true);
+// AVISA: NeedChanged(tipo, valor) cuando cambia un valor (lo escuchan las barras
+//        y la cara) y DormidoCambiado(bool) al dormirse o despertarse.
+// ============================================================================
+
 // Guarda el estado de las necesidades de la mascota y avisa cuando cambian. No conoce la UI ni
 // las habitaciones: las barras y las actividades se enganchan a los eventos.
 public class NeedsSystem : MonoBehaviour
 {
+    // Tope de cada necesidad.
     public const float Maximo = 100f;
 
     [Header("Referencias")]
+    // El asset con todos los numeros (Data/NeedsConfig.asset).
     [SerializeField] private NeedsConfig config;
 
     [Header("Debug")]
+    // [AJUSTE] Velocidad del tiempo para probar.
     // Para probar en el Editor sin esperar horas: con 3600 una hora de juego pasa en un segundo.
     [SerializeField] private float multiplicadorTiempo = 1f;
 
     public event Action<NeedType, float> NeedChanged;
     public event Action<bool> DormidoCambiado;
 
+    // Hambre, Higiene, Diversion y Energia, en el orden del enum NeedType.
     private readonly float[] valores = new float[4];
 
     public bool Dormido { get; private set; }
@@ -30,10 +53,12 @@ public class NeedsSystem : MonoBehaviour
         set => multiplicadorTiempo = value;
     }
 
+    // Felicidad = promedio de las otras cuatro.
     // Felicidad no se guarda: se calcula siempre, asi nunca queda desincronizada del resto.
     public float Felicidad =>
         (Obtener(NeedType.Hambre) + Obtener(NeedType.Higiene) + Obtener(NeedType.Diversion) + Obtener(NeedType.Energia)) / 4f;
 
+    // Cuantas manchas de suciedad tiene Poku segun su higiene (0 a ManchasMaximas).
     public int Manchas
     {
         get
@@ -43,10 +68,12 @@ public class NeedsSystem : MonoBehaviour
         }
     }
 
+    // Multiplicador de los cuidados: x2 (o lo que diga NeedsConfig) con la Mega activa, x1 sin ella.
     // Lo que rinde cada cuidado. Se mira en el momento y no se guarda: si la Mega termina, deja de valer.
     private float Bonus => MegaEvolution.Activa ? config.MultiplicadorMega : 1f;
     private float EnergiaDurmiendoPorHora => config.EnergiaDurmiendoPorHora * Bonus;
 
+    // Cuanta higiene representa cada mancha.
     private float TramoPorMancha => config.HigieneSinManchas / config.ManchasMaximas;
 
     // Ir a un minijuego recarga la escena de la casa, y con ella este componente. Lo estatico
@@ -55,18 +82,21 @@ public class NeedsSystem : MonoBehaviour
     // La de la casa mientras esta cargada, para que el guardado pueda sacarle una foto desde afuera.
     private static NeedsSystem enEscena;
 
+    // Para el guardado.
     // Desde un minijuego no hay casa cargada: se guarda la foto que quedo al salir.
     public static NeedsState Foto()
     {
         return enEscena != null ? enEscena.SacarFoto() : estadoAlSalir;
     }
 
+    // Al abrir el juego: recibe lo guardado.
     // Awake la toma igual que al volver de un minijuego y descuenta el tiempo que estuvo cerrada.
     public static void Restaurar(NeedsState guardado)
     {
         estadoAlSalir = guardado;
     }
 
+    // Arranca con lo guardado (o con el valor inicial) y descuenta el tiempo que paso afuera.
     private void Awake()
     {
         enEscena = this;
@@ -96,12 +126,14 @@ public class NeedsSystem : MonoBehaviour
         Avanzar(Mathf.Clamp(horas, 0f, config.HorasMaximasAusente));
     }
 
+    // Al salir de la casa (ir a un minijuego) deja una foto del estado.
     private void OnDestroy()
     {
         estadoAlSalir = SacarFoto();
         if (enEscena == this) enEscena = null;
     }
 
+    // Copia del estado actual con la hora, para guardar.
     private NeedsState SacarFoto()
     {
         return new NeedsState
@@ -112,11 +144,13 @@ public class NeedsSystem : MonoBehaviour
         };
     }
 
+    // Cada frame avanza el tiempo (deltaTime pasado a horas).
     private void Update()
     {
         Avanzar(Time.deltaTime * multiplicadorTiempo / 3600f);
     }
 
+    // Hace pasar "horas" de tiempo: baja las necesidades y, si duerme, recupera energia.
     // Recibe horas y no segundos porque al abrir la app se usa este mismo metodo con el tiempo que
     // estuvo cerrada (DateTime.UtcNow contra el momento en que se guardo).
     private void Avanzar(float horas)
@@ -132,6 +166,7 @@ public class NeedsSystem : MonoBehaviour
             Cambiar(NeedType.Energia, EnergiaDurmiendoPorHora * dormidas);
             if (horas < hastaLlenarse) return;
 
+            // Se lleno la energia: se despierta solo.
             Dormir(false);
             horas -= dormidas;
         }
@@ -148,6 +183,7 @@ public class NeedsSystem : MonoBehaviour
         Cambiar(NeedType.Diversion, -config.DecaimientoPorHora(NeedType.Diversion) * horas);
     }
 
+    // Lee el valor de una necesidad (0 a 100). Es lo que muestran las barras.
     public float Obtener(NeedType tipo)
     {
         if (tipo == NeedType.Felicidad) return Felicidad;
@@ -159,6 +195,7 @@ public class NeedsSystem : MonoBehaviour
         return valores[(int)tipo];
     }
 
+    // La llama PetStains cuando la esponja borra una mancha.
     // La ultima mancha deja la higiene en 100: banarlo lo deja limpio del todo.
     public void LimpiarMancha()
     {
@@ -182,6 +219,8 @@ public class NeedsSystem : MonoBehaviour
         Cambiar(NeedType.Higiene, Mathf.Min(nuevo, valores[i]) - valores[i]);
     }
 
+    // Sube (o baja, con negativo) una necesidad. Es lo que llaman la comida, la pelota, las caricias, etc.
+    // Lo que sube se multiplica por el Bonus de la Mega.
     public void Sumar(NeedType tipo, float cantidad)
     {
         // Felicidad no se sube directo: sube cuando sube cualquiera de las otras.
@@ -190,6 +229,7 @@ public class NeedsSystem : MonoBehaviour
         Cambiar(tipo, cantidad > 0f ? cantidad * Bonus : cantidad);
     }
 
+    // Lo acuesta (true) o lo despierta (false) y avisa.
     public void Dormir(bool dormir)
     {
         if (Dormido == dormir) return;
@@ -197,6 +237,7 @@ public class NeedsSystem : MonoBehaviour
         DormidoCambiado?.Invoke(Dormido);
     }
 
+    // Unico lugar donde se modifica un valor: lo limita entre 0 y 100 y avisa si cambio lo que se ve.
     private void Cambiar(NeedType tipo, float delta)
     {
         int i = (int)tipo;

@@ -2,6 +2,19 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// ============================================================================
+// ShopShelf.cs
+// QUE HACE: una pestana de la tienda (Comida, Ropa o Decoraciones). Crea un
+//           casillero (ShopSlot) por cada item de su categoria, ordenados por
+//           nivel, y maneja la compra: avisa si esta bloqueado o si no alcanza
+//           la plata, y si alcanza pide confirmacion y cobra.
+// DONDE ESTA: en "Canvas/Pantallas/Tienda/Contenido/Paneles/PanelComida",
+//             "PanelRopa" y "PanelDecoraciones" de SampleScene.
+// PARA CAMBIAR: los textos de los avisos -> Pedir().
+//               que items aparecen -> el catalogo (Data/Items/ItemCatalog.asset);
+//               aparecen los de la categoria de esta pestana con precio > 0.
+// ============================================================================
+
 // El estante de una pestana de la tienda: arma un ShopSlot por cada producto de su categoria y
 // cobra cuando el jugador confirma la compra.
 public class ShopShelf : MonoBehaviour
@@ -15,6 +28,7 @@ public class ShopShelf : MonoBehaviour
     [SerializeField] private Transform contenedor;
 
     [Header("Estante")]
+    // Que categoria de items vende esta pestana.
     [SerializeField] private ItemCategory categoria;
     [SerializeField] private Sprite iconoMonedas;
     [SerializeField] private Sprite iconoGemas;
@@ -25,6 +39,7 @@ public class ShopShelf : MonoBehaviour
     private readonly List<ShopSlot> slots = new List<ShopSlot>();
     private readonly List<ItemDefinition> productos = new List<ItemDefinition>();
 
+    // Arma los casilleros una sola vez.
     private void Awake()
     {
         plantilla.gameObject.SetActive(false);
@@ -60,6 +75,7 @@ public class ShopShelf : MonoBehaviour
 
     private void AlCambiarSaldo(CurrencyType tipo, int saldo) => Refrescar();
 
+    // Actualiza cada casillero (si ya lo tiene, si le alcanza, candado).
     private void Refrescar()
     {
         for (int i = 0; i < slots.Count; i++)
@@ -68,6 +84,7 @@ public class ShopShelf : MonoBehaviour
         }
     }
 
+    // Tocaron un producto: bloqueado -> aviso de nivel; no alcanza -> aviso; si no, confirmar y comprar.
     private void Pedir(ItemDefinition item)
     {
         if (item.Bloqueado)

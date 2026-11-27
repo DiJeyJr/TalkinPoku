@@ -4,6 +4,19 @@ using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
+// ============================================================================
+// SwipeDetector.cs
+// QUE HACE: detecta cuando el jugador desliza el dedo rapido hacia la izquierda
+//           o la derecha (swipe) y avisa la direccion.
+// DONDE ESTA: en el objeto "Sistemas" de SampleScene. Lo usa RoomNavigator para
+//             cambiar de habitacion.
+// PARA CAMBIAR: cuanto hay que deslizar -> swipeMinDistanceMm.
+//               que tan rapido tiene que ser -> swipeMaxDuration (segundos).
+//               sobre que objetos NO cuenta el swipe -> capasQueBloquean.
+// AVISA: el evento Swiped(direccion).
+// ============================================================================
+
+// Las dos direcciones posibles del swipe.
 public enum SwipeDirection
 {
     Izquierda,
@@ -18,9 +31,12 @@ public class SwipeDetector : MonoBehaviour
     [SerializeField] private Camera camara;
 
     [Header("Umbrales")]
+    // [AJUSTE] Milimetros minimos que tiene que recorrer el dedo de costado.
     // En milimetros: los 150 px de clase equivalen a unos 9 mm en un celular de 400 dpi.
     [SerializeField] private float swipeMinDistanceMm = 9f;
+    // [AJUSTE] Segundos maximos del gesto: si tarda mas, es un arrastre y no un swipe.
     [SerializeField] private float swipeMaxDuration = 0.6f;
+    // [AJUSTE] Capas de fisica que, si el dedo empieza encima, cancelan el swipe.
     [SerializeField] private LayerMask capasQueBloquean = ~0;
 
     public event Action<SwipeDirection> Swiped;
@@ -44,6 +60,7 @@ public class SwipeDetector : MonoBehaviour
         dedoActivo = -1;
     }
 
+    // Anota donde y cuando empieza el dedo; al levantarlo, Evaluar decide si fue un swipe.
     private void Update()
     {
         foreach (Touch touch in Touch.activeTouches)
@@ -78,6 +95,7 @@ public class SwipeDetector : MonoBehaviour
         }
     }
 
+    // Revisa tiempo, direccion y distancia. Si todo da, avisa el swipe.
     private void Evaluar(Vector2 posicionFinal)
     {
         // Un arrastre lento no es un swipe. Sirve para mover objetos, no para cambiar de pantalla.

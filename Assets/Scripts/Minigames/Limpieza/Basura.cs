@@ -2,6 +2,19 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+// ============================================================================
+// Basura.cs  (minijuego "Limpieza")
+// QUE HACE: una basura del escenario. Segun su tipo se junta distinto:
+//           - Suelta: tocarla o arrastrarla al cesto.
+//           - Pegada: mantenerla apretada (hold).
+//           - EnArbol: sacudir el celular (o tocarla) para que caiga y pase a Suelta.
+// DONDE ESTA: es el prefab Basura; LimpiezaGame crea una por cada basura del escenario.
+// PARA CAMBIAR: tamano minimo para tocarla -> tamanoTactilMm.
+//               cuanto cae la del arbol y a que velocidad -> distanciaCaida / velocidadCaida.
+//               color de las pegadas -> colorPegada.
+// AVISA: Juntada(basura) y PidioAyuda(basura).
+// ============================================================================
+
 // Una basura del escenario. No detecta gestos: escucha a TouchTarget (tap y hold) y a Draggable
 // (arrastre), y segun su tipo decide cual de esos gestos la junta.
 [RequireComponent(typeof(BoxCollider2D))]
@@ -16,6 +29,7 @@ public class Basura : MonoBehaviour
     [SerializeField] private float tamanoTactilMm = 7.6f;
 
     [Header("Caida")]
+    // [AJUSTE] Cuanto cae y a que velocidad la basura del arbol.
     [SerializeField] private float distanciaCaida = 2f;
     [SerializeField] private float velocidadCaida = 6f;
 
@@ -59,6 +73,7 @@ public class Basura : MonoBehaviour
         draggable.Soltado -= AlSoltar;
     }
 
+    // La llama LimpiezaGame al crearla: sprite, tipo, cesto y tamano del collider.
     public void Configurar(Sprite sprite, TipoBasura tipoInicial, Collider2D cestoDeLaEscena, Camera camara)
     {
         spriteRenderer.sprite = sprite;
@@ -72,6 +87,7 @@ public class Basura : MonoBehaviour
         AjustarCollider(camara);
     }
 
+    // Agranda el collider hasta el tamano tactil minimo si el dibujo es chico.
     private void AjustarCollider(Camera camara)
     {
         // Pixeles de pantalla a unidades de mundo con camara ortografica: la altura visible del mundo
@@ -90,6 +106,7 @@ public class Basura : MonoBehaviour
         if (tipo == TipoBasura.EnArbol) StartCoroutine(Caer());
     }
 
+    // Tap: la suelta se junta; la del arbol cae; la pegada tiembla y pide ayuda.
     private void AlTocar()
     {
         if (tipo == TipoBasura.Suelta) Juntar();
@@ -104,6 +121,7 @@ public class Basura : MonoBehaviour
         }
     }
 
+    // Corrutina: la mueve de lado a lado un ratito.
     private IEnumerator Temblar()
     {
         Vector3 origen = transform.position;
@@ -117,17 +135,20 @@ public class Basura : MonoBehaviour
         temblor = null;
     }
 
+    // Hold: la pegada se junta.
     private void AlSostener()
     {
         if (tipo == TipoBasura.Pegada) Juntar();
     }
 
+    // Arrastre soltado: si cayo en el cesto, se junta.
     private void AlSoltar(Vector2 dedo)
     {
         // Se mira el dedo y no el centro de la basura: es lo que el jugador siente que solto.
         if (cesto != null && cesto.OverlapPoint(dedo)) Juntar();
     }
 
+    // Corrutina: la basura del arbol baja hasta el piso y pasa a ser suelta.
     private IEnumerator Caer()
     {
         // Se cambia el tipo antes de caer para que una segunda sacudida no la tire de nuevo.
@@ -143,6 +164,7 @@ public class Basura : MonoBehaviour
         draggable.enabled = true;
     }
 
+    // Desaparece y avisa que se junto.
     private void Juntar()
     {
         gameObject.SetActive(false);

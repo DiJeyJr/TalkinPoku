@@ -3,14 +3,32 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+// ============================================================================
+// SaveSystem.cs
+// QUE HACE: lee y escribe la partida (partida.json). Al abrir el juego reparte
+//           los datos guardados a cada sistema (necesidades, monedas, nivel,
+//           inventario...). Al guardar junta los datos de todos y los escribe.
+// DONDE ESTA: en ningun objeto (clase estatica). Unity lo ejecuta solo al abrir
+//             el juego y crea el AutoSave.
+// FLUJO: AlAbrir -> Cargar -> cada sistema recibe lo suyo con Restaurar(...).
+//        AutoSave -> Guardar -> se pide a cada sistema su Foto() y se escribe.
+// PARA GUARDAR ALGO NUEVO: ver los pasos en el encabezado de SaveData.cs.
+// PARA BORRAR LA PARTIDA (empezar de cero): borrar partida.json y partida.bak
+//   de Application.persistentDataPath (en Windows: AppData/LocalLow/Grupo 12/
+//   Talkin Poku/) con el juego cerrado. El panel de admin solo reinicia el
+//   nivel y vacia el inventario, no borra todo.
+// ============================================================================
+
 // Lee y escribe la partida en un JSON. Las necesidades, la billetera, las recetas y el nivel viven cada uno en
 // su sistema: aca solo se juntan para escribirlas y se reparten al abrir el juego.
 public static class SaveSystem
 {
+    // Archivos: la partida, un temporal mientras se escribe y el respaldo (la partida anterior).
     private static string Ruta => Path.Combine(Application.persistentDataPath, "partida.json");
     private static string RutaTemporal => Path.Combine(Application.persistentDataPath, "partida.tmp");
     private static string RutaRespaldo => Path.Combine(Application.persistentDataPath, "partida.bak");
 
+    // La partida en memoria.
     private static SaveData datos = new SaveData();
 
     // Unity lo llama solo al abrir el juego, antes de cargar la primera escena: la partida ya esta en
@@ -26,6 +44,7 @@ public static class SaveSystem
         objeto.AddComponent<AutoSave>();
     }
 
+    // Lee el archivo y le devuelve a cada sistema sus datos guardados.
     public static void Cargar()
     {
         // Si la partida quedo cortada o rota se usa el respaldo, que es la anterior.
@@ -34,6 +53,7 @@ public static class SaveSystem
         if (leidos == null) return;
 
         datos = Migrar(leidos);
+        // Un Restaurar por sistema. Si se agrega algo nuevo a SaveData, se reparte aca.
         NeedsSystem.Restaurar(datos.necesidades);
         Wallet.Restaurar(datos.saldo);
         RegistroIds.Recetas.Restaurar(datos.recetas);
@@ -66,6 +86,8 @@ public static class SaveSystem
         return viejos;
     }
 
+    // Junta el estado actual de todos los sistemas y lo escribe en el archivo.
+    // Se puede llamar desde cualquier lado con SaveSystem.Guardar() para forzar un guardado.
     public static void Guardar()
     {
         // null = ese sistema todavia no arranco en esta sesion. Se deja lo que se habia leido.
@@ -75,6 +97,7 @@ public static class SaveSystem
         int[] saldo = Wallet.Foto();
         if (saldo != null) datos.saldo = saldo;
 
+        // Una linea por dato. Si se agrega algo nuevo a SaveData, se junta aca.
         datos.recetas = RegistroIds.Recetas.Foto();
         datos.nivel = Progression.NivelActual;
         datos.xp = Progression.XpActual;
@@ -106,6 +129,7 @@ public static class SaveSystem
         }
     }
 
+    // Lee un archivo y lo convierte de JSON a SaveData. Si no existe o esta roto devuelve null.
     private static SaveData Leer(string archivo)
     {
         if (!File.Exists(archivo)) return null;

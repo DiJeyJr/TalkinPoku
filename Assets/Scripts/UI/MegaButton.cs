@@ -2,6 +2,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// ============================================================================
+// MegaButton.cs
+// QUE HACE: el boton de la Mega Evolucion, que a la vez es su barra. Se llena
+//           con la Energia Mega; lleno late y se puede tocar para activarla;
+//           activa, muestra el tiempo que queda. Antes del nivel de la Mega no
+//           se ve.
+// DONDE ESTA: en "Canvas/SafeArea/HUD/Mega" de SampleScene.
+// PARA CAMBIAR: cada cuanto late cuando esta lista -> segundosEntreLatidos.
+//               los textos ("¡MEGA!", porcentaje, minutos) -> Refrescar().
+//               colores del texto -> colorSobreGris / colorSobreDorado.
+// ============================================================================
+
 // El boton de la Mega Evolucion, que es tambien su barra: se va llenando con la Energia Mega, con
 // la barra llena late y se puede tocar, y mientras dura Mega-Pokuchan se vacia con el tiempo que
 // le queda. Antes del nivel 50 no se muestra. La Image de relleno tiene que estar en Filled.
@@ -20,6 +32,7 @@ public class MegaButton : MonoBehaviour
     [Header("Feedback")]
     // Opcional: late al cargarse y, con la barra llena, cada tanto para que se note que esta lista.
     [SerializeField] private Latido latido;
+    // [AJUSTE] Segundos entre latidos cuando esta lista.
     [SerializeField] private float segundosEntreLatidos = 1.5f;
     // El texto queda del lado derecho, que es el ultimo en llenarse: casi siempre esta sobre el gris
     // y ahi el oscuro no se lee. Pasa al oscuro cuando el dorado ya llego abajo del texto.
@@ -31,6 +44,7 @@ public class MegaButton : MonoBehaviour
 
     private void Awake()
     {
+        // Tocar el boton activa la Mega.
         boton.onClick.AddListener(mega.Activar);
     }
 
@@ -54,6 +68,7 @@ public class MegaButton : MonoBehaviour
         Refrescar();
     }
 
+    // Con la barra llena, late cada tanto.
     private void Update()
     {
         if (!mega.Lista || Time.time < proximoLatido) return;
@@ -61,6 +76,7 @@ public class MegaButton : MonoBehaviour
         if (latido != null) latido.Latir();
     }
 
+    // Actualiza visibilidad, relleno, si se puede tocar y el texto.
     private void Refrescar()
     {
         contenido.SetActive(mega.Desbloqueada);
@@ -70,6 +86,7 @@ public class MegaButton : MonoBehaviour
 
         if (MegaEvolution.Activa)
         {
+            // Activa: minutos:segundos que quedan.
             int segundos = Mathf.CeilToInt((float)mega.SegundosRestantes);
             texto.SetText("{0}:{1:00}", segundos / 60, segundos % 60);
         }

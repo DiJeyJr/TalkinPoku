@@ -1,6 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// ============================================================================
+// TabGroup.cs
+// QUE HACE: las pestanas de la tienda. Muestra un panel y apaga los demas.
+// DONDE ESTA: en "Canvas/Pantallas/Tienda" de SampleScene.
+// PARA CAMBIAR: agregar una pestana -> sumar su boton a "Pestanas" y su panel a
+//               "Paneles" (mismo indice), y en el OnClick del boton llamar a
+//               Mostrar con ese indice.
+//               colores de pestana activa/inactiva -> colorActiva / colorInactiva.
+// ============================================================================
+
 // Pestanas de la tienda: muestra un panel y apaga los demas. Cada boton de pestana llama a
 // Mostrar con su numero desde el OnClick del Inspector.
 public class TabGroup : MonoBehaviour
@@ -17,6 +27,7 @@ public class TabGroup : MonoBehaviour
     // Cada vez que se abre la tienda arranca en la primera pestana, no en la que quedo la vez anterior.
     private void OnEnable() => Mostrar(0);
 
+    // Prende el panel "indice", apaga los demas y pinta las pestanas.
     public void Mostrar(int indice)
     {
         for (int i = 0; i < paneles.Length; i++)

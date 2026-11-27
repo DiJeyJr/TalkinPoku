@@ -4,6 +4,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// ============================================================================
+// PuertaAdultos.cs
+// QUE HACE: antes de una compra con dinero real pide resolver una
+//           multiplicacion escrita con palabras ("¿Cuanto es tres por siete?"),
+//           con varias respuestas para elegir. Si acierta, aprueba la compra.
+// DONDE ESTA: en "Canvas/Pantallas/Tienda/Contenido/PuertaAdultos" de SampleScene.
+// PARA CAMBIAR: los numeros de la cuenta -> factorMinimo / factorMaximo (hasta 9).
+//               que tan parecidas son las respuestas falsas -> distanciaMaxima.
+//               cuantas opciones hay -> lista "Opciones" (botones).
+// ============================================================================
+
 // La puerta para adultos antes de pagar con dinero real: una multiplicacion escrita con palabras y
 // varias respuestas para elegir. Un chico que todavia no lee o no sabe las tablas no la pasa; un
 // adulto la resuelve en dos segundos. Es lo habitual en apps para chicos (App Store la exige en Kids).
@@ -19,9 +30,11 @@ public class PuertaAdultos : MonoBehaviour
     [SerializeField] private Button cancelar;
 
     [Header("Cuenta")]
+    // [AJUSTE] Rango de los numeros que se multiplican.
     // Hasta nueve porque los numeros van escritos con palabras.
     [SerializeField] private int factorMinimo = 3;
     [SerializeField] private int factorMaximo = 9;
+    // [AJUSTE] Distancia maxima entre la respuesta correcta y las falsas.
     // Las respuestas falsas quedan cerca de la verdadera: no se puede adivinar por tamano.
     [SerializeField] private int distanciaMaxima = 10;
 
@@ -34,6 +47,7 @@ public class PuertaAdultos : MonoBehaviour
     private int[] valores;
     private readonly List<int> usados = new List<int>();
     private int respuesta;
+    // Lo que se ejecuta si acierta (la compra).
     private Action alAprobar;
 
     private void Awake()
@@ -56,6 +70,7 @@ public class PuertaAdultos : MonoBehaviour
         Cerrar();
     }
 
+    // Arma una cuenta nueva con sus opciones y abre el panel.
     public void Pedir(string queSeCompra, Action siAprueba)
     {
         int a = Factor();
@@ -92,6 +107,7 @@ public class PuertaAdultos : MonoBehaviour
         panel.SetActive(true);
     }
 
+    // Un numero al azar entre factorMinimo y factorMaximo (limitado a 2..9).
     private int Factor()
     {
         int minimo = Mathf.Clamp(factorMinimo, 2, 9);

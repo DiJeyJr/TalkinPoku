@@ -1,20 +1,39 @@
 using UnityEngine;
 
+// ============================================================================
+// MusicPlayer.cs
+// QUE HACE: reproduce la musica de fondo. Hay uno solo en todo el juego y no se
+//           destruye al cambiar de escena. Cuando cambia el tema, hace un fundido
+//           (baja uno mientras sube el otro).
+// DONDE ESTA: se crea solo la primera vez que alguien pide musica
+//             (MusicaDeEscena llama a MusicPlayer.Cambiar).
+// PARA CAMBIAR: volumen de la musica -> volumen.
+//               duracion del fundido entre temas -> segundosFundido.
+//               que tema suena en cada escena -> el componente MusicaDeEscena
+//               del objeto "Musica" de esa escena.
+// ============================================================================
+
 // Musica de fondo. Una sola instancia que sobrevive a los cambios de escena y mezcla dos
 // AudioSource para pasar de un tema a otro con fundido cruzado, sin corte ni silencio en el medio.
 public class MusicPlayer : MonoBehaviour
 {
+    // La unica instancia (patron singleton).
     private static MusicPlayer instancia;
 
     [Header("Volumen")]
+    // [AJUSTE] Volumen de la musica, de 0 a 1.
     [SerializeField] [Range(0f, 1f)] private float volumen = 0.4f;
 
     [Header("Fundido")]
+    // [AJUSTE] Cuantos segundos tarda en pasar de un tema al otro.
     [SerializeField] private float segundosFundido = 0.8f;
 
+    // Dos parlantes: uno con el tema que suena y otro con el que entra.
     private AudioSource[] fuentes;
+    // Indice (0 o 1) del parlante que tiene el tema actual.
     private int actual;
 
+    // Punto de entrada: cualquier script llama MusicPlayer.Cambiar(clip) para cambiar el tema.
     public static void Cambiar(AudioClip clip)
     {
         if (clip == null) return;
@@ -28,6 +47,7 @@ public class MusicPlayer : MonoBehaviour
         instancia.Pedir(clip);
     }
 
+    // Se asegura de que haya uno solo y crea los dos AudioSource.
     private void Awake()
     {
         if (instancia != null && instancia != this)
@@ -49,6 +69,7 @@ public class MusicPlayer : MonoBehaviour
         }
     }
 
+    // Pone el tema nuevo en el parlante libre y lo arranca en volumen 0 (Update lo va subiendo).
     private void Pedir(AudioClip clip)
     {
         // Mismo tema: no se reinicia, asi volver a una escena con la misma musica no corta el loop.
@@ -61,6 +82,7 @@ public class MusicPlayer : MonoBehaviour
         entrante.Play();
     }
 
+    // Cada frame sube el volumen del tema actual y baja el del anterior hasta apagarlo.
     // unscaledDeltaTime para que el fundido siga andando si el juego se pausa con timeScale en 0.
     private void Update()
     {

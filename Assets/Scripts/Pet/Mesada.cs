@@ -1,23 +1,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// ============================================================================
+// Mesada.cs
+// QUE HACE: la mesada de la cocina de la casa. Muestra los platos cocinados que
+//           tiene el jugador (de la Despensa de platos). Si hay mas platos que
+//           lugares, las flechas los van corriendo como un carrusel.
+// DONDE ESTA: en "Habitaciones/Cocina/Mesada" de SampleScene. Cada lugar es un
+//             PlatoEnMesada (Plato1, Plato2, Plato3).
+// PARA CAMBIAR: que platos pueden aparecer y en que orden -> lista "Recetas"
+//               del Inspector. Cuantos lugares hay -> lista "Lugares".
+// ============================================================================
+
 // La mesada de la cocina: pone en sus lugares los platos que hay en el inventario. Si hay mas
 // platos que lugares, las flechas los corren de a uno, como un carrusel.
 public class Mesada : MonoBehaviour
 {
     [Header("Referencias")]
+    // [AJUSTE] Los lugares donde se muestra un plato.
     [SerializeField] private PlatoEnMesada[] lugares;
     [SerializeField] private TouchTarget flechaIzquierda;
     [SerializeField] private TouchTarget flechaDerecha;
 
     [Header("Recetas")]
+    // [AJUSTE] Recetas que se muestran.
     // Todas las que se pueden cocinar, en el orden en que aparecen en la mesada.
     [SerializeField] private RecipeDefinition[] recetas;
 
     [Header("Sonidos")]
     [SerializeField] private AudioClip sonidoFlecha;
 
+    // Recetas de las que hay al menos un plato.
     private readonly List<RecipeDefinition> hay = new List<RecipeDefinition>();
+    // Indice del primer plato visible en el carrusel.
     private int primero;
     private bool empezada;
 
@@ -43,11 +58,13 @@ public class Mesada : MonoBehaviour
         flechaDerecha.Tocado -= Siguiente;
     }
 
+    // Cambio la cantidad de algun plato (se cocino o se comio uno).
     private void AlCambiar(string id, int cantidad)
     {
         Actualizar();
     }
 
+    // Flecha izquierda: corre el carrusel uno para atras.
     private void Anterior()
     {
         primero--;
@@ -55,6 +72,7 @@ public class Mesada : MonoBehaviour
         Actualizar();
     }
 
+    // Flecha derecha: corre el carrusel uno para adelante.
     private void Siguiente()
     {
         primero++;
@@ -62,6 +80,7 @@ public class Mesada : MonoBehaviour
         Actualizar();
     }
 
+    // Arma la lista de platos disponibles, llena los lugares y prende/apaga las flechas.
     private void Actualizar()
     {
         // Se rearma solo cuando cambia el inventario o se toca una flecha, no en cada frame.
@@ -80,6 +99,7 @@ public class Mesada : MonoBehaviour
             lugares[i].Mostrar(indice < hay.Count ? hay[indice] : null);
         }
 
+        // Las flechas solo aparecen si hay platos para ese lado.
         flechaIzquierda.gameObject.SetActive(primero > 0);
         flechaDerecha.gameObject.SetActive(primero + lugares.Length < hay.Count);
     }

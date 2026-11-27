@@ -1,5 +1,18 @@
 using UnityEngine;
 
+// ============================================================================
+// ObstaculoSpawner.cs  (minijuego "Vuelo")
+// QUE HACE: lanza obstaculos (tubos) desde la derecha cada cierto tiempo, con
+//           el hueco a una altura al azar. Los crea al arrancar y los recicla
+//           (pool). Con el puntaje van mas rapido y salen mas seguido.
+// DONDE ESTA: en el objeto "Obstaculos" de la escena Vuelo.
+// PARA CAMBIAR (Inspector de "Obstaculos"):
+//   - velocidad inicial y maxima -> velocidad / velocidadMaxima
+//   - cada cuanto sale uno (inicial y minimo) -> intervalo / intervaloMinimo
+//   - a que alturas puede estar el hueco -> alturaMinima / alturaMaxima
+//   - con cuantos puntos llega a la dificultad maxima -> puntosParaMaximo
+// ============================================================================
+
 // Lanza obstaculos desde la derecha cada cierto tiempo. Los crea todos al arrancar y los recicla,
 // porque instanciar y destruir uno por tubo genera basura y el GC da tirones en el celular.
 public class ObstaculoSpawner : MonoBehaviour
@@ -11,16 +24,19 @@ public class ObstaculoSpawner : MonoBehaviour
     [SerializeField] private int cantidad = 5;
 
     [Header("Movimiento")]
+    // [AJUSTE] Velocidad e intervalo del primer obstaculo.
     [SerializeField] private float velocidad = 3f;
     [SerializeField] private float intervalo = 1.8f;
     [SerializeField] private float xAparicion = 7f;
     [SerializeField] private float xReciclado = -7f;
 
     [Header("Hueco")]
+    // [AJUSTE] Rango de altura del hueco.
     [SerializeField] private float alturaMinima = -3f;
     [SerializeField] private float alturaMaxima = 4f;
 
     [Header("Dificultad")]
+    // [AJUSTE] Topes de dificultad.
     // Velocidad e intervalo de arriba son los del primer obstaculo; con el puntaje se acercan a estos
     // dos topes. Un intervalo minimo muy bajo amontona obstaculos: no bajar de 1,2 sin probar en el celular.
     [SerializeField] private float velocidadMaxima = 5.5f;
@@ -31,6 +47,7 @@ public class ObstaculoSpawner : MonoBehaviour
     [SerializeField] private AnimationCurve curvaDificultad = AnimationCurve.Linear(0f, 0f, 1f, 1f);
 
     private Rigidbody2D[] obstaculos;
+    // Indice del proximo obstaculo a usar (en ronda).
     private int siguiente;
     private float proximoLanzamiento;
     private bool corriendo;
@@ -41,6 +58,7 @@ public class ObstaculoSpawner : MonoBehaviour
     // Antes de arrancar y despues de chocar es 0, asi el escenario se queda quieto.
     public float VelocidadEscenario => corriendo ? velocidadActual : 0f;
 
+    // Crea el pool de obstaculos apagados.
     private void Awake()
     {
         velocidadActual = velocidad;
@@ -53,6 +71,7 @@ public class ObstaculoSpawner : MonoBehaviour
         }
     }
 
+    // Empieza a lanzar.
     public void Arrancar()
     {
         ActualizarDificultad(0);
@@ -60,6 +79,7 @@ public class ObstaculoSpawner : MonoBehaviour
         proximoLanzamiento = Time.time;
     }
 
+    // Recalcula velocidad e intervalo segun los puntos.
     // Solo afecta a los obstaculos que se lancen de ahi en adelante: los que ya vuelan no cambian de velocidad.
     public void ActualizarDificultad(int puntos)
     {
@@ -68,6 +88,7 @@ public class ObstaculoSpawner : MonoBehaviour
         intervaloActual = Mathf.Lerp(intervalo, intervaloMinimo, k);
     }
 
+    // Deja de lanzar y frena los que estan en pantalla.
     public void Frenar()
     {
         corriendo = false;
@@ -77,6 +98,7 @@ public class ObstaculoSpawner : MonoBehaviour
         }
     }
 
+    // Lanza uno cuando toca y apaga los que salieron por la izquierda.
     private void Update()
     {
         if (!corriendo) return;
@@ -96,6 +118,7 @@ public class ObstaculoSpawner : MonoBehaviour
         }
     }
 
+    // Pone el siguiente obstaculo a la derecha, con el hueco a una altura al azar, y lo mueve a la izquierda.
     private void Lanzar()
     {
         // Se usan en ronda. Con 5 alcanza: a 3 u/s cada uno tarda unos 4,7 s en cruzar y sale uno

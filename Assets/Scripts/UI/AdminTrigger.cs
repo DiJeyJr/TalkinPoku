@@ -1,6 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// ============================================================================
+// AdminTrigger.cs
+// QUE HACE: boton invisible arriba a la derecha. Tocarlo varias veces seguidas
+//           abre o cierra el panel de admin.
+// DONDE ESTA: en "Canvas/Admin/BotonSecreto" de SampleScene.
+// PARA CAMBIAR: cuantos toques hacen falta -> toquesNecesarios.
+//               pausa maxima entre toques -> pausaMaxima.
+// ============================================================================
+
 // Boton invisible arriba a la derecha: siete toques seguidos abren o cierran el panel de admin.
 // Seguidos quiere decir sin pausas largas, asi un toque suelto de vez en cuando no va sumando.
 [RequireComponent(typeof(Button))]
@@ -10,7 +19,9 @@ public class AdminTrigger : MonoBehaviour
     [SerializeField] private AdminPanel panel;
 
     [Header("Umbrales")]
+    // [AJUSTE] Toques seguidos para abrir el panel.
     [SerializeField] private int toquesNecesarios = 7;
+    // [AJUSTE] Segundos maximos entre un toque y el siguiente.
     [SerializeField] private float pausaMaxima = 0.6f;
 
     private int toques;
@@ -39,6 +50,7 @@ public class AdminTrigger : MonoBehaviour
 #endif
     }
 
+    // Cuenta toques; si pasa mucho entre uno y otro, vuelve a empezar de cero.
     private void Tocar()
     {
         if (Time.time - ultimoToque > pausaMaxima) toques = 0;

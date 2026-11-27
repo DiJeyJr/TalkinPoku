@@ -1,5 +1,18 @@
 using UnityEngine;
 
+// ============================================================================
+// TiendaPacks.cs
+// QUE HACE: la pestana "Dinero real" de la tienda: vende packs de monedas y
+//           gemas. Flujo de una compra: tocar pack -> puerta para adultos
+//           (PuertaAdultos) -> cobra el backend (BackendSimulado) -> si salio
+//           bien, suma la plata a Wallet y guarda.
+// DONDE ESTA: en "Canvas/Pantallas/Tienda/Contenido/Paneles/PanelPacks".
+// PARA CAMBIAR: que packs aparecen -> lista "Packs" del Inspector.
+//               que trae cada pack -> su asset en Data/Packs.
+//               los mensajes de exito/fallo -> Terminar().
+//               la leyenda de compra de prueba -> leyendaPrueba.
+// ============================================================================
+
 // La pestana de la tienda que vende monedas y gemas por dinero real. Es la unica parte del juego
 // que cobra plata de verdad, por eso nunca compra de un toque: primero pasa un adulto por la puerta,
 // despues cobra el backend y recien con la respuesta se acredita y se guarda.
@@ -19,6 +32,7 @@ public class TiendaPacks : MonoBehaviour
     [SerializeField] private GameObject procesando;
 
     [Header("Paquetes")]
+    // [AJUSTE] Packs a la venta.
     [SerializeField] private PackDefinition[] packs;
     [SerializeField] private Sprite iconoMonedas;
     [SerializeField] private Sprite iconoGemas;
@@ -32,8 +46,10 @@ public class TiendaPacks : MonoBehaviour
     [SerializeField] private AudioClip sonidoCompra;
 
     private IPurchaseBackend cobrador;
+    // true mientras hay una compra en curso.
     private bool comprando;
 
+    // Busca el backend y crea un casillero por pack.
     private void Awake()
     {
         cobrador = backend as IPurchaseBackend;
@@ -57,6 +73,7 @@ public class TiendaPacks : MonoBehaviour
 
     private string Leyenda() => string.IsNullOrEmpty(leyendaPrueba) ? "" : "\n<size=75%>" + leyendaPrueba + "</size>";
 
+    // Paso 1: tocaron un pack -> se pide la puerta para adultos.
     private void Pedir(PackDefinition pack)
     {
         if (comprando) return;
@@ -70,6 +87,7 @@ public class TiendaPacks : MonoBehaviour
         puerta.Pedir(queSeCompra, () => Cobrar(pack));
     }
 
+    // Paso 2: el adulto aprobo -> se cobra.
     private void Cobrar(PackDefinition pack)
     {
         comprando = true;
@@ -77,6 +95,7 @@ public class TiendaPacks : MonoBehaviour
         cobrador.Comprar(pack, resultado => Terminar(pack, resultado));
     }
 
+    // Paso 3: respuesta del backend -> se acredita (si salio bien) y se avisa.
     private void Terminar(PackDefinition pack, ResultadoCompra resultado)
     {
         comprando = false;

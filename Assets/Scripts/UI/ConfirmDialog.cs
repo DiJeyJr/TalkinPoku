@@ -3,11 +3,24 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// ============================================================================
+// ConfirmDialog.cs
+// QUE HACE: carteles emergentes. Tres usos:
+//           - Preguntar(texto, accion): "¿Seguro?" con Aceptar y Cancelar.
+//           - PreguntarCompra(item, ...): el cartel de compra con icono y precio.
+//           - Avisar(texto): solo un mensaje con un boton (ej: no te alcanza).
+// DONDE ESTA: en "Canvas/Pantallas/Tienda/Contenido/Dialogo" (tienda) y en
+//             "Canvas/DialogoMega" (cartel de la primera Mega).
+// USO DESDE OTRO SCRIPT: dialogo.Avisar("Texto");
+//                        dialogo.Preguntar("¿Seguro?", () => { ...que hacer si acepta... });
+// ============================================================================
+
 // Cartel de "¿Seguro?" con Aceptar y Cancelar. El GDD pide confirmar antes de gastar: el publico es
 // infantil y un toque sin querer no puede llevarse las monedas.
 public class ConfirmDialog : MonoBehaviour
 {
     [Header("Referencias")]
+    // El fondo oscuro con el cartel (se prende y apaga entero).
     [SerializeField] private GameObject panel;
     [SerializeField] private TMP_Text texto;
     [SerializeField] private Button aceptar;
@@ -26,6 +39,7 @@ public class ConfirmDialog : MonoBehaviour
     [SerializeField] private Button comprar;
     [SerializeField] private Button noComprar;
 
+    // Lo que se ejecuta si el jugador acepta.
     private Action alAceptar;
 
     private void Awake()
@@ -43,6 +57,7 @@ public class ConfirmDialog : MonoBehaviour
         Cerrar();
     }
 
+    // Pregunta con Aceptar y Cancelar.
     public void Preguntar(string mensaje, Action siAcepta)
     {
         texto.SetText(mensaje);
@@ -51,6 +66,7 @@ public class ConfirmDialog : MonoBehaviour
         Mostrar(caja);
     }
 
+    // Cartel de compra con el icono, nombre y precio del item.
     public void PreguntarCompra(ItemDefinition item, Sprite moneda, Action siAcepta)
     {
         compraIcono.sprite = item.Icono;
@@ -71,6 +87,7 @@ public class ConfirmDialog : MonoBehaviour
         Mostrar(caja);
     }
 
+    // Prende la caja pedida (comun o compra) y apaga la otra.
     private void Mostrar(GameObject cual)
     {
         caja.SetActive(cual == caja);
@@ -78,6 +95,7 @@ public class ConfirmDialog : MonoBehaviour
         panel.SetActive(true);
     }
 
+    // Cierra y despues ejecuta la accion (si habia).
     private void Aceptar()
     {
         Action accion = alAceptar;

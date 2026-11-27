@@ -1,5 +1,13 @@
 using UnityEngine;
 
+// ============================================================================
+// SleepOverlay.cs
+// QUE HACE: oscurece la pantalla mientras Poku duerme.
+// DONDE ESTA: en el objeto "Canvas" de SampleScene (el oscuro es OverlayDormido).
+// PARA CAMBIAR: que tan oscuro se ve -> el color/alpha de la Image de
+//               "Canvas/OverlayDormido" en el Inspector.
+// ============================================================================
+
 // Oscurece la pantalla mientras la mascota duerme. Va en el Canvas y no en la cama porque la cama
 // se apaga al cambiar de habitacion, y la mascota se puede despertar sola estando en otra.
 public class SleepOverlay : MonoBehaviour
@@ -20,6 +28,7 @@ public class SleepOverlay : MonoBehaviour
         if (necesidades != null) necesidades.DormidoCambiado -= Mostrar;
     }
 
+    // Prende el oscuro si duerme y lo apaga si se despierta.
     private void Mostrar(bool dormido)
     {
         if (overlay != null) overlay.SetActive(dormido);

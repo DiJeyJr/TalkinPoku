@@ -1,6 +1,18 @@
 using TMPro;
 using UnityEngine;
 
+// ============================================================================
+// AdminPanel.cs
+// QUE HACE: panel de trucos para probar el juego (no es parte del juego):
+//           acelerar el tiempo, sumar XP o niveles, cargar/cortar la Mega, dar
+//           monedas y vaciar el inventario.
+// DONDE ESTA: en "Canvas/Admin" de SampleScene. Se abre tocando 7 veces seguidas
+//             el boton invisible de arriba a la derecha (AdminTrigger).
+// PARA CAMBIAR: que hace cada boton -> el OnClick del boton en el Inspector,
+//               que llama a uno de los metodos publicos de aca con su numero.
+//               cuantas gemas da junto con las monedas -> "cantidad / 50" en SumarMonedas.
+// ============================================================================
+
 // Panel para probar el juego sin esperar horas: cambia la velocidad del tiempo, y sus filas
 // (AdminNeedRow) suben o bajan cada necesidad. No es parte del juego: se abre con AdminTrigger.
 public class AdminPanel : MonoBehaviour
@@ -25,6 +37,7 @@ public class AdminPanel : MonoBehaviour
         MostrarVelocidad();
     }
 
+    // Abre o cierra el panel (lo llama AdminTrigger).
     public void Alternar()
     {
         // Se abre como una pantalla mas: el ScreenStack apaga el input de la casa, y un toque en un
